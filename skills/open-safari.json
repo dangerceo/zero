@@ -1,0 +1,16 @@
+{
+  "name": "open-safari",
+  "triggers": [
+    "open",
+    "safari"
+  ],
+  "steps": [
+    {
+      "action": "macos.openApp",
+      "app": "Safari",
+      "description": "Opening Safari"
+    }
+  ],
+  "createdAt": "2026-01-13T04:42:16.059Z",
+  "timesUsed": 1
+}

@@ -1,0 +1,6 @@
+{
+  "provider": "gemini",
+  "claudeApiKey": "",
+  "geminiApiKey": "AIzaSyDEgKlXR09wxy3jjtkRzW4dA-c-mTrXFbA",
+  "model": "claude-sonnet-4-20250514"
+}
