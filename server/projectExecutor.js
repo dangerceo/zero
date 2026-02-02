@@ -124,7 +124,7 @@ export async function executeProject(projectId, broadcast) {
 
 async function runGeminiStreaming(projectId, prompt, workingDir, broadcast) {
     return new Promise(async (resolve) => {
-        const child = spawn('gemini', ['--yolo', '--output-format', 'text', prompt], {
+        const child = spawn('gemini', ['--yolo', '--output-format', 'json', prompt], {
             cwd: workingDir,
             env: { ...process.env }
         });
@@ -155,12 +155,81 @@ async function runGeminiStreaming(projectId, prompt, workingDir, broadcast) {
         };
 
         const processLine = async (line) => {
+            if (!line.trim()) return;
+
+            // Handle legacy text output or noise
             if (line.includes('DeprecationWarning')) return;
             if (line.includes('[WARN] Skipping')) return;
             if (line.includes('--trace-deprecation')) return;
             if (line.includes('YOLO mode')) return;
             if (line.includes('Loaded cached')) return;
-            if (line.trim() === '') return;
+
+            // Try to parse as JSON first
+            try {
+                const data = JSON.parse(line);
+                const thought = data.thought || data.reasoning;
+                const command = data.command || data.action || data.code;
+
+                // Log thought if present
+                if (thought) {
+                    // Check for checkpoints/questions in thought
+                    if (thought.includes('[CHECKPOINT]')) {
+                        const summary = thought.replace('[CHECKPOINT]', '').trim();
+                        await projectStore.addCheckpoint(projectId, { summary });
+                        streamLog(projectId, broadcast, `📍 ${summary}`, 'success');
+                        broadcastProjectUpdate(projectId, broadcast);
+                        return;
+                    }
+
+                    if (thought.includes('[QUESTION]')) {
+                        const question = thought.replace('[QUESTION]', '').trim();
+                        await projectStore.addQuestion(projectId, question);
+                        await projectStore.update(projectId, { status: 'waiting' });
+                        streamLog(projectId, broadcast, `❓ ${question}`, 'warning');
+                        broadcastProjectUpdate(projectId, broadcast);
+                        return;
+                    }
+
+                    streamLog(projectId, broadcast, thought, 'info');
+                }
+
+                // Determine action
+                let action = null;
+                if (command) {
+                     if (thought) {
+                         action = extractAction(thought);
+                     }
+
+                     if (!action || action.type === 'thinking') {
+                         action = { type: 'running', action: command.slice(0, 50) };
+                     }
+
+                     streamLog(projectId, broadcast, `> ${command}`, 'output');
+                } else if (thought) {
+                     action = extractAction(thought);
+                     if (!action) {
+                         action = { type: 'thinking', action: thought.slice(0, 50) };
+                     }
+                }
+
+                if (action) {
+                    stepCount++;
+                    currentStep = action.action;
+
+                    broadcast({
+                        type: 'project:progress',
+                        projectId,
+                        step: currentStep,
+                        stepCount,
+                        actionType: action.type,
+                        thought: thought // Include thought for visualization
+                    });
+                }
+                return;
+
+            } catch (e) {
+                // Not JSON, fall back to text processing
+            }
 
             if (line.includes('[CHECKPOINT]')) {
                 const summary = line.replace('[CHECKPOINT]', '').trim();

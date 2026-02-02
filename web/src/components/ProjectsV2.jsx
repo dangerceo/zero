@@ -115,6 +115,7 @@ function ProjectDetail({ project: initialProject, onBack, onUpdate }) {
     const [copyStatus, setCopyStatus] = useState('');
     const [elapsed, setElapsed] = useState(0);
     const [currentStep, setCurrentStep] = useState('Starting...');
+    const [currentThought, setCurrentThought] = useState('');
     const [stepCount, setStepCount] = useState(0);
     const logsEndRef = useRef(null);
 
@@ -138,6 +139,7 @@ function ProjectDetail({ project: initialProject, onBack, onUpdate }) {
             if (msg.type === 'project:progress' && msg.projectId === project.id) {
                 setCurrentStep(msg.step);
                 setStepCount(msg.stepCount);
+                if (msg.thought) setCurrentThought(msg.thought);
             }
         };
 
@@ -300,7 +302,14 @@ function ProjectDetail({ project: initialProject, onBack, onUpdate }) {
             {/* Progress Card - Mobile Friendly */}
             {isWorking && (
                 <div className="progress-card">
-                    <div className="progress-step">{currentStep}</div>
+                    {currentThought && (
+                        <div className="progress-thought">
+                            <span className="icon">💭</span> {currentThought}
+                        </div>
+                    )}
+                    <div className="progress-step">
+                        <span className="icon">⚡</span> {currentStep}
+                    </div>
                     <div className="progress-meta">
                         <span className="step-count">Step {stepCount}</span>
                         <span className="elapsed-time">{formatTime(elapsed)}</span>
