@@ -1,0 +1,378 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.zero.android"
+4    android:versionCode="1"
+5    android:versionName="0.1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="29"
+9        android:targetSdkVersion="34" />
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:3:5-67
+11-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:3:22-64
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:4:5-79
+12-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:4:22-76
+13    <uses-permission android:name="android.permission.CAMERA" />
+13-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:5:5-65
+13-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:5:22-62
+14    <uses-permission android:name="android.permission.BLUETOOTH" />
+14-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:6:5-68
+14-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:6:22-65
+15    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+15-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:7:5-76
+15-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:7:22-73
+16    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+16-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:8:5-77
+16-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:8:22-74
+17    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+17-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:9:5-77
+17-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:9:22-74
+18    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+18-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:10:5-87
+18-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:10:22-84
+19
+20    <queries>
+20-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:15:5-18:15
+21        <package android:name="com.facebook.stella" />
+21-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:16:9-55
+21-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:16:18-52
+22        <package android:name="com.facebook.stella_debug" />
+22-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:17:9-61
+22-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:17:18-58
+23    </queries>
+24
+25    <permission
+25-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:20:5-22:47
+26        android:name="com.zero.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+26-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:21:9-81
+27        android:protectionLevel="signature" />
+27-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:22:9-44
+28
+29    <uses-permission android:name="com.zero.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+29-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:24:5-97
+29-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:24:22-94
+30
+31    <application
+31-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:12:5-63:19
+32        android:name="com.zero.android.ZeroApplication"
+32-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:13:9-40
+33        android:allowBackup="true"
+33-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:14:9-35
+34        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+34-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:26:18-86
+35        android:debuggable="true"
+36        android:extractNativeLibs="false"
+37        android:icon="@mipmap/ic_launcher"
+37-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:15:9-43
+38        android:label="@string/app_name"
+38-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:16:9-41
+39        android:roundIcon="@mipmap/ic_launcher_round"
+39-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:17:9-54
+40        android:supportsRtl="true"
+40-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:18:9-35
+41        android:testOnly="true"
+42        android:theme="@style/Theme.Zero"
+42-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:19:9-42
+43        android:usesCleartextTraffic="true" >
+43-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:20:9-44
+44        <meta-data
+45            android:name="com.meta.wearable.mwdat.APPLICATION_ID"
+45-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:23:13-66
+46            android:value="3163683107302911" />
+46-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:24:13-52
+47        <meta-data
+48            android:name="com.meta.wearable.mwdat.CLIENT_TOKEN"
+48-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:26:13-64
+49            android:value="AR|3163683107302911|32ad615e4d7f2d7e46ca88dfaff2d8a7" />
+49-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:27:13-50
+50        <meta-data
+51            android:name="com.meta.wearable.mwdat.ANALYTICS_OPT_OUT"
+51-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:29:13-69
+52            android:value="true" />
+52-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:30:13-55
+53
+54        <activity
+54-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:32:9-47:20
+55            android:name="com.zero.android.MainActivity"
+55-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:33:13-41
+56            android:exported="true"
+56-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:34:13-36
+57            android:launchMode="singleTop" >
+57-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:35:13-43
+58            <intent-filter>
+58-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:36:13-39:29
+59                <action android:name="android.intent.action.MAIN" />
+59-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:37:17-69
+59-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:37:25-66
+60
+61                <category android:name="android.intent.category.LAUNCHER" />
+61-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:38:17-77
+61-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:38:27-74
+62            </intent-filter>
+63            <intent-filter android:autoVerify="true" >
+63-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:40:13-46:29
+63-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:40:28-53
+64                <action android:name="android.intent.action.VIEW" />
+64-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:41:17-69
+64-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:41:25-66
+65
+66                <category android:name="android.intent.category.DEFAULT" />
+66-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:42:17-76
+66-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:42:27-73
+67                <category android:name="android.intent.category.BROWSABLE" />
+67-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:43:17-78
+67-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:43:27-75
+68
+69                <data
+69-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:44:17-104
+70                    android:host="0.computer"
+70-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:44:46-71
+71                    android:pathPrefix="/connect"
+71-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:44:72-101
+72                    android:scheme="https" />
+72-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:44:23-45
+73                <data
+73-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:44:17-104
+74                    android:host="connect"
+74-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:44:46-71
+75                    android:scheme="zero" />
+75-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:44:23-45
+76            </intent-filter>
+77        </activity>
+78
+79        <service
+79-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:49:9-52:56
+80            android:name="com.zero.android.service.MonitoringService"
+80-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:50:13-54
+81            android:exported="false"
+81-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:51:13-37
+82            android:foregroundServiceType="dataSync" />
+82-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:52:13-53
+83
+84        <provider
+85            android:name="androidx.core.content.FileProvider"
+85-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:55:13-62
+86            android:authorities="com.zero.android.fileprovider"
+86-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:56:13-64
+87            android:exported="false"
+87-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:57:13-37
+88            android:grantUriPermissions="true" >
+88-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:58:13-47
+89            <meta-data
+89-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:59:13-61:54
+90                android:name="android.support.FILE_PROVIDER_PATHS"
+90-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:60:17-67
+91                android:resource="@xml/file_paths" />
+91-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:61:17-51
+92        </provider>
+93
+94        <service
+94-->[androidx.camera:camera-camera2:1.3.2] /Users/dalnk/.gradle/caches/transforms-3/f0d76daa62a7f2edf164c95bd7191198/transformed/camera-camera2-1.3.2/AndroidManifest.xml:24:9-33:19
+95            android:name="androidx.camera.core.impl.MetadataHolderService"
+95-->[androidx.camera:camera-camera2:1.3.2] /Users/dalnk/.gradle/caches/transforms-3/f0d76daa62a7f2edf164c95bd7191198/transformed/camera-camera2-1.3.2/AndroidManifest.xml:25:13-75
+96            android:enabled="false"
+96-->[androidx.camera:camera-camera2:1.3.2] /Users/dalnk/.gradle/caches/transforms-3/f0d76daa62a7f2edf164c95bd7191198/transformed/camera-camera2-1.3.2/AndroidManifest.xml:26:13-36
+97            android:exported="false" >
+97-->[androidx.camera:camera-camera2:1.3.2] /Users/dalnk/.gradle/caches/transforms-3/f0d76daa62a7f2edf164c95bd7191198/transformed/camera-camera2-1.3.2/AndroidManifest.xml:27:13-37
+98            <meta-data
+98-->[androidx.camera:camera-camera2:1.3.2] /Users/dalnk/.gradle/caches/transforms-3/f0d76daa62a7f2edf164c95bd7191198/transformed/camera-camera2-1.3.2/AndroidManifest.xml:30:13-32:89
+99                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+99-->[androidx.camera:camera-camera2:1.3.2] /Users/dalnk/.gradle/caches/transforms-3/f0d76daa62a7f2edf164c95bd7191198/transformed/camera-camera2-1.3.2/AndroidManifest.xml:31:17-103
+100                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+100-->[androidx.camera:camera-camera2:1.3.2] /Users/dalnk/.gradle/caches/transforms-3/f0d76daa62a7f2edf164c95bd7191198/transformed/camera-camera2-1.3.2/AndroidManifest.xml:32:17-86
+101        </service>
+102        <service
+102-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.0] /Users/dalnk/.gradle/caches/transforms-3/042ae3d8d102edf865d74207fd64454c/transformed/play-services-mlkit-barcode-scanning-18.3.0/AndroidManifest.xml:9:9-15:19
+103            android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService"
+103-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.0] /Users/dalnk/.gradle/caches/transforms-3/042ae3d8d102edf865d74207fd64454c/transformed/play-services-mlkit-barcode-scanning-18.3.0/AndroidManifest.xml:10:13-91
+104            android:directBootAware="true"
+104-->[com.google.mlkit:common:18.9.0] /Users/dalnk/.gradle/caches/transforms-3/5c69a591aa5a259ff31d8cc329751207/transformed/common-18.9.0/AndroidManifest.xml:17:13-43
+105            android:exported="false" >
+105-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.0] /Users/dalnk/.gradle/caches/transforms-3/042ae3d8d102edf865d74207fd64454c/transformed/play-services-mlkit-barcode-scanning-18.3.0/AndroidManifest.xml:11:13-37
+106            <meta-data
+106-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.0] /Users/dalnk/.gradle/caches/transforms-3/042ae3d8d102edf865d74207fd64454c/transformed/play-services-mlkit-barcode-scanning-18.3.0/AndroidManifest.xml:12:13-14:85
+107                android:name="com.google.firebase.components:com.google.mlkit.vision.barcode.internal.BarcodeRegistrar"
+107-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.0] /Users/dalnk/.gradle/caches/transforms-3/042ae3d8d102edf865d74207fd64454c/transformed/play-services-mlkit-barcode-scanning-18.3.0/AndroidManifest.xml:13:17-120
+108                android:value="com.google.firebase.components.ComponentRegistrar" />
+108-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.0] /Users/dalnk/.gradle/caches/transforms-3/042ae3d8d102edf865d74207fd64454c/transformed/play-services-mlkit-barcode-scanning-18.3.0/AndroidManifest.xml:14:17-82
+109            <meta-data
+109-->[com.google.mlkit:vision-common:17.3.0] /Users/dalnk/.gradle/caches/transforms-3/6d835fcbca0033ff0ba7862fb9267e48/transformed/vision-common-17.3.0/AndroidManifest.xml:12:13-14:85
+110                android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar"
+110-->[com.google.mlkit:vision-common:17.3.0] /Users/dalnk/.gradle/caches/transforms-3/6d835fcbca0033ff0ba7862fb9267e48/transformed/vision-common-17.3.0/AndroidManifest.xml:13:17-124
+111                android:value="com.google.firebase.components.ComponentRegistrar" />
+111-->[com.google.mlkit:vision-common:17.3.0] /Users/dalnk/.gradle/caches/transforms-3/6d835fcbca0033ff0ba7862fb9267e48/transformed/vision-common-17.3.0/AndroidManifest.xml:14:17-82
+112            <meta-data
+112-->[com.google.mlkit:common:18.9.0] /Users/dalnk/.gradle/caches/transforms-3/5c69a591aa5a259ff31d8cc329751207/transformed/common-18.9.0/AndroidManifest.xml:20:13-22:85
+113                android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar"
+113-->[com.google.mlkit:common:18.9.0] /Users/dalnk/.gradle/caches/transforms-3/5c69a591aa5a259ff31d8cc329751207/transformed/common-18.9.0/AndroidManifest.xml:21:17-120
+114                android:value="com.google.firebase.components.ComponentRegistrar" />
+114-->[com.google.mlkit:common:18.9.0] /Users/dalnk/.gradle/caches/transforms-3/5c69a591aa5a259ff31d8cc329751207/transformed/common-18.9.0/AndroidManifest.xml:22:17-82
+115        </service>
+116
+117        <provider
+117-->[com.google.mlkit:common:18.9.0] /Users/dalnk/.gradle/caches/transforms-3/5c69a591aa5a259ff31d8cc329751207/transformed/common-18.9.0/AndroidManifest.xml:9:9-13:38
+118            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
+118-->[com.google.mlkit:common:18.9.0] /Users/dalnk/.gradle/caches/transforms-3/5c69a591aa5a259ff31d8cc329751207/transformed/common-18.9.0/AndroidManifest.xml:10:13-78
+119            android:authorities="com.zero.android.mlkitinitprovider"
+119-->[com.google.mlkit:common:18.9.0] /Users/dalnk/.gradle/caches/transforms-3/5c69a591aa5a259ff31d8cc329751207/transformed/common-18.9.0/AndroidManifest.xml:11:13-69
+120            android:exported="false"
+120-->[com.google.mlkit:common:18.9.0] /Users/dalnk/.gradle/caches/transforms-3/5c69a591aa5a259ff31d8cc329751207/transformed/common-18.9.0/AndroidManifest.xml:12:13-37
+121            android:initOrder="99" />
+121-->[com.google.mlkit:common:18.9.0] /Users/dalnk/.gradle/caches/transforms-3/5c69a591aa5a259ff31d8cc329751207/transformed/common-18.9.0/AndroidManifest.xml:13:13-35
+122
+123        <activity
+123-->[com.google.android.gms:play-services-base:18.1.0] /Users/dalnk/.gradle/caches/transforms-3/989c0323a41ba319a431d21864d22c6c/transformed/play-services-base-18.1.0/AndroidManifest.xml:20:9-22:45
+124            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+124-->[com.google.android.gms:play-services-base:18.1.0] /Users/dalnk/.gradle/caches/transforms-3/989c0323a41ba319a431d21864d22c6c/transformed/play-services-base-18.1.0/AndroidManifest.xml:20:19-85
+125            android:exported="false"
+125-->[com.google.android.gms:play-services-base:18.1.0] /Users/dalnk/.gradle/caches/transforms-3/989c0323a41ba319a431d21864d22c6c/transformed/play-services-base-18.1.0/AndroidManifest.xml:22:19-43
+126            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+126-->[com.google.android.gms:play-services-base:18.1.0] /Users/dalnk/.gradle/caches/transforms-3/989c0323a41ba319a431d21864d22c6c/transformed/play-services-base-18.1.0/AndroidManifest.xml:21:19-78
+127
+128        <meta-data
+128-->[com.google.android.gms:play-services-basement:18.1.0] /Users/dalnk/.gradle/caches/transforms-3/28af78eece38dfbb5a0c82198f8559f8/transformed/play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
+129            android:name="com.google.android.gms.version"
+129-->[com.google.android.gms:play-services-basement:18.1.0] /Users/dalnk/.gradle/caches/transforms-3/28af78eece38dfbb5a0c82198f8559f8/transformed/play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
+130            android:value="@integer/google_play_services_version" />
+130-->[com.google.android.gms:play-services-basement:18.1.0] /Users/dalnk/.gradle/caches/transforms-3/28af78eece38dfbb5a0c82198f8559f8/transformed/play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
+131
+132        <service
+132-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:27:9-35:19
+133            android:name="com.meta.wearable.acdc.sdk.service.ACDCRegistrationService"
+133-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:28:13-86
+134            android:exported="true" >
+134-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:29:13-36
+135            <intent-filter>
+135-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:30:13-34:29
+136                <action android:name="com.meta.wearable.acdc.sdk.service.ACDCRegistrationService.BIND" />
+136-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:31:17-106
+136-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:31:25-103
+137
+138                <category android:name="android.intent.category.DEFAULT" />
+138-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:42:17-76
+138-->/Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:42:27-73
+139            </intent-filter>
+140        </service>
+141
+142        <provider
+142-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:37:9-50:20
+143            android:name="androidx.startup.InitializationProvider"
+143-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:38:13-67
+144            android:authorities="com.zero.android.androidx-startup"
+144-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:39:13-68
+145            android:exported="false" >
+145-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:40:13-37
+146            <meta-data
+146-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:41:13-43:52
+147                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+147-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:42:17-75
+148                android:value="androidx.startup" />
+148-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:43:17-49
+149            <meta-data
+149-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:44:13-46:52
+150                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+150-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:45:17-78
+151                android:value="androidx.startup" />
+151-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:46:17-49
+152            <meta-data
+152-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:47:13-49:52
+153                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+153-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:48:17-85
+154                android:value="androidx.startup" />
+154-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:49:17-49
+155        </provider>
+156
+157        <receiver
+157-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:52:9-70:20
+158            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+158-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:53:13-76
+159            android:directBootAware="false"
+159-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:54:13-44
+160            android:enabled="true"
+160-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:55:13-35
+161            android:exported="true"
+161-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:56:13-36
+162            android:permission="android.permission.DUMP" >
+162-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:57:13-57
+163            <intent-filter>
+163-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:58:13-60:29
+164                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+164-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:59:17-91
+164-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:59:25-88
+165            </intent-filter>
+166            <intent-filter>
+166-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:61:13-63:29
+167                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+167-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:62:17-85
+167-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:62:25-82
+168            </intent-filter>
+169            <intent-filter>
+169-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:64:13-66:29
+170                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+170-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:65:17-88
+170-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:65:25-85
+171            </intent-filter>
+172            <intent-filter>
+172-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:67:13-69:29
+173                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+173-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:68:17-95
+173-->[com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/transforms-3/e511d056304f3e143911a998dbcd038c/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:68:25-92
+174            </intent-filter>
+175        </receiver>
+176
+177        <activity
+177-->[androidx.compose.ui:ui-tooling-android:1.9.0] /Users/dalnk/.gradle/caches/transforms-3/e67dc97e53e0d93e684fa0532678e212/transformed/ui-tooling/AndroidManifest.xml:23:9-25:39
+178            android:name="androidx.compose.ui.tooling.PreviewActivity"
+178-->[androidx.compose.ui:ui-tooling-android:1.9.0] /Users/dalnk/.gradle/caches/transforms-3/e67dc97e53e0d93e684fa0532678e212/transformed/ui-tooling/AndroidManifest.xml:24:13-71
+179            android:exported="true" />
+179-->[androidx.compose.ui:ui-tooling-android:1.9.0] /Users/dalnk/.gradle/caches/transforms-3/e67dc97e53e0d93e684fa0532678e212/transformed/ui-tooling/AndroidManifest.xml:25:13-36
+180        <activity
+180-->[androidx.compose.ui:ui-test-manifest:1.9.0] /Users/dalnk/.gradle/caches/transforms-3/9060e9547b39030a8d47ae5279ed0f0b/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:23:9-26:79
+181            android:name="androidx.activity.ComponentActivity"
+181-->[androidx.compose.ui:ui-test-manifest:1.9.0] /Users/dalnk/.gradle/caches/transforms-3/9060e9547b39030a8d47ae5279ed0f0b/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:24:13-63
+182            android:exported="true"
+182-->[androidx.compose.ui:ui-test-manifest:1.9.0] /Users/dalnk/.gradle/caches/transforms-3/9060e9547b39030a8d47ae5279ed0f0b/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:25:13-36
+183            android:theme="@android:style/Theme.Material.Light.NoActionBar" />
+183-->[androidx.compose.ui:ui-test-manifest:1.9.0] /Users/dalnk/.gradle/caches/transforms-3/9060e9547b39030a8d47ae5279ed0f0b/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:26:13-76
+184
+185        <service
+185-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/transforms-3/1e45723972e36d4fe0e97a583fb1e6d7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:29:9-35:19
+186            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+186-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/transforms-3/1e45723972e36d4fe0e97a583fb1e6d7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:30:13-103
+187            android:exported="false" >
+187-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/transforms-3/1e45723972e36d4fe0e97a583fb1e6d7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:31:13-37
+188            <meta-data
+188-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/transforms-3/1e45723972e36d4fe0e97a583fb1e6d7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:32:13-34:39
+189                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+189-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/transforms-3/1e45723972e36d4fe0e97a583fb1e6d7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:33:17-94
+190                android:value="cct" />
+190-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/transforms-3/1e45723972e36d4fe0e97a583fb1e6d7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:34:17-36
+191        </service>
+192        <service
+192-->[com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/transforms-3/24ad436329027f201e7c41ffb149ae4f/transformed/transport-runtime-2.2.6/AndroidManifest.xml:26:9-30:19
+193            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+193-->[com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/transforms-3/24ad436329027f201e7c41ffb149ae4f/transformed/transport-runtime-2.2.6/AndroidManifest.xml:27:13-117
+194            android:exported="false"
+194-->[com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/transforms-3/24ad436329027f201e7c41ffb149ae4f/transformed/transport-runtime-2.2.6/AndroidManifest.xml:28:13-37
+195            android:permission="android.permission.BIND_JOB_SERVICE" >
+195-->[com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/transforms-3/24ad436329027f201e7c41ffb149ae4f/transformed/transport-runtime-2.2.6/AndroidManifest.xml:29:13-69
+196        </service>
+197
+198        <receiver
+198-->[com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/transforms-3/24ad436329027f201e7c41ffb149ae4f/transformed/transport-runtime-2.2.6/AndroidManifest.xml:32:9-34:40
+199            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+199-->[com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/transforms-3/24ad436329027f201e7c41ffb149ae4f/transformed/transport-runtime-2.2.6/AndroidManifest.xml:33:13-132
+200            android:exported="false" />
+200-->[com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/transforms-3/24ad436329027f201e7c41ffb149ae4f/transformed/transport-runtime-2.2.6/AndroidManifest.xml:34:13-37
+201
+202        <meta-data
+202-->[com.facebook.soloader:soloader:0.12.1] /Users/dalnk/.gradle/caches/transforms-3/fe904d8ebcf0c50d14daaffbf3626df5/transformed/soloader-0.12.1/AndroidManifest.xml:12:9-14:37
+203            android:name="com.facebook.soloader.enabled"
+203-->[com.facebook.soloader:soloader:0.12.1] /Users/dalnk/.gradle/caches/transforms-3/fe904d8ebcf0c50d14daaffbf3626df5/transformed/soloader-0.12.1/AndroidManifest.xml:13:13-57
+204            android:value="false" />
+204-->[com.facebook.soloader:soloader:0.12.1] /Users/dalnk/.gradle/caches/transforms-3/fe904d8ebcf0c50d14daaffbf3626df5/transformed/soloader-0.12.1/AndroidManifest.xml:14:13-34
+205    </application>
+206
+207</manifest>

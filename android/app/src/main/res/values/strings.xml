@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Zero</string>
+    <string name="notification_channel_agents">Agents</string>
+    <string name="notification_channel_alerts">Agent Alerts</string>
+    <string name="monitoring_active">Monitoring active</string>
+    <string name="monitoring_inactive">Monitoring stopped</string>
+
+    <!-- Camera Access (Meta Wearables DAT) -->
+    <string name="register_button_title">Connect my glasses</string>
+    <string name="unregister_button_title">Disconnect</string>
+    <string name="stream_button_title">Start streaming</string>
+    <string name="stop_stream_button_title">Stop streaming</string>
+    <string name="home_tip_video_title">Video Capture</string>
+    <string name="home_tip_audio_title">Open-Ear Audio</string>
+    <string name="home_tip_hands_title">Enjoy On-the-Go</string>
+    <string name="home_tip_video">Record videos directly from your glasses, from your point of view.</string>
+    <string name="home_tip_audio">Hear notifications while keeping your ears open to the world around you.</string>
+    <string name="home_tip_hands">Stay hands-free while you move through your day. Move freely, stay connected.</string>
+    <string name="home_redirect_message">You\'ll be redirected to the Meta AI app to confirm your connection.</string>
+    <string name="live_stream">Live stream</string>
+    <string name="camera_access_icon_description">Camera Access icon</string>
+    <string name="non_stream_screen_description">Tap the Start streaming button to stream video from your glasses or use the camera button to take a photo from your glasses.</string>
+    <string name="non_stream_screen_title">Stream Your Glasses Camera</string>
+    <string name="waiting_for_active_device">Waiting for an active device</string>
+    <string name="photo_captured">Photo Captured</string>
+    <string name="captured_photo">Captured Photo</string>
+    <string name="capture_photo">Capture Photo</string>
+    <string name="share">Share</string>
+    <string name="mock_device_kit_title">Mock Device Kit</string>
+    <string name="devices_paired_count">%1$d device(s) paired</string>
+    <string name="mock_device_kit_description">This screen handles simulating devices, mocking capabilities and states</string>
+    <string name="pair_rayban_meta">Pair RayBan Meta</string>
+    <string name="unpair">Unpair</string>
+    <string name="power_on">Power On</string>
+    <string name="power_off">Power Off</string>
+    <string name="unfold">Unfold</string>
+    <string name="fold">Fold</string>
+    <string name="don">Don</string>
+    <string name="doff">Doff</string>
+    <string name="select_video">Select video</string>
+    <string name="has_camera_feed">Has camera feed</string>
+    <string name="no_camera_feed">No camera feed</string>
+    <string name="select_image">Select image</string>
+    <string name="has_captured_image">Has captured image</string>
+    <string name="no_captured_image">No captured image</string>
+    <string name="getting_started_title">Getting started</string>
+    <string name="getting_started_tip_permission">First, Camera Access needs permission to use your glasses camera.</string>
+    <string name="getting_started_tip_led">The capture LED lets others know when you\'re capturing content or going live.</string>
+    <string name="getting_started_tip_photo">Capture photos by tapping the camera button.</string>
+    <string name="getting_started_continue">Continue</string>
+</resources>

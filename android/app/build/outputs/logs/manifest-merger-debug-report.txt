@@ -1,0 +1,888 @@
+-- Merging decision tree log ---
+meta-data#com.meta.wearable.mwdat.APPLICATION_ID
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:22:9-24:55
+	android:value
+		INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:24:13-52
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:23:13-66
+meta-data#com.meta.wearable.mwdat.CLIENT_TOKEN
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:25:9-27:53
+	android:value
+		INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:27:13-50
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:26:13-64
+meta-data#com.meta.wearable.mwdat.ANALYTICS_OPT_OUT
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:28:9-30:58
+	android:value
+		INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:30:13-55
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:29:13-69
+provider#androidx.core.content.FileProvider
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:62:9-70:20
+	android:grantUriPermissions
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:66:13-47
+	android:authorities
+		INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:64:13-64
+	android:exported
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:65:13-37
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:63:13-62
+manifest
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:1:1-73:12
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:1:1-73:12
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:1:1-73:12
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:1:1-73:12
+MERGED from [androidx.navigation:navigation-common:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/0ed4ab61d6e536dfa4288ff1b577f833/transformed/navigation-common-2.8.5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/9c9ea35eeb500080d62150124713ecb7/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/5bfa68fb08b94e58ab6f1f3ea803a479/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/7a9688703f86b370f40f9838d1ca8d57/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-compose:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/acd4879da98f21c04557b1211f95ae21/transformed/navigation-compose-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.material:material:1.12.0] /Users/dalnk/.gradle/caches/8.13/transforms/f20d037c5921e2d5303db068fd9c8f8d/transformed/material-1.12.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.camera:camera-video:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/51f67d421acf08bb98db9cf4c11bf2bf/transformed/camera-video-1.4.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.camera:camera-lifecycle:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/6f27a8b8fbaf08448ce922d0bc735356/transformed/camera-lifecycle-1.4.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:17:1-36:12
+MERGED from [androidx.camera:camera-core:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/087f55e049d4c529df6b417c9e3ec50b/transformed/camera-core-1.4.1/AndroidManifest.xml:17:1-36:12
+MERGED from [androidx.camera:camera-view:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/74ffa9edfefd253990d5ef83a3f45111/transformed/camera-view-1.4.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/dalnk/.gradle/caches/8.13/transforms/f123de1a2b475656f1c84307e8a4c603/transformed/constraintlayout-2.0.1/AndroidManifest.xml:2:1-11:12
+MERGED from [com.google.mlkit:barcode-scanning:17.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/82a9a59377ff9ca151a34652a66a37ff/transformed/barcode-scanning-17.3.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/24e6146e537457fba6f0c7dd7c5b39d1/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:2:1-18:12
+MERGED from [com.google.mlkit:barcode-scanning-common:17.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/8002be658fe17f1b6db9e2b790870874/transformed/barcode-scanning-common-17.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.mlkit:vision-common:17.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/00b4a6799270ccd7235bb2b0f6938efd/transformed/vision-common-17.3.0/AndroidManifest.xml:2:1-18:12
+MERGED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:2:1-26:12
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /Users/dalnk/.gradle/caches/8.13/transforms/bd33812f038525f73ce1b40218375ff9/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.appcompat:appcompat:1.6.1] /Users/dalnk/.gradle/caches/8.13/transforms/f742dfc905e692ebf5b97c49091b9f60/transformed/appcompat-1.6.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/12e7fe256df9e31f21f6654a6cd31110/transformed/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/dalnk/.gradle/caches/8.13/transforms/e2461e43e1d3bff7df7920d6ae8b0465/transformed/play-services-base-18.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.mlkit:vision-interfaces:16.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/338bc5cb96cec898b6a2ec543a74d661/transformed/vision-interfaces-16.3.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/dalnk/.gradle/caches/8.13/transforms/0bf52681702d06119573d2ee40b1565d/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:2:1-5:12
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/1c592fc4eada11e5f08011ca0a22e4ed/transformed/play-services-basement-18.4.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/dalnk/.gradle/caches/8.13/transforms/2f17d93c7e262c0e5fe3670e0ada42f9/transformed/fragment-1.3.6/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/20375ffbff4a73a31786722eb181115b/transformed/material3-release/AndroidManifest.xml:17:1-22:12
+MERGED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:3:1-73:12
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:3:1-73:12
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:3:1-73:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/1dd84d261fabf464ecb83cce060b7ac4/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/edd1db4fab91191c69537866ffd3f56a/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.5.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce2764e06192457953ca12d8f1b992cc/transformed/transition-1.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/f14fa45e727d0fa3c26fd98171b5d616/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/3fb7eb2afea2518e41b9a482daab8a1c/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/41d59cbb08c7c62a94f771721a65a14e/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/df1e6ba3ef9be222eb7387a2729ba190/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/52be469427308c7463ec6cb0a4656123/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/a54aa6981bf27fd84c26d1b6b6f71647/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/c827a83aaf6fbad190a07112fd690281/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/13bd782581120f6e207250d945915e7c/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/9544cb6893747b4866c02f72a407f09c/transformed/autofill-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/36b07cd9830b4814ffa1dfbd9330169b/transformed/ui-tooling-data/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/0b1b50edb78c2f189320a82e85eeeafb/transformed/ui-tooling-preview/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.ui:ui-tooling-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/76b0e8af9478fc4fe68a503c4f594b38/transformed/ui-tooling/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.compose.material:material-android:1.7.6] /Users/dalnk/.gradle/caches/8.13/transforms/0e2e5e2a80818f07445280a799341b0a/transformed/material-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-ripple-android:1.7.6] /Users/dalnk/.gradle/caches/8.13/transforms/cbb878f34286cc4448319e814eca9db4/transformed/material-ripple-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/569d5896435d36f819f25b10840ece02/transformed/foundation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/e15cbd3d5740e8ba6fe0bf05cc475699/transformed/foundation-layout/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-core-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/5f9b09c66a9bb2b10b2d5985270edec2/transformed/animation-core/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/e2c000e7676674032f5a76b573b11bf4/transformed/animation/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-util-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/429c43270383ff3c5c91fcb5bd72a4a5/transformed/ui-util/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-unit-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/793e9c3f22cd2fbb7e1cd91777131e5c/transformed/ui-unit/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-text-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/697f095852c610ec04e8b4f21ee239fb/transformed/ui-text/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-geometry-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/daa6cd04178a67a1c6b3fca8a49fe4aa/transformed/ui-geometry/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-graphics-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/5a61e475556a7468db80ff3af676537b/transformed/ui-graphics-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/dalnk/.gradle/caches/8.13/transforms/87af29da5691ec5857457cac1ae32bb4/transformed/graphics-path-1.0.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/9e6ca3d21df7b035494b23643f96cbf7/transformed/emoji2-views-helper-1.4.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6f8bda3a963145692cc9bcb25a607e25/transformed/emoji2-1.4.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.core:core:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/af103df8ce3affeef15e4c7cbd7273d6/transformed/core-1.15.0/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.compose.runtime:runtime-annotation-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/86250cf42b3c47b48bbc772c46228243/transformed/runtime-annotation/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/0a79aec575fdfe90040f306e66d03792/transformed/savedstate-ktx-1.3.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.savedstate:savedstate-android:1.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/4aa3a8bdbe518c66fd53e6234384762c/transformed/savedstate-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate-compose-android:1.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/eae3881efb66144f56be192f53750c6a/transformed/savedstate-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/183ad173e4ebf7859e2f3b348f7a7fe7/transformed/runtime/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/c83da893252f029ae34207376f1ce105/transformed/runtime-saveable/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/6caadd2a54666f58a06776cb2adb8c64/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/065c7871d71838a91241d124060f8885/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/22d86d4ff28b8677a9276f79a62a7f2f/transformed/lifecycle-viewmodel-savedstate-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/0c9f848742f9f0db769a6fc0b66ee07d/transformed/lifecycle-viewmodel-2.9.4/AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/d7638c005964d17923c3713da377cd48/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/1fe0830805250725bea07c729cf628ab/transformed/lifecycle-runtime-ktx/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/f51e2d7d00da6750fe5801c5d7d0a816/transformed/lifecycle-livedata-core-ktx-2.9.4/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/bf1c5030fd3909079798e51bef5c7487/transformed/lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/a1917ff13f08a1191d37b3410aedbd26/transformed/lifecycle-livedata-core-2.9.4/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/1e07cebb7510900fb2c0c25a525e3468/transformed/lifecycle-viewmodel-ktx-2.9.4/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/20196ea8887e684bdde3035358d8b2e2/transformed/lifecycle-livedata-2.9.4/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-service:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/c7542ac965013e11bbda90c1e6d22012/transformed/lifecycle-service-2.9.4/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/8693ef8909a775717aae79ea52ffa49f/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.6] /Users/dalnk/.gradle/caches/8.13/transforms/95e3aed0d7b3586c0c7d55bb37cd8494/transformed/material-icons-extended-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.6] /Users/dalnk/.gradle/caches/8.13/transforms/ebc764aa6c3e0d30b91004d81edd6e9f/transformed/material-icons-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/7d01bdfdfd6e4f1108359c43889d64c0/transformed/ui-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-test-manifest:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/01738d8ef44e13d0c6cfa3f9660efb52/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:17:1-29:12
+MERGED from [androidx.activity:activity:1.10.0] /Users/dalnk/.gradle/caches/8.13/transforms/04f9a64926e0c63df8732e97754d0990/transformed/activity-1.10.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity-ktx:1.10.0] /Users/dalnk/.gradle/caches/8.13/transforms/4d296119976d153412c75990faf50eed/transformed/activity-ktx-1.10.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity-compose:1.10.0] /Users/dalnk/.gradle/caches/8.13/transforms/6383cb6f82b19bf0835034e4ca0e9d59/transformed/activity-compose-1.10.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/555bc98bc4dfeb5f094292e776601958/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.core:core-ktx:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/4ad6b264ffb9361427add2ef0b0576f8/transformed/core-ktx-1.15.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/95fb46b42262a2905adeea7d64ebd6a1/transformed/datastore-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.datastore:datastore-android:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/a0f644ce2eeabfe1f241a73ce22d3117/transformed/datastore-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/251cca588e1f41351613c9d9f29bf0d0/transformed/datastore-preferences-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/6048a130531a601786267e021b3ef58a/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/db267348ac0aa400878575a1daedc3b2/transformed/profileinstaller-1.4.0/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/b016c2b64b7f9466d60260a302b938bf/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.2.0] /Users/dalnk/.gradle/caches/8.13/transforms/b792bcaea23628f67fe86d771085ad38/transformed/tracing-1.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.tracing:tracing-ktx:1.2.0] /Users/dalnk/.gradle/caches/8.13/transforms/0463ac641f719967442b008a3fb09b5a/transformed/tracing-ktx-1.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core-viewtree:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/56f7906ff49668cca30c71575b564470/transformed/core-viewtree-1.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/cd4d85c69f3f722573dce70cea9f05d4/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] /Users/dalnk/.gradle/caches/8.13/transforms/71f8b10a19ef5aefb6e99a63f6635ac2/transformed/exifinterface-1.3.7/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.security:security-crypto:1.1.0-alpha04] /Users/dalnk/.gradle/caches/8.13/transforms/4a0d55f89c97074c7b887618fda943d3/transformed/security-crypto-1.1.0-alpha04/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/8ab152a549bc88f0d764fb5846f33659/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/2dd3c23d285fc45ba53d77deb3a3427f/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/c065fc79becd8e6ca8f1cd7fbb0083da/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:15:1-38:12
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:15:1-41:12
+MERGED from [com.google.android.datatransport:transport-api:2.2.1] /Users/dalnk/.gradle/caches/8.13/transforms/361e39e08db50befc9b3717bceb0dce4/transformed/transport-api-2.2.1/AndroidManifest.xml:15:1-22:12
+MERGED from [com.google.firebase:firebase-components:16.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/62834773babf4db1daa1804f8fe4a618/transformed/firebase-components-16.1.0/AndroidManifest.xml:15:1-23:12
+MERGED from [com.google.firebase:firebase-encoders-json:17.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/a6116c7d4d5ebafcd0cb46cf2325dc64/transformed/firebase-encoders-json-17.1.0/AndroidManifest.xml:15:1-23:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/6c225ea907520bf7c1bdd16327138b10/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/094c5645b8f9999f97d52f25e58cb9f1/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/1c2b1c421c615d515e2d83cb72fa14cb/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/dalnk/.gradle/caches/8.13/transforms/70d9fa75bd973230b7136a6819201018/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.soloader:soloader:0.12.1] /Users/dalnk/.gradle/caches/8.13/transforms/90ada6868431a0c9f8e33ccce24a7311/transformed/soloader-0.12.1/AndroidManifest.xml:2:1-17:12
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/dalnk/.gradle/caches/8.13/transforms/06cdb829d376cc881929752a7dd7b55b/transformed/image-1.0.0-beta1/AndroidManifest.xml:2:1-9:12
+	package
+		INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:3:5-67
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:26:5-67
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:26:5-67
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:3:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:4:5-79
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:25:5-79
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:25:5-79
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:22:5-79
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:22:5-79
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:4:22-76
+uses-permission#android.permission.CAMERA
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:5:5-65
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:5:22-62
+uses-permission#android.permission.BLUETOOTH
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:6:5-68
+MERGED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:13:5-68
+MERGED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:13:5-68
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:13:5-68
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:13:5-68
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:13:5-68
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:13:5-68
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:6:22-65
+uses-permission#android.permission.BLUETOOTH_CONNECT
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:7:5-76
+MERGED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:12:5-76
+MERGED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:12:5-76
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:12:5-76
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:12:5-76
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:12:5-76
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:12:5-76
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:7:22-73
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:8:5-77
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:8:22-74
+uses-permission#android.permission.FOREGROUND_SERVICE
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:9:5-77
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:9:22-74
+uses-permission#android.permission.FOREGROUND_SERVICE_DATA_SYNC
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:10:5-87
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:10:22-84
+application
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:12:5-71:19
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:12:5-71:19
+MERGED from [com.google.android.material:material:1.12.0] /Users/dalnk/.gradle/caches/8.13/transforms/f20d037c5921e2d5303db068fd9c8f8d/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.12.0] /Users/dalnk/.gradle/caches/8.13/transforms/f20d037c5921e2d5303db068fd9c8f8d/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:23:5-34:19
+MERGED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:23:5-34:19
+MERGED from [androidx.camera:camera-core:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/087f55e049d4c529df6b417c9e3ec50b/transformed/camera-core-1.4.1/AndroidManifest.xml:23:5-34:19
+MERGED from [androidx.camera:camera-core:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/087f55e049d4c529df6b417c9e3ec50b/transformed/camera-core-1.4.1/AndroidManifest.xml:23:5-34:19
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/dalnk/.gradle/caches/8.13/transforms/f123de1a2b475656f1c84307e8a4c603/transformed/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/dalnk/.gradle/caches/8.13/transforms/f123de1a2b475656f1c84307e8a4c603/transformed/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/24e6146e537457fba6f0c7dd7c5b39d1/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/24e6146e537457fba6f0c7dd7c5b39d1/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.mlkit:vision-common:17.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/00b4a6799270ccd7235bb2b0f6938efd/transformed/vision-common-17.3.0/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.mlkit:vision-common:17.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/00b4a6799270ccd7235bb2b0f6938efd/transformed/vision-common-17.3.0/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:8:5-24:19
+MERGED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:8:5-24:19
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/dalnk/.gradle/caches/8.13/transforms/e2461e43e1d3bff7df7920d6ae8b0465/transformed/play-services-base-18.5.0/AndroidManifest.xml:4:5-6:19
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/dalnk/.gradle/caches/8.13/transforms/e2461e43e1d3bff7df7920d6ae8b0465/transformed/play-services-base-18.5.0/AndroidManifest.xml:4:5-6:19
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/dalnk/.gradle/caches/8.13/transforms/0bf52681702d06119573d2ee40b1565d/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/dalnk/.gradle/caches/8.13/transforms/0bf52681702d06119573d2ee40b1565d/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/1c592fc4eada11e5f08011ca0a22e4ed/transformed/play-services-basement-18.4.0/AndroidManifest.xml:5:5-7:19
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/1c592fc4eada11e5f08011ca0a22e4ed/transformed/play-services-basement-18.4.0/AndroidManifest.xml:5:5-7:19
+MERGED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:26:5-71:19
+MERGED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:26:5-71:19
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:26:5-71:19
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:26:5-71:19
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:26:5-71:19
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:26:5-71:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/76b0e8af9478fc4fe68a503c4f594b38/transformed/ui-tooling/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/76b0e8af9478fc4fe68a503c4f594b38/transformed/ui-tooling/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.emoji2:emoji2:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6f8bda3a963145692cc9bcb25a607e25/transformed/emoji2-1.4.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6f8bda3a963145692cc9bcb25a607e25/transformed/emoji2-1.4.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.core:core:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/af103df8ce3affeef15e4c7cbd7273d6/transformed/core-1.15.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/af103df8ce3affeef15e4c7cbd7273d6/transformed/core-1.15.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/6caadd2a54666f58a06776cb2adb8c64/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/6caadd2a54666f58a06776cb2adb8c64/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.compose.ui:ui-test-manifest:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/01738d8ef44e13d0c6cfa3f9660efb52/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:22:5-27:19
+MERGED from [androidx.compose.ui:ui-test-manifest:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/01738d8ef44e13d0c6cfa3f9660efb52/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:22:5-27:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/db267348ac0aa400878575a1daedc3b2/transformed/profileinstaller-1.4.0/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/db267348ac0aa400878575a1daedc3b2/transformed/profileinstaller-1.4.0/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/b016c2b64b7f9466d60260a302b938bf/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/b016c2b64b7f9466d60260a302b938bf/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/2dd3c23d285fc45ba53d77deb3a3427f/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/2dd3c23d285fc45ba53d77deb3a3427f/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:28:5-36:19
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:28:5-36:19
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:25:5-39:19
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:25:5-39:19
+MERGED from [com.facebook.soloader:soloader:0.12.1] /Users/dalnk/.gradle/caches/8.13/transforms/90ada6868431a0c9f8e33ccce24a7311/transformed/soloader-0.12.1/AndroidManifest.xml:11:5-15:19
+MERGED from [com.facebook.soloader:soloader:0.12.1] /Users/dalnk/.gradle/caches/8.13/transforms/90ada6868431a0c9f8e33ccce24a7311/transformed/soloader-0.12.1/AndroidManifest.xml:11:5-15:19
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/dalnk/.gradle/caches/8.13/transforms/06cdb829d376cc881929752a7dd7b55b/transformed/image-1.0.0-beta1/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/dalnk/.gradle/caches/8.13/transforms/06cdb829d376cc881929752a7dd7b55b/transformed/image-1.0.0-beta1/AndroidManifest.xml:7:5-20
+	android:extractNativeLibs
+		INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
+	android:appComponentFactory
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:26:18-86
+	android:supportsRtl
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:18:9-35
+	android:label
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:16:9-41
+	android:roundIcon
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:17:9-54
+	android:icon
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:15:9-43
+	android:allowBackup
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:14:9-35
+	android:theme
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:19:9-42
+	android:usesCleartextTraffic
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:20:9-44
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:13:9-40
+activity#com.zero.android.MainActivity
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:32:9-47:20
+	android:launchMode
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:35:13-43
+	android:exported
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:34:13-36
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:33:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:36:13-39:29
+action#android.intent.action.MAIN
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:37:17-69
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:37:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:38:17-77
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:38:27-74
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:0.computer+data:host:connect+data:pathPrefix:/connect+data:scheme:https+data:scheme:zero
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:40:13-46:29
+	android:autoVerify
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:40:28-53
+action#android.intent.action.VIEW
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:41:17-69
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:41:25-66
+category#android.intent.category.DEFAULT
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:42:17-76
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:42:27-73
+category#android.intent.category.BROWSABLE
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:43:17-78
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:43:27-75
+data
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:44:17-104
+	android:host
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:44:46-71
+	android:scheme
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:44:23-45
+	android:pathPrefix
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:44:72-101
+service#com.zero.android.service.MonitoringService
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:49:9-52:56
+	android:exported
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:51:13-37
+	android:foregroundServiceType
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:52:13-53
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:50:13-54
+receiver#com.zero.android.service.QuickReplyReceiver
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:54:9-60:20
+	android:exported
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:56:13-37
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:55:13-55
+intent-filter#action:name:com.zero.android.ACTION_REPLY
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:57:13-59:29
+action#com.zero.android.ACTION_REPLY
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:58:17-72
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:58:25-69
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:67:13-69:54
+	android:resource
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:69:17-51
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:68:17-67
+uses-sdk
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
+MERGED from [androidx.navigation:navigation-common:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/0ed4ab61d6e536dfa4288ff1b577f833/transformed/navigation-common-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/0ed4ab61d6e536dfa4288ff1b577f833/transformed/navigation-common-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/9c9ea35eeb500080d62150124713ecb7/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/9c9ea35eeb500080d62150124713ecb7/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/5bfa68fb08b94e58ab6f1f3ea803a479/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/5bfa68fb08b94e58ab6f1f3ea803a479/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/7a9688703f86b370f40f9838d1ca8d57/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/7a9688703f86b370f40f9838d1ca8d57/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/acd4879da98f21c04557b1211f95ae21/transformed/navigation-compose-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/acd4879da98f21c04557b1211f95ae21/transformed/navigation-compose-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.material:material:1.12.0] /Users/dalnk/.gradle/caches/8.13/transforms/f20d037c5921e2d5303db068fd9c8f8d/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.12.0] /Users/dalnk/.gradle/caches/8.13/transforms/f20d037c5921e2d5303db068fd9c8f8d/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.camera:camera-video:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/51f67d421acf08bb98db9cf4c11bf2bf/transformed/camera-video-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-video:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/51f67d421acf08bb98db9cf4c11bf2bf/transformed/camera-video-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-lifecycle:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/6f27a8b8fbaf08448ce922d0bc735356/transformed/camera-lifecycle-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-lifecycle:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/6f27a8b8fbaf08448ce922d0bc735356/transformed/camera-lifecycle-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.camera:camera-core:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/087f55e049d4c529df6b417c9e3ec50b/transformed/camera-core-1.4.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.camera:camera-core:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/087f55e049d4c529df6b417c9e3ec50b/transformed/camera-core-1.4.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.camera:camera-view:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/74ffa9edfefd253990d5ef83a3f45111/transformed/camera-view-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-view:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/74ffa9edfefd253990d5ef83a3f45111/transformed/camera-view-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/dalnk/.gradle/caches/8.13/transforms/f123de1a2b475656f1c84307e8a4c603/transformed/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/dalnk/.gradle/caches/8.13/transforms/f123de1a2b475656f1c84307e8a4c603/transformed/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.mlkit:barcode-scanning:17.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/82a9a59377ff9ca151a34652a66a37ff/transformed/barcode-scanning-17.3.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.mlkit:barcode-scanning:17.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/82a9a59377ff9ca151a34652a66a37ff/transformed/barcode-scanning-17.3.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/24e6146e537457fba6f0c7dd7c5b39d1/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:6:5-44
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/24e6146e537457fba6f0c7dd7c5b39d1/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:6:5-44
+MERGED from [com.google.mlkit:barcode-scanning-common:17.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/8002be658fe17f1b6db9e2b790870874/transformed/barcode-scanning-common-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.mlkit:barcode-scanning-common:17.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/8002be658fe17f1b6db9e2b790870874/transformed/barcode-scanning-common-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.mlkit:vision-common:17.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/00b4a6799270ccd7235bb2b0f6938efd/transformed/vision-common-17.3.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.mlkit:vision-common:17.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/00b4a6799270ccd7235bb2b0f6938efd/transformed/vision-common-17.3.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:6:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /Users/dalnk/.gradle/caches/8.13/transforms/bd33812f038525f73ce1b40218375ff9/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /Users/dalnk/.gradle/caches/8.13/transforms/bd33812f038525f73ce1b40218375ff9/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.6.1] /Users/dalnk/.gradle/caches/8.13/transforms/f742dfc905e692ebf5b97c49091b9f60/transformed/appcompat-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.6.1] /Users/dalnk/.gradle/caches/8.13/transforms/f742dfc905e692ebf5b97c49091b9f60/transformed/appcompat-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/12e7fe256df9e31f21f6654a6cd31110/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/12e7fe256df9e31f21f6654a6cd31110/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/dalnk/.gradle/caches/8.13/transforms/e2461e43e1d3bff7df7920d6ae8b0465/transformed/play-services-base-18.5.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/dalnk/.gradle/caches/8.13/transforms/e2461e43e1d3bff7df7920d6ae8b0465/transformed/play-services-base-18.5.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.mlkit:vision-interfaces:16.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/338bc5cb96cec898b6a2ec543a74d661/transformed/vision-interfaces-16.3.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.mlkit:vision-interfaces:16.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/338bc5cb96cec898b6a2ec543a74d661/transformed/vision-interfaces-16.3.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/dalnk/.gradle/caches/8.13/transforms/0bf52681702d06119573d2ee40b1565d/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/dalnk/.gradle/caches/8.13/transforms/0bf52681702d06119573d2ee40b1565d/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/1c592fc4eada11e5f08011ca0a22e4ed/transformed/play-services-basement-18.4.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/1c592fc4eada11e5f08011ca0a22e4ed/transformed/play-services-basement-18.4.0/AndroidManifest.xml:3:5-44
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/dalnk/.gradle/caches/8.13/transforms/2f17d93c7e262c0e5fe3670e0ada42f9/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/dalnk/.gradle/caches/8.13/transforms/2f17d93c7e262c0e5fe3670e0ada42f9/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/20375ffbff4a73a31786722eb181115b/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/20375ffbff4a73a31786722eb181115b/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:8:5-10:41
+MERGED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:8:5-10:41
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:8:5-10:41
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:8:5-10:41
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:8:5-10:41
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:8:5-10:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/1dd84d261fabf464ecb83cce060b7ac4/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/1dd84d261fabf464ecb83cce060b7ac4/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/edd1db4fab91191c69537866ffd3f56a/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/edd1db4fab91191c69537866ffd3f56a/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.5.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce2764e06192457953ca12d8f1b992cc/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.transition:transition:1.5.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce2764e06192457953ca12d8f1b992cc/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/f14fa45e727d0fa3c26fd98171b5d616/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/f14fa45e727d0fa3c26fd98171b5d616/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/3fb7eb2afea2518e41b9a482daab8a1c/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/3fb7eb2afea2518e41b9a482daab8a1c/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/41d59cbb08c7c62a94f771721a65a14e/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/41d59cbb08c7c62a94f771721a65a14e/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/df1e6ba3ef9be222eb7387a2729ba190/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/df1e6ba3ef9be222eb7387a2729ba190/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/52be469427308c7463ec6cb0a4656123/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/52be469427308c7463ec6cb0a4656123/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/a54aa6981bf27fd84c26d1b6b6f71647/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/a54aa6981bf27fd84c26d1b6b6f71647/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/c827a83aaf6fbad190a07112fd690281/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/c827a83aaf6fbad190a07112fd690281/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/13bd782581120f6e207250d945915e7c/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/13bd782581120f6e207250d945915e7c/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/9544cb6893747b4866c02f72a407f09c/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/9544cb6893747b4866c02f72a407f09c/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/36b07cd9830b4814ffa1dfbd9330169b/transformed/ui-tooling-data/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/36b07cd9830b4814ffa1dfbd9330169b/transformed/ui-tooling-data/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/0b1b50edb78c2f189320a82e85eeeafb/transformed/ui-tooling-preview/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/0b1b50edb78c2f189320a82e85eeeafb/transformed/ui-tooling-preview/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/76b0e8af9478fc4fe68a503c4f594b38/transformed/ui-tooling/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/76b0e8af9478fc4fe68a503c4f594b38/transformed/ui-tooling/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material:material-android:1.7.6] /Users/dalnk/.gradle/caches/8.13/transforms/0e2e5e2a80818f07445280a799341b0a/transformed/material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-android:1.7.6] /Users/dalnk/.gradle/caches/8.13/transforms/0e2e5e2a80818f07445280a799341b0a/transformed/material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.6] /Users/dalnk/.gradle/caches/8.13/transforms/cbb878f34286cc4448319e814eca9db4/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.6] /Users/dalnk/.gradle/caches/8.13/transforms/cbb878f34286cc4448319e814eca9db4/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/569d5896435d36f819f25b10840ece02/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/569d5896435d36f819f25b10840ece02/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/e15cbd3d5740e8ba6fe0bf05cc475699/transformed/foundation-layout/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/e15cbd3d5740e8ba6fe0bf05cc475699/transformed/foundation-layout/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/5f9b09c66a9bb2b10b2d5985270edec2/transformed/animation-core/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/5f9b09c66a9bb2b10b2d5985270edec2/transformed/animation-core/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/e2c000e7676674032f5a76b573b11bf4/transformed/animation/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/e2c000e7676674032f5a76b573b11bf4/transformed/animation/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/429c43270383ff3c5c91fcb5bd72a4a5/transformed/ui-util/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/429c43270383ff3c5c91fcb5bd72a4a5/transformed/ui-util/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/793e9c3f22cd2fbb7e1cd91777131e5c/transformed/ui-unit/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/793e9c3f22cd2fbb7e1cd91777131e5c/transformed/ui-unit/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/697f095852c610ec04e8b4f21ee239fb/transformed/ui-text/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/697f095852c610ec04e8b4f21ee239fb/transformed/ui-text/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/daa6cd04178a67a1c6b3fca8a49fe4aa/transformed/ui-geometry/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/daa6cd04178a67a1c6b3fca8a49fe4aa/transformed/ui-geometry/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/5a61e475556a7468db80ff3af676537b/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/5a61e475556a7468db80ff3af676537b/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/dalnk/.gradle/caches/8.13/transforms/87af29da5691ec5857457cac1ae32bb4/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/dalnk/.gradle/caches/8.13/transforms/87af29da5691ec5857457cac1ae32bb4/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/9e6ca3d21df7b035494b23643f96cbf7/transformed/emoji2-views-helper-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/9e6ca3d21df7b035494b23643f96cbf7/transformed/emoji2-views-helper-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6f8bda3a963145692cc9bcb25a607e25/transformed/emoji2-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6f8bda3a963145692cc9bcb25a607e25/transformed/emoji2-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.core:core:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/af103df8ce3affeef15e4c7cbd7273d6/transformed/core-1.15.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/af103df8ce3affeef15e4c7cbd7273d6/transformed/core-1.15.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.runtime:runtime-annotation-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/86250cf42b3c47b48bbc772c46228243/transformed/runtime-annotation/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-annotation-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/86250cf42b3c47b48bbc772c46228243/transformed/runtime-annotation/AndroidManifest.xml:5:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/0a79aec575fdfe90040f306e66d03792/transformed/savedstate-ktx-1.3.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/0a79aec575fdfe90040f306e66d03792/transformed/savedstate-ktx-1.3.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.savedstate:savedstate-android:1.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/4aa3a8bdbe518c66fd53e6234384762c/transformed/savedstate-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-android:1.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/4aa3a8bdbe518c66fd53e6234384762c/transformed/savedstate-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-compose-android:1.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/eae3881efb66144f56be192f53750c6a/transformed/savedstate-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.savedstate:savedstate-compose-android:1.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/eae3881efb66144f56be192f53750c6a/transformed/savedstate-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/183ad173e4ebf7859e2f3b348f7a7fe7/transformed/runtime/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/183ad173e4ebf7859e2f3b348f7a7fe7/transformed/runtime/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/c83da893252f029ae34207376f1ce105/transformed/runtime-saveable/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/c83da893252f029ae34207376f1ce105/transformed/runtime-saveable/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/6caadd2a54666f58a06776cb2adb8c64/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/6caadd2a54666f58a06776cb2adb8c64/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/065c7871d71838a91241d124060f8885/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/065c7871d71838a91241d124060f8885/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/22d86d4ff28b8677a9276f79a62a7f2f/transformed/lifecycle-viewmodel-savedstate-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/22d86d4ff28b8677a9276f79a62a7f2f/transformed/lifecycle-viewmodel-savedstate-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/0c9f848742f9f0db769a6fc0b66ee07d/transformed/lifecycle-viewmodel-2.9.4/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/0c9f848742f9f0db769a6fc0b66ee07d/transformed/lifecycle-viewmodel-2.9.4/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/d7638c005964d17923c3713da377cd48/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/d7638c005964d17923c3713da377cd48/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/1fe0830805250725bea07c729cf628ab/transformed/lifecycle-runtime-ktx/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/1fe0830805250725bea07c729cf628ab/transformed/lifecycle-runtime-ktx/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/f51e2d7d00da6750fe5801c5d7d0a816/transformed/lifecycle-livedata-core-ktx-2.9.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/f51e2d7d00da6750fe5801c5d7d0a816/transformed/lifecycle-livedata-core-ktx-2.9.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/bf1c5030fd3909079798e51bef5c7487/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/bf1c5030fd3909079798e51bef5c7487/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/a1917ff13f08a1191d37b3410aedbd26/transformed/lifecycle-livedata-core-2.9.4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/a1917ff13f08a1191d37b3410aedbd26/transformed/lifecycle-livedata-core-2.9.4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/1e07cebb7510900fb2c0c25a525e3468/transformed/lifecycle-viewmodel-ktx-2.9.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/1e07cebb7510900fb2c0c25a525e3468/transformed/lifecycle-viewmodel-ktx-2.9.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/20196ea8887e684bdde3035358d8b2e2/transformed/lifecycle-livedata-2.9.4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/20196ea8887e684bdde3035358d8b2e2/transformed/lifecycle-livedata-2.9.4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/c7542ac965013e11bbda90c1e6d22012/transformed/lifecycle-service-2.9.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/c7542ac965013e11bbda90c1e6d22012/transformed/lifecycle-service-2.9.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/8693ef8909a775717aae79ea52ffa49f/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/8693ef8909a775717aae79ea52ffa49f/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.6] /Users/dalnk/.gradle/caches/8.13/transforms/95e3aed0d7b3586c0c7d55bb37cd8494/transformed/material-icons-extended-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.6] /Users/dalnk/.gradle/caches/8.13/transforms/95e3aed0d7b3586c0c7d55bb37cd8494/transformed/material-icons-extended-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.6] /Users/dalnk/.gradle/caches/8.13/transforms/ebc764aa6c3e0d30b91004d81edd6e9f/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.6] /Users/dalnk/.gradle/caches/8.13/transforms/ebc764aa6c3e0d30b91004d81edd6e9f/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/7d01bdfdfd6e4f1108359c43889d64c0/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/7d01bdfdfd6e4f1108359c43889d64c0/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-test-manifest:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/01738d8ef44e13d0c6cfa3f9660efb52/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-test-manifest:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/01738d8ef44e13d0c6cfa3f9660efb52/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.10.0] /Users/dalnk/.gradle/caches/8.13/transforms/04f9a64926e0c63df8732e97754d0990/transformed/activity-1.10.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.10.0] /Users/dalnk/.gradle/caches/8.13/transforms/04f9a64926e0c63df8732e97754d0990/transformed/activity-1.10.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-ktx:1.10.0] /Users/dalnk/.gradle/caches/8.13/transforms/4d296119976d153412c75990faf50eed/transformed/activity-ktx-1.10.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.10.0] /Users/dalnk/.gradle/caches/8.13/transforms/4d296119976d153412c75990faf50eed/transformed/activity-ktx-1.10.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.10.0] /Users/dalnk/.gradle/caches/8.13/transforms/6383cb6f82b19bf0835034e4ca0e9d59/transformed/activity-compose-1.10.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.10.0] /Users/dalnk/.gradle/caches/8.13/transforms/6383cb6f82b19bf0835034e4ca0e9d59/transformed/activity-compose-1.10.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/555bc98bc4dfeb5f094292e776601958/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/555bc98bc4dfeb5f094292e776601958/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.core:core-ktx:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/4ad6b264ffb9361427add2ef0b0576f8/transformed/core-ktx-1.15.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/4ad6b264ffb9361427add2ef0b0576f8/transformed/core-ktx-1.15.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/95fb46b42262a2905adeea7d64ebd6a1/transformed/datastore-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/95fb46b42262a2905adeea7d64ebd6a1/transformed/datastore-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-android:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/a0f644ce2eeabfe1f241a73ce22d3117/transformed/datastore-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-android:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/a0f644ce2eeabfe1f241a73ce22d3117/transformed/datastore-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/251cca588e1f41351613c9d9f29bf0d0/transformed/datastore-preferences-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/251cca588e1f41351613c9d9f29bf0d0/transformed/datastore-preferences-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/6048a130531a601786267e021b3ef58a/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/6048a130531a601786267e021b3ef58a/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/db267348ac0aa400878575a1daedc3b2/transformed/profileinstaller-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/db267348ac0aa400878575a1daedc3b2/transformed/profileinstaller-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/b016c2b64b7f9466d60260a302b938bf/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/b016c2b64b7f9466d60260a302b938bf/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.2.0] /Users/dalnk/.gradle/caches/8.13/transforms/b792bcaea23628f67fe86d771085ad38/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.2.0] /Users/dalnk/.gradle/caches/8.13/transforms/b792bcaea23628f67fe86d771085ad38/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing-ktx:1.2.0] /Users/dalnk/.gradle/caches/8.13/transforms/0463ac641f719967442b008a3fb09b5a/transformed/tracing-ktx-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing-ktx:1.2.0] /Users/dalnk/.gradle/caches/8.13/transforms/0463ac641f719967442b008a3fb09b5a/transformed/tracing-ktx-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core-viewtree:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/56f7906ff49668cca30c71575b564470/transformed/core-viewtree-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-viewtree:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/56f7906ff49668cca30c71575b564470/transformed/core-viewtree-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/cd4d85c69f3f722573dce70cea9f05d4/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/cd4d85c69f3f722573dce70cea9f05d4/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] /Users/dalnk/.gradle/caches/8.13/transforms/71f8b10a19ef5aefb6e99a63f6635ac2/transformed/exifinterface-1.3.7/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] /Users/dalnk/.gradle/caches/8.13/transforms/71f8b10a19ef5aefb6e99a63f6635ac2/transformed/exifinterface-1.3.7/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.security:security-crypto:1.1.0-alpha04] /Users/dalnk/.gradle/caches/8.13/transforms/4a0d55f89c97074c7b887618fda943d3/transformed/security-crypto-1.1.0-alpha04/AndroidManifest.xml:20:5-44
+MERGED from [androidx.security:security-crypto:1.1.0-alpha04] /Users/dalnk/.gradle/caches/8.13/transforms/4a0d55f89c97074c7b887618fda943d3/transformed/security-crypto-1.1.0-alpha04/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/8ab152a549bc88f0d764fb5846f33659/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/8ab152a549bc88f0d764fb5846f33659/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/2dd3c23d285fc45ba53d77deb3a3427f/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/2dd3c23d285fc45ba53d77deb3a3427f/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/c065fc79becd8e6ca8f1cd7fbb0083da/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/c065fc79becd8e6ca8f1cd7fbb0083da/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.datatransport:transport-api:2.2.1] /Users/dalnk/.gradle/caches/8.13/transforms/361e39e08db50befc9b3717bceb0dce4/transformed/transport-api-2.2.1/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.datatransport:transport-api:2.2.1] /Users/dalnk/.gradle/caches/8.13/transforms/361e39e08db50befc9b3717bceb0dce4/transformed/transport-api-2.2.1/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.firebase:firebase-components:16.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/62834773babf4db1daa1804f8fe4a618/transformed/firebase-components-16.1.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-components:16.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/62834773babf4db1daa1804f8fe4a618/transformed/firebase-components-16.1.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-encoders-json:17.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/a6116c7d4d5ebafcd0cb46cf2325dc64/transformed/firebase-encoders-json-17.1.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-encoders-json:17.1.0] /Users/dalnk/.gradle/caches/8.13/transforms/a6116c7d4d5ebafcd0cb46cf2325dc64/transformed/firebase-encoders-json-17.1.0/AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/6c225ea907520bf7c1bdd16327138b10/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/6c225ea907520bf7c1bdd16327138b10/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/094c5645b8f9999f97d52f25e58cb9f1/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/094c5645b8f9999f97d52f25e58cb9f1/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/1c2b1c421c615d515e2d83cb72fa14cb/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/dalnk/.gradle/caches/8.13/transforms/1c2b1c421c615d515e2d83cb72fa14cb/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/dalnk/.gradle/caches/8.13/transforms/70d9fa75bd973230b7136a6819201018/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/dalnk/.gradle/caches/8.13/transforms/70d9fa75bd973230b7136a6819201018/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.soloader:soloader:0.12.1] /Users/dalnk/.gradle/caches/8.13/transforms/90ada6868431a0c9f8e33ccce24a7311/transformed/soloader-0.12.1/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.soloader:soloader:0.12.1] /Users/dalnk/.gradle/caches/8.13/transforms/90ada6868431a0c9f8e33ccce24a7311/transformed/soloader-0.12.1/AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/dalnk/.gradle/caches/8.13/transforms/06cdb829d376cc881929752a7dd7b55b/transformed/image-1.0.0-beta1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/dalnk/.gradle/caches/8.13/transforms/06cdb829d376cc881929752a7dd7b55b/transformed/image-1.0.0-beta1/AndroidManifest.xml:5:5-44
+	android:targetSdkVersion
+		INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
+service#androidx.camera.core.impl.MetadataHolderService
+ADDED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:24:9-33:19
+MERGED from [androidx.camera:camera-core:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/087f55e049d4c529df6b417c9e3ec50b/transformed/camera-core-1.4.1/AndroidManifest.xml:29:9-33:78
+MERGED from [androidx.camera:camera-core:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/087f55e049d4c529df6b417c9e3ec50b/transformed/camera-core-1.4.1/AndroidManifest.xml:29:9-33:78
+	tools:node
+		ADDED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:29:13-31
+	android:enabled
+		ADDED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:26:13-36
+	android:exported
+		ADDED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:27:13-37
+	tools:ignore
+		ADDED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:28:13-75
+	android:name
+		ADDED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:25:13-75
+meta-data#androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER
+ADDED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:30:13-32:89
+	android:value
+		ADDED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:32:17-86
+	android:name
+		ADDED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:31:17-103
+service#com.google.mlkit.common.internal.MlKitComponentDiscoveryService
+ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/24e6146e537457fba6f0c7dd7c5b39d1/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.mlkit:vision-common:17.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/00b4a6799270ccd7235bb2b0f6938efd/transformed/vision-common-17.3.0/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.mlkit:vision-common:17.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/00b4a6799270ccd7235bb2b0f6938efd/transformed/vision-common-17.3.0/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:15:9-23:19
+MERGED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:15:9-23:19
+	android:exported
+		ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/24e6146e537457fba6f0c7dd7c5b39d1/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:11:13-37
+	tools:targetApi
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:19:13-32
+	android:directBootAware
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:17:13-43
+	android:name
+		ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/24e6146e537457fba6f0c7dd7c5b39d1/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:10:13-91
+meta-data#com.google.firebase.components:com.google.mlkit.vision.barcode.internal.BarcodeRegistrar
+ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/24e6146e537457fba6f0c7dd7c5b39d1/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:12:13-14:85
+	android:value
+		ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/24e6146e537457fba6f0c7dd7c5b39d1/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:14:17-82
+	android:name
+		ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/dalnk/.gradle/caches/8.13/transforms/24e6146e537457fba6f0c7dd7c5b39d1/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:13:17-120
+meta-data#com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar
+ADDED from [com.google.mlkit:vision-common:17.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/00b4a6799270ccd7235bb2b0f6938efd/transformed/vision-common-17.3.0/AndroidManifest.xml:12:13-14:85
+	android:value
+		ADDED from [com.google.mlkit:vision-common:17.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/00b4a6799270ccd7235bb2b0f6938efd/transformed/vision-common-17.3.0/AndroidManifest.xml:14:17-82
+	android:name
+		ADDED from [com.google.mlkit:vision-common:17.3.0] /Users/dalnk/.gradle/caches/8.13/transforms/00b4a6799270ccd7235bb2b0f6938efd/transformed/vision-common-17.3.0/AndroidManifest.xml:13:17-124
+provider#com.google.mlkit.common.internal.MlKitInitProvider
+ADDED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:9:9-13:38
+	android:authorities
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:11:13-69
+	android:exported
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:12:13-37
+	android:initOrder
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:13:13-35
+	android:name
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:10:13-78
+meta-data#com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar
+ADDED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:20:13-22:85
+	android:value
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:22:17-82
+	android:name
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/dalnk/.gradle/caches/8.13/transforms/af185c82c71285b4f6089f40d9b9fa1a/transformed/common-18.11.0/AndroidManifest.xml:21:17-120
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:18.5.0] /Users/dalnk/.gradle/caches/8.13/transforms/e2461e43e1d3bff7df7920d6ae8b0465/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /Users/dalnk/.gradle/caches/8.13/transforms/e2461e43e1d3bff7df7920d6ae8b0465/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /Users/dalnk/.gradle/caches/8.13/transforms/e2461e43e1d3bff7df7920d6ae8b0465/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /Users/dalnk/.gradle/caches/8.13/transforms/e2461e43e1d3bff7df7920d6ae8b0465/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/1c592fc4eada11e5f08011ca0a22e4ed/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/1c592fc4eada11e5f08011ca0a22e4ed/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/1c592fc4eada11e5f08011ca0a22e4ed/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
+queries
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:15:5-18:15
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:15:5-18:15
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:15:5-18:15
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:15:5-18:15
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:15:5-18:15
+package#com.facebook.stella
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:16:9-55
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:16:9-55
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:16:9-55
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:16:9-55
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:16:9-55
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:16:18-52
+package#com.facebook.stella_debug
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:17:9-61
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:17:9-61
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:17:9-61
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:17:9-61
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:17:9-61
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:17:18-58
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:20:5-22:47
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:20:5-22:47
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:20:5-22:47
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:20:5-22:47
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:20:5-22:47
+MERGED from [androidx.core:core:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/af103df8ce3affeef15e4c7cbd7273d6/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+MERGED from [androidx.core:core:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/af103df8ce3affeef15e4c7cbd7273d6/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:22:9-44
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:21:9-81
+permission#com.zero.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:20:5-22:47
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:20:5-22:47
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:20:5-22:47
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:20:5-22:47
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:20:5-22:47
+MERGED from [androidx.core:core:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/af103df8ce3affeef15e4c7cbd7273d6/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+MERGED from [androidx.core:core:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/af103df8ce3affeef15e4c7cbd7273d6/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:22:9-44
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:21:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:24:5-97
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:24:5-97
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:24:5-97
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:24:5-97
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:24:5-97
+MERGED from [androidx.core:core:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/af103df8ce3affeef15e4c7cbd7273d6/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+MERGED from [androidx.core:core:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/af103df8ce3affeef15e4c7cbd7273d6/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:24:22-94
+uses-permission#com.zero.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:24:5-97
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:24:5-97
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:24:5-97
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:24:5-97
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:24:5-97
+MERGED from [androidx.core:core:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/af103df8ce3affeef15e4c7cbd7273d6/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+MERGED from [androidx.core:core:1.15.0] /Users/dalnk/.gradle/caches/8.13/transforms/af103df8ce3affeef15e4c7cbd7273d6/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:24:22-94
+service#com.meta.wearable.acdc.sdk.service.ACDCRegistrationService
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:27:9-35:19
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:27:9-35:19
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:27:9-35:19
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:27:9-35:19
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:27:9-35:19
+	android:exported
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:29:13-36
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:28:13-86
+intent-filter#action:name:com.meta.wearable.acdc.sdk.service.ACDCRegistrationService.BIND+category:name:android.intent.category.DEFAULT
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:30:13-34:29
+action#com.meta.wearable.acdc.sdk.service.ACDCRegistrationService.BIND
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:31:17-106
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:31:25-103
+provider#androidx.startup.InitializationProvider
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:37:9-50:20
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:37:9-50:20
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:37:9-50:20
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:37:9-50:20
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:37:9-50:20
+MERGED from [androidx.emoji2:emoji2:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6f8bda3a963145692cc9bcb25a607e25/transformed/emoji2-1.4.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.emoji2:emoji2:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6f8bda3a963145692cc9bcb25a607e25/transformed/emoji2-1.4.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/6caadd2a54666f58a06776cb2adb8c64/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/6caadd2a54666f58a06776cb2adb8c64/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/db267348ac0aa400878575a1daedc3b2/transformed/profileinstaller-1.4.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/db267348ac0aa400878575a1daedc3b2/transformed/profileinstaller-1.4.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/b016c2b64b7f9466d60260a302b938bf/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/dalnk/.gradle/caches/8.13/transforms/b016c2b64b7f9466d60260a302b938bf/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	android:authorities
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:39:13-68
+	android:exported
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:40:13-37
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:38:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:41:13-43:52
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:41:13-43:52
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:41:13-43:52
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:41:13-43:52
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:41:13-43:52
+MERGED from [androidx.emoji2:emoji2:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6f8bda3a963145692cc9bcb25a607e25/transformed/emoji2-1.4.0/AndroidManifest.xml:29:13-31:52
+MERGED from [androidx.emoji2:emoji2:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6f8bda3a963145692cc9bcb25a607e25/transformed/emoji2-1.4.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:43:17-49
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:42:17-75
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:44:13-46:52
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:44:13-46:52
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:44:13-46:52
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:44:13-46:52
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:44:13-46:52
+MERGED from [androidx.lifecycle:lifecycle-process:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/6caadd2a54666f58a06776cb2adb8c64/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:29:13-31:52
+MERGED from [androidx.lifecycle:lifecycle-process:2.9.4] /Users/dalnk/.gradle/caches/8.13/transforms/6caadd2a54666f58a06776cb2adb8c64/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:46:17-49
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:45:17-78
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:47:13-49:52
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:47:13-49:52
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:47:13-49:52
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:47:13-49:52
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:47:13-49:52
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/db267348ac0aa400878575a1daedc3b2/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/db267348ac0aa400878575a1daedc3b2/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:49:17-49
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:48:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:52:9-70:20
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:52:9-70:20
+MERGED from [com.meta.wearable:mwdat-mockdevice:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/da9617d12a044345b3c93def36707911/transformed/mwdat-mockdevice-0.4.0/AndroidManifest.xml:52:9-70:20
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:52:9-70:20
+MERGED from [com.meta.wearable:mwdat-core:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/ce363c03bf1d39bcc3408327b09c826c/transformed/mwdat-core-0.4.0/AndroidManifest.xml:52:9-70:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/db267348ac0aa400878575a1daedc3b2/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/db267348ac0aa400878575a1daedc3b2/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:55:13-35
+	android:exported
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:56:13-36
+	android:permission
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:57:13-57
+	android:directBootAware
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:54:13-44
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:53:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:58:13-60:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:59:17-91
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:59:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:61:13-63:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:62:17-85
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:62:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:64:13-66:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:65:17-88
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:65:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:67:13-69:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:68:17-95
+	android:name
+		ADDED from [com.meta.wearable:mwdat-camera:0.4.0] /Users/dalnk/.gradle/caches/8.13/transforms/6569fa340a4705e0895a8ecec9096b55/transformed/mwdat-camera-0.4.0/AndroidManifest.xml:68:25-92
+activity#androidx.compose.ui.tooling.PreviewActivity
+ADDED from [androidx.compose.ui:ui-tooling-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/76b0e8af9478fc4fe68a503c4f594b38/transformed/ui-tooling/AndroidManifest.xml:23:9-25:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/76b0e8af9478fc4fe68a503c4f594b38/transformed/ui-tooling/AndroidManifest.xml:25:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/76b0e8af9478fc4fe68a503c4f594b38/transformed/ui-tooling/AndroidManifest.xml:24:13-71
+activity#androidx.activity.ComponentActivity
+ADDED from [androidx.compose.ui:ui-test-manifest:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/01738d8ef44e13d0c6cfa3f9660efb52/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:23:9-26:79
+	android:exported
+		ADDED from [androidx.compose.ui:ui-test-manifest:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/01738d8ef44e13d0c6cfa3f9660efb52/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:25:13-36
+	android:theme
+		ADDED from [androidx.compose.ui:ui-test-manifest:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/01738d8ef44e13d0c6cfa3f9660efb52/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:26:13-76
+	android:name
+		ADDED from [androidx.compose.ui:ui-test-manifest:1.9.0] /Users/dalnk/.gradle/caches/8.13/transforms/01738d8ef44e13d0c6cfa3f9660efb52/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:24:13-63
+service#com.google.android.datatransport.runtime.backends.TransportBackendDiscovery
+ADDED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:36:9-38:40
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:36:9-38:40
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:31:13-37
+	android:name
+		ADDED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:30:13-103
+meta-data#backend:com.google.android.datatransport.cct.CctBackendFactory
+ADDED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:32:13-34:39
+	android:value
+		ADDED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:34:17-36
+	android:name
+		ADDED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/dalnk/.gradle/caches/8.13/transforms/14eb931c4bacf7bbf0439ab50585d5b7/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:33:17-94
+service#com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService
+ADDED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:26:9-30:19
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:28:13-37
+	android:permission
+		ADDED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:29:13-69
+	android:name
+		ADDED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:27:13-117
+receiver#com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver
+ADDED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:32:9-34:40
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:34:13-37
+	android:name
+		ADDED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/dalnk/.gradle/caches/8.13/transforms/bbbb74845e445568f51e17152f4c0a0d/transformed/transport-runtime-2.2.6/AndroidManifest.xml:33:13-132
+meta-data#com.facebook.soloader.enabled
+ADDED from [com.facebook.soloader:soloader:0.12.1] /Users/dalnk/.gradle/caches/8.13/transforms/90ada6868431a0c9f8e33ccce24a7311/transformed/soloader-0.12.1/AndroidManifest.xml:12:9-14:37
+	android:value
+		ADDED from [com.facebook.soloader:soloader:0.12.1] /Users/dalnk/.gradle/caches/8.13/transforms/90ada6868431a0c9f8e33ccce24a7311/transformed/soloader-0.12.1/AndroidManifest.xml:14:13-34
+	android:name
+		ADDED from [com.facebook.soloader:soloader:0.12.1] /Users/dalnk/.gradle/caches/8.13/transforms/90ada6868431a0c9f8e33ccce24a7311/transformed/soloader-0.12.1/AndroidManifest.xml:13:13-57

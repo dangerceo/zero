@@ -4,12 +4,11 @@ import { WebSocketServer } from 'ws';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { networkInterfaces } from 'os';
-import QRCode from 'qrcode';
 import chalk from 'chalk';
-import boxen from 'boxen';
-import open from 'open';
 
-import { createTasksRouter, taskStore } from './tasks.js';
+import { agentStore } from './agentStore.js';
+import { executeAgent, continueAgent } from './agentExecutor.js';
+import { agyService } from './agyService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -19,165 +18,170 @@ const server = createServer(app);
 const wss = new WebSocketServer({ server });
 
 const PORT = process.env.PORT || 3847;
-const isDev = process.env.NODE_ENV !== 'production';
 
 // Middleware
 app.use(express.json());
 
-// Get local IP address
-function getLocalIP() {
-  const interfaces = networkInterfaces();
-  for (const name of Object.keys(interfaces)) {
-    for (const iface of interfaces[name]) {
-      if (iface.family === 'IPv4' && !iface.internal) {
-        return iface.address;
-      }
-    }
-  }
-  return 'localhost';
-}
-
-// WebSocket connection handling
+// WebSocket
 const clients = new Set();
 
-wss.on('connection', (ws) => {
-  clients.add(ws);
-  console.log(chalk.green('📱 Phone connected!'));
-
-  // Send current tasks on connect
-  ws.send(JSON.stringify({
-    type: 'init',
-    tasks: taskStore.getAll()
-  }));
-
-  ws.on('close', () => {
-    clients.delete(ws);
-    console.log(chalk.yellow('📱 Phone disconnected'));
-  });
-});
-
-// Broadcast updates to all connected clients
 export function broadcast(message) {
   const data = JSON.stringify(message);
   for (const client of clients) {
-    if (client.readyState === 1) { // WebSocket.OPEN
+    if (client.readyState === 1) {
       client.send(data);
     }
   }
 }
 
-// API Routes
-app.use('/api/tasks', createTasksRouter(broadcast));
+// Start agy monitoring
+agyService.start(broadcast);
 
-// Projects API (V2 - persistent projects)
-import { projectStore } from './projectStore.js';
+wss.on('connection', async (ws) => {
+  clients.add(ws);
+  console.log(chalk.green('📱 Client connected'));
 
-app.get('/api/v2/projects', async (req, res) => {
-  const projects = await projectStore.getAll();
-  res.json(projects);
+  // Send current agents on connect
+  const agents = await agentStore.getAll();
+  ws.send(JSON.stringify({ type: 'init', agents }));
+
+  ws.on('close', () => {
+    clients.delete(ws);
+    console.log(chalk.yellow('📱 Client disconnected'));
+  });
 });
 
-app.post('/api/v2/projects', async (req, res) => {
-  const project = await projectStore.create(req.body);
-  broadcast({ type: 'project:created', project });
-  res.status(201).json(project);
+app.get('/api/agy/projects', (req, res) => {
+  res.json(agyService.getProjects());
 });
 
-// Create a special "Zero" project that edits itself
-app.post('/api/v2/projects/zero', async (req, res) => {
+// ─── Agent API ───────────────────────────────────────────
+
+app.get('/api/agents', async (req, res) => {
+  const agents = await agentStore.getAll();
+  res.json(agents);
+});
+
+app.post('/api/agents', async (req, res) => {
+  const { name, goal, workingDir, files } = req.body;
+  const agent = await agentStore.create({
+    name: name || (goal || '').slice(0, 50),
+    goal: goal || name || '',
+    workingDir: workingDir || null,
+    files: files || []
+  });
+  broadcast({ type: 'agent:created', agent });
+  res.status(201).json(agent);
+});
+
+// Create a "Zero self-edit" agent
+app.post('/api/agents/zero', async (req, res) => {
   const { goal } = req.body;
-  const project = await projectStore.create({
+  const agent = await agentStore.create({
     name: '🔧 Zero Self-Edit',
     goal: goal || 'Improve Zero Computer',
-    workingDir: '/Users/dalnk/Desktop/zero' // Points to Zero's own codebase
+    workingDir: '/Users/dalnk/Desktop/zero'
   });
-  broadcast({ type: 'project:created', project });
-  res.status(201).json(project);
+  broadcast({ type: 'agent:created', agent });
+  res.status(201).json(agent);
 });
 
-app.get('/api/v2/projects/:id', async (req, res) => {
-  const project = await projectStore.get(req.params.id);
-  if (!project) return res.status(404).json({ error: 'Not found' });
-  res.json(project);
+app.get('/api/agents/:id', async (req, res) => {
+  const agent = await agentStore.get(req.params.id);
+  if (!agent) return res.status(404).json({ error: 'Not found' });
+  res.json(agent);
 });
 
-app.patch('/api/v2/projects/:id', async (req, res) => {
-  const project = await projectStore.update(req.params.id, req.body);
-  if (!project) return res.status(404).json({ error: 'Not found' });
-  broadcast({ type: 'project:updated', project });
-  res.json(project);
+app.patch('/api/agents/:id', async (req, res) => {
+  const agent = await agentStore.update(req.params.id, req.body);
+  if (!agent) return res.status(404).json({ error: 'Not found' });
+  broadcast({ type: 'agent:updated', agent });
+  res.json(agent);
 });
 
-app.post('/api/v2/projects/:id/questions/:qid/answer', async (req, res) => {
-  const project = await projectStore.answerQuestion(
+app.delete('/api/agents/:id', async (req, res) => {
+  const deleted = await agentStore.delete(req.params.id);
+  if (!deleted) return res.status(404).json({ error: 'Not found' });
+  broadcast({ type: 'agent:deleted', id: req.params.id });
+  res.status(204).send();
+});
+
+// Start agent execution
+app.post('/api/agents/:id/start', async (req, res) => {
+  const agent = await agentStore.get(req.params.id);
+  if (!agent) return res.status(404).json({ error: 'Not found' });
+  executeAgent(req.params.id, broadcast);
+  res.json({ status: 'started' });
+});
+
+// Continue agent
+app.post('/api/agents/:id/continue', async (req, res) => {
+  const agent = await agentStore.get(req.params.id);
+  if (!agent) return res.status(404).json({ error: 'Not found' });
+  continueAgent(req.params.id, broadcast);
+  res.json({ status: 'continuing' });
+});
+
+// Add comment / quick reply
+app.post('/api/agents/:id/comment', async (req, res) => {
+  const { comment } = req.body;
+  if (!comment) return res.status(400).json({ error: 'Comment required' });
+  const agent = await agentStore.addComment(req.params.id, comment);
+  if (!agent) return res.status(404).json({ error: 'Not found' });
+  broadcast({ type: 'agent:updated', agent });
+  res.json(agent);
+});
+
+// Answer a question
+app.post('/api/agents/:id/questions/:qid/answer', async (req, res) => {
+  const agent = await agentStore.answerQuestion(
     req.params.id,
     req.params.qid,
     req.body.answer
   );
-  if (!project) return res.status(404).json({ error: 'Not found' });
-  broadcast({ type: 'project:updated', project });
-  res.json(project);
+  if (!agent) return res.status(404).json({ error: 'Not found' });
+  broadcast({ type: 'agent:updated', agent });
+  res.json(agent);
 });
 
-app.delete('/api/v2/projects/:id', async (req, res) => {
-  const deleted = await projectStore.delete(req.params.id);
-  if (!deleted) return res.status(404).json({ error: 'Not found' });
-  broadcast({ type: 'project:deleted', id: req.params.id });
-  res.status(204).send();
+// Get threads
+app.get('/api/agents/:id/threads', async (req, res) => {
+  const agent = await agentStore.get(req.params.id);
+  if (!agent) return res.status(404).json({ error: 'Not found' });
+  res.json(agent.threads || []);
 });
 
-// Start/continue project execution
-import { executeProject, continueProject } from './projectExecutor.js';
-
-app.post('/api/v2/projects/:id/start', async (req, res) => {
-  const project = await projectStore.get(req.params.id);
-  if (!project) return res.status(404).json({ error: 'Not found' });
-
-  // Start in background
-  executeProject(req.params.id, broadcast);
-  res.json({ status: 'started' });
+// File management
+app.get('/api/agents/:id/files', async (req, res) => {
+  const agent = await agentStore.get(req.params.id);
+  if (!agent) return res.status(404).json({ error: 'Not found' });
+  res.json(agent.files || []);
 });
 
-app.post('/api/v2/projects/:id/continue', async (req, res) => {
-  const project = await projectStore.get(req.params.id);
-  if (!project) return res.status(404).json({ error: 'Not found' });
-
-  continueProject(req.params.id, broadcast);
-  res.json({ status: 'continuing' });
+app.post('/api/agents/:id/files', async (req, res) => {
+  const { path, description } = req.body;
+  if (!path) return res.status(400).json({ error: 'Path required' });
+  const agent = await agentStore.addFile(req.params.id, { path, description: description || '' });
+  if (!agent) return res.status(404).json({ error: 'Not found' });
+  broadcast({ type: 'agent:updated', agent });
+  res.json(agent);
 });
 
-// Add follow-up comment to project queue
-app.post('/api/v2/projects/:id/comments', async (req, res) => {
-  const { comment } = req.body;
-  if (!comment) return res.status(400).json({ error: 'Comment required' });
-
-  const project = await projectStore.addComment(req.params.id, comment);
-  if (!project) return res.status(404).json({ error: 'Not found' });
-
-  broadcast({ type: 'project:updated', project });
-  res.json(project);
+app.delete('/api/agents/:id/files', async (req, res) => {
+  const { path } = req.body;
+  if (!path) return res.status(400).json({ error: 'Path required' });
+  const agent = await agentStore.removeFile(req.params.id, path);
+  if (!agent) return res.status(404).json({ error: 'Not found' });
+  broadcast({ type: 'agent:updated', agent });
+  res.json(agent);
 });
 
-// Legacy projects API (reads from agy brain)
-import { getProjects, getProjectDetails } from './projects.js';
+// ─── Settings API ────────────────────────────────────────
 
-app.get('/api/projects', async (req, res) => {
-  const projects = await getProjects();
-  res.json(projects);
-});
-
-app.get('/api/projects/:id', async (req, res) => {
-  const details = await getProjectDetails(req.params.id);
-  if (!details) return res.status(404).json({ error: 'Not found' });
-  res.json(details);
-});
-
-// Settings API
 import { getSettings, saveSettings } from './settings.js';
 
 app.get('/api/settings', async (req, res) => {
   const settings = await getSettings();
-  // Mask API keys for security
   res.json({
     ...settings,
     claudeApiKey: settings.claudeApiKey ? '••••' + settings.claudeApiKey.slice(-4) : '',
@@ -186,7 +190,7 @@ app.get('/api/settings', async (req, res) => {
 });
 
 app.post('/api/settings', async (req, res) => {
-  const updated = await saveSettings(req.body);
+  await saveSettings(req.body);
   res.json({ success: true });
 });
 
@@ -195,34 +199,17 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', connectedClients: clients.size });
 });
 
-// Always serve static files from the built web app
+// Static files
 app.use(express.static(join(__dirname, '../web/dist')));
 app.get('*', (req, res, next) => {
   if (req.path.startsWith('/api')) return next();
   res.sendFile(join(__dirname, '../web/dist/index.html'));
 });
 
+import { startTunnel } from './tunnel.js';
 
-// Start server
-server.listen(PORT, '0.0.0.0', async () => {
-  const localIP = getLocalIP();
-  const url = `http://${localIP}:${PORT}`;
-
-  // Generate QR code
-  const qrCode = await QRCode.toString(url, { type: 'terminal', small: true });
-
-  console.clear();
-  console.log(boxen(
-    chalk.bold.cyan('⚡ Zero Computer') + '\n\n' +
-    chalk.white('Scan this QR code with your phone:\n\n') +
-    qrCode + '\n' +
-    chalk.gray('Or open: ') + chalk.underline.blue(url) + '\n\n' +
-    chalk.dim('Press Ctrl+C to stop'),
-    {
-      padding: 1,
-      margin: 1,
-      borderStyle: 'round',
-      borderColor: 'cyan'
-    }
-  ));
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(chalk.cyan(`⚡ Zero running on port ${PORT}`));
+  const token = process.env.ZERO_TOKEN;
+  startTunnel(PORT, token);
 });

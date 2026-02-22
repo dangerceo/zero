@@ -1,33 +1,28 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import TaskList from './components/TaskList';
-import NewTaskForm from './components/NewTaskForm';
-import Header from './components/Header';
-import ProjectsV2 from './components/ProjectsV2';
+import Home from './components/Home';
+import AgentDetail from './components/AgentDetail';
 import Settings from './components/Settings';
 
 function App() {
-    const [tasks, setTasks] = useState([]);
+    const [agents, setAgents] = useState([]);
     const [connected, setConnected] = useState(false);
-    const [showNewTask, setShowNewTask] = useState(false);
-    const [view, setView] = useState('tasks'); // 'tasks', 'projects', 'settings'
+    const [view, setView] = useState('home');
+    const [selectedAgentId, setSelectedAgentId] = useState(null);
 
     useEffect(() => {
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
         const wsUrl = `${protocol}//${window.location.host}`;
-
         let ws;
         let reconnectTimeout;
 
         function connect() {
             ws = new WebSocket(wsUrl);
 
-            ws.onopen = () => {
-                setConnected(true);
-            };
+            ws.onopen = () => setConnected(true);
 
             ws.onmessage = (event) => {
-                const message = JSON.parse(event.data);
-                handleMessage(message);
+                const msg = JSON.parse(event.data);
+                handleMessage(msg);
             };
 
             ws.onclose = () => {
@@ -39,97 +34,68 @@ function App() {
         }
 
         connect();
-
         return () => {
             clearTimeout(reconnectTimeout);
             ws?.close();
         };
     }, []);
 
-    const handleMessage = useCallback((message) => {
-        switch (message.type) {
+    const handleMessage = useCallback((msg) => {
+        switch (msg.type) {
             case 'init':
-                setTasks(message.tasks);
+                setAgents(msg.agents || []);
                 break;
-            case 'task:created':
-                setTasks(prev => [message.task, ...prev]);
+            case 'agent:created':
+                setAgents(prev => [msg.agent, ...prev]);
                 break;
-            case 'task:updated':
-                setTasks(prev => prev.map(t =>
-                    t.id === message.task.id ? message.task : t
+            case 'agent:updated':
+                setAgents(prev => prev.map(a =>
+                    a.id === msg.agent.id ? msg.agent : a
                 ));
                 break;
-            case 'task:deleted':
-                setTasks(prev => prev.filter(t => t.id !== message.id));
+            case 'agent:deleted':
+                setAgents(prev => prev.filter(a => a.id !== msg.id));
+                break;
+            case 'agent:log':
+                setAgents(prev => prev.map(a => {
+                    if (a.id === msg.agentId) {
+                        return { ...a, logs: [...(a.logs || []), msg.log] };
+                    }
+                    return a;
+                }));
                 break;
             default:
                 break;
         }
     }, []);
 
-    const createTask = async (description) => {
-        try {
-            const response = await fetch('/api/tasks', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ description })
-            });
-            if (response.ok) setShowNewTask(false);
-        } catch (error) {
-            console.error(error);
-        }
+    const openAgent = (id) => {
+        setSelectedAgentId(id);
+        setView('agent');
     };
 
-    const deleteTask = async (id) => {
-        await fetch(`/api/tasks/${id}`, { method: 'DELETE' });
-    };
-
-    const cancelTask = async (id) => {
-        await fetch(`/api/tasks/${id}/cancel`, { method: 'POST' });
-    };
-
-    const feedbackTask = async (id, success) => {
-        const response = await fetch(`/api/tasks/${id}/feedback`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ success })
-        });
-        if (response.ok) {
-            const updated = await response.json();
-            setTasks(prev => prev.map(t => t.id === id ? updated : t));
-        }
-    };
-
-    if (view === 'projects') {
-        return <ProjectsV2 onBack={() => setView('tasks')} />;
-    }
+    const selectedAgent = agents.find(a => a.id === selectedAgentId);
 
     if (view === 'settings') {
-        return <Settings onBack={() => setView('tasks')} />;
+        return <Settings onBack={() => setView('home')} />;
+    }
+
+    if (view === 'agent' && selectedAgent) {
+        return (
+            <AgentDetail
+                agent={selectedAgent}
+                onBack={() => { setSelectedAgentId(null); setView('home'); }}
+            />
+        );
     }
 
     return (
-        <div className="app">
-            <Header
-                connected={connected}
-                onProjectsClick={() => setView('projects')}
-                onSettingsClick={() => setView('settings')}
-            />
-
-            <main className="main">
-                {tasks.length === 0 ? (
-                    <div className="empty-state">No tasks</div>
-                ) : (
-                    <TaskList tasks={tasks} onDelete={deleteTask} onCancel={cancelTask} onFeedback={feedbackTask} />
-                )}
-            </main>
-
-            <button className="fab" onClick={() => setShowNewTask(true)}>+</button>
-
-            {showNewTask && (
-                <NewTaskForm onSubmit={createTask} onClose={() => setShowNewTask(false)} />
-            )}
-        </div>
+        <Home
+            agents={agents}
+            connected={connected}
+            onSelectAgent={openAgent}
+            onSettingsClick={() => setView('settings')}
+        />
     );
 }
 

@@ -1,0 +1,11 @@
+<resources>
+    <color name="zero_dark">#0D0F14</color>
+    <color name="zero_light">#F5F7FA</color>
+    <color name="zero_primary">#2D6CDF</color>
+    <color name="zero_secondary">#1AAE8A</color>
+    <color name="zero_warning">#E6A23C</color>
+    <color name="zero_error">#D94A4A</color>
+    <color name="zero_surface">#151923</color>
+    <color name="zero_surface_light">#FFFFFF</color>
+    <color name="ic_launcher_background">#0D0F14</color>
+</resources>

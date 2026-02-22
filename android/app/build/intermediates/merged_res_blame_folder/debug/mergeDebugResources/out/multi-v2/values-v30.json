@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.zero.android.app-mergeDebugResources-68:/values-v30/values-v30.xml",
+            "map": [
+                {
+                    "source": "/Users/dalnk/.gradle/caches/8.13/transforms/20375ffbff4a73a31786722eb181115b/transformed/material3-release/res/values-v30/values-v30.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "72",
+                        "endOffsets": "123"
+                    }
+                }
+            ]
+        }
+    ]
+}

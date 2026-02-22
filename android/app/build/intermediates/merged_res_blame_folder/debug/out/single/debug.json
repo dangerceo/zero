@@ -1,0 +1,58 @@
+[
+    {
+        "merged": "com.zero.android.app-merged_res-68:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.zero.android.app-main-70:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.zero.android.app-merged_res-68:/drawable_video_icon.xml.flat",
+        "source": "com.zero.android.app-main-70:/drawable/video_icon.xml"
+    },
+    {
+        "merged": "com.zero.android.app-merged_res-68:/drawable_camera_icon.xml.flat",
+        "source": "com.zero.android.app-main-70:/drawable/camera_icon.xml"
+    },
+    {
+        "merged": "com.zero.android.app-merged_res-68:/drawable_timer_icon.xml.flat",
+        "source": "com.zero.android.app-main-70:/drawable/timer_icon.xml"
+    },
+    {
+        "merged": "com.zero.android.app-merged_res-68:/drawable_camera_access_icon.xml.flat",
+        "source": "com.zero.android.app-main-70:/drawable/camera_access_icon.xml"
+    },
+    {
+        "merged": "com.zero.android.app-merged_res-68:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.zero.android.app-main-70:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.zero.android.app-merged_res-68:/xml_file_paths.xml.flat",
+        "source": "com.zero.android.app-main-70:/xml/file_paths.xml"
+    },
+    {
+        "merged": "com.zero.android.app-merged_res-68:/drawable_hourglass_icon.xml.flat",
+        "source": "com.zero.android.app-main-70:/drawable/hourglass_icon.xml"
+    },
+    {
+        "merged": "com.zero.android.app-merged_res-68:/drawable_tap_icon.xml.flat",
+        "source": "com.zero.android.app-main-70:/drawable/tap_icon.xml"
+    },
+    {
+        "merged": "com.zero.android.app-merged_res-68:/drawable_smart_glasses_icon.xml.flat",
+        "source": "com.zero.android.app-main-70:/drawable/smart_glasses_icon.xml"
+    },
+    {
+        "merged": "com.zero.android.app-merged_res-68:/drawable_walking_icon.xml.flat",
+        "source": "com.zero.android.app-main-70:/drawable/walking_icon.xml"
+    },
+    {
+        "merged": "com.zero.android.app-merged_res-68:/drawable_sound_icon.xml.flat",
+        "source": "com.zero.android.app-main-70:/drawable/sound_icon.xml"
+    },
+    {
+        "merged": "com.zero.android.app-merged_res-68:/drawable_ic_stat_zero.xml.flat",
+        "source": "com.zero.android.app-main-70:/drawable/ic_stat_zero.xml"
+    },
+    {
+        "merged": "com.zero.android.app-merged_res-68:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.zero.android.app-main-70:/drawable/ic_launcher_foreground.xml"
+    }
+]
