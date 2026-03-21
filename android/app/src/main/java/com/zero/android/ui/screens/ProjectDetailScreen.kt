@@ -37,6 +37,7 @@ import com.zero.android.ui.components.LogList
 fun ProjectDetailScreen(
     agentId: String?,
     agents: List<AgentUiModel>,
+    onDeploy: (String) -> Unit,
     onBack: () -> Unit
 ) {
     val agent = agents.firstOrNull { it.id == agentId }
@@ -70,7 +71,7 @@ fun ProjectDetailScreen(
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                AgentHeader(agent)
+                AgentHeader(agent, onDeploy = { onDeploy(agent.id) })
                 Card(
                     modifier = Modifier.fillMaxSize(),
                     shape = MaterialTheme.shapes.large,
@@ -97,7 +98,7 @@ fun ProjectDetailScreen(
 }
 
 @Composable
-private fun AgentHeader(agent: AgentUiModel) {
+private fun AgentHeader(agent: AgentUiModel, onDeploy: () -> Unit) {
     Card(
         shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
@@ -126,6 +127,26 @@ private fun AgentHeader(agent: AgentUiModel) {
                     progress = agent.progress / 100f,
                     modifier = Modifier.fillMaxWidth(),
                     color = Color(0xFF1AAE8A)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+            androidx.compose.material3.Button(
+                onClick = onDeploy,
+                modifier = Modifier.fillMaxWidth(),
+                colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFF38020) // Cloudflare Orange
+                )
+            ) {
+                androidx.compose.material3.Text("Push to Cloudflare")
+            }
+
+            val lastDeployment = agent.deployments.lastOrNull()
+            if (lastDeployment != null) {
+                Spacer(modifier = Modifier.height(8.dp))
+                androidx.compose.material3.Text(
+                    text = "Last deploy: ${lastDeployment.status}${lastDeployment.url?.let { " - $it" } ?: ""}",
+                    style = MaterialTheme.typography.bodySmall
                 )
             }
         }

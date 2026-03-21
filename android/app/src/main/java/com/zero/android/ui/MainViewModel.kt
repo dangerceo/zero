@@ -80,6 +80,12 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
         }
     }
 
+    fun deploy(agentId: String) {
+        viewModelScope.launch {
+            repository?.deploy(agentId)
+        }
+    }
+
     fun setBaseUrl(url: String) {
         viewModelScope.launch {
             container.userPreferences.setBaseUrl(url)

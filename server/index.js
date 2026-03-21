@@ -20,6 +20,7 @@ import { getSettings, saveSettings } from './settings.js';
 import { attachChatServer, getChatSessions } from './chatService.js';
 import { attachPtyServer, getActiveTerminalSessions, killTerminalSession } from './ptyService.js';
 import { dangerTerminal } from './dangerTerminal.js';
+import { deployToCloudflare } from './cloudflareService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -122,6 +123,15 @@ app.post('/api/agents/:id/intervene', async (req, res) => {
     
     broadcast({ type: 'agent:updated', agent: { ...agent, actuallyRunning: isAgentActuallyRunning(agent.id) } });
     res.json({ status: 'ok' });
+});
+
+app.post('/api/agents/:id/deploy', async (req, res) => {
+    try {
+        const result = await deployToCloudflare(req.params.id, broadcast);
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
 app.get('/api/screenshot', async (req, res) => {

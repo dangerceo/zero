@@ -10,6 +10,7 @@ data class Agent(
     val threads: List<ThreadEntry> = emptyList(),
     val checkpoints: List<Checkpoint> = emptyList(),
     val interventions: List<Intervention> = emptyList(),
+    val deployments: List<Deployment> = emptyList(),
     val logs: List<AgentLog> = emptyList(),
     val createdAt: String? = null,
     val updatedAt: String? = null
@@ -38,4 +39,12 @@ data class AgentLog(
     val message: String,
     val type: String,
     val timestamp: String
+)
+
+data class Deployment(
+    val id: String,
+    val provider: String,
+    val status: String,
+    val url: String?,
+    val createdAt: String
 )

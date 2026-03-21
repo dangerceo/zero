@@ -15771,5 +15771,284 @@
     "startedAt": "2026-03-12T10:24:17.744Z",
     "actuallyRunning": false,
     "completedAt": "2026-03-12T10:30:53.509Z"
+  },
+  {
+    "id": "b5853e7f-000c-40ab-a308-b71d36276132",
+    "name": "Test Agent",
+    "goal": "",
+    "status": "idle",
+    "workingDir": null,
+    "files": [],
+    "threads": [],
+    "tickets": [],
+    "interventions": [],
+    "checkpoints": [],
+    "pendingQuestions": [],
+    "todos": [],
+    "logs": [],
+    "useConductor": false,
+    "createdAt": "2026-03-21T10:26:25.372Z",
+    "updatedAt": "2026-03-21T10:26:25.373Z"
+  },
+  {
+    "id": "507051b4-d8b1-4000-9dbe-c5a3b6f2e52d",
+    "name": "Test Agent",
+    "goal": "",
+    "status": "idle",
+    "workingDir": null,
+    "files": [],
+    "threads": [],
+    "tickets": [],
+    "interventions": [],
+    "sessions": [],
+    "deployments": [],
+    "checkpoints": [],
+    "pendingQuestions": [],
+    "todos": [],
+    "logs": [],
+    "useConductor": false,
+    "createdAt": "2026-03-21T10:26:45.161Z",
+    "updatedAt": "2026-03-21T10:26:45.162Z"
+  },
+  {
+    "id": "f7067159-1f50-4b68-a464-c751e1db5efa",
+    "name": "Test Agent",
+    "goal": "",
+    "status": "idle",
+    "workingDir": null,
+    "files": [],
+    "threads": [],
+    "tickets": [],
+    "interventions": [],
+    "sessions": [],
+    "deployments": [],
+    "checkpoints": [],
+    "pendingQuestions": [],
+    "todos": [],
+    "logs": [],
+    "useConductor": false,
+    "createdAt": "2026-03-21T10:26:55.214Z",
+    "updatedAt": "2026-03-21T10:26:55.215Z"
+  },
+  {
+    "id": "04cefb78-e0bb-4469-a3e1-6d0a127b11be",
+    "name": "Test Agent",
+    "goal": "",
+    "status": "idle",
+    "workingDir": null,
+    "files": [],
+    "threads": [],
+    "tickets": [],
+    "interventions": [],
+    "sessions": [
+      {
+        "id": "db5c72af-973a-4cf7-8303-e0ab8b3adabc",
+        "type": "chat",
+        "status": "active",
+        "createdAt": "2026-03-21T10:27:05.551Z"
+      }
+    ],
+    "deployments": [
+      {
+        "id": "34c721d2-52f1-4bb6-b762-18f2f3101eaa",
+        "provider": "cloudflare",
+        "status": "deployed",
+        "url": "https://test.workers.dev",
+        "createdAt": "2026-03-21T10:27:05.554Z"
+      }
+    ],
+    "checkpoints": [],
+    "pendingQuestions": [],
+    "todos": [],
+    "logs": [],
+    "useConductor": false,
+    "createdAt": "2026-03-21T10:27:05.547Z",
+    "updatedAt": "2026-03-21T10:27:05.554Z"
+  },
+  {
+    "id": "0a96950c-e5c3-44b9-bf36-9daeb870609c",
+    "name": "Test Agent",
+    "goal": "",
+    "status": "idle",
+    "workingDir": null,
+    "files": [],
+    "threads": [],
+    "tickets": [],
+    "interventions": [],
+    "sessions": [
+      {
+        "id": "9ec6b654-6f3e-436b-93cc-027774fcb0f0",
+        "type": "chat",
+        "status": "active",
+        "createdAt": "2026-03-21T10:27:14.903Z"
+      }
+    ],
+    "deployments": [
+      {
+        "id": "4c9aacad-5da0-4bef-8b2d-8832736d4c1d",
+        "provider": "cloudflare",
+        "status": "deployed",
+        "url": "https://test.workers.dev",
+        "createdAt": "2026-03-21T10:27:14.906Z"
+      }
+    ],
+    "checkpoints": [],
+    "pendingQuestions": [],
+    "todos": [],
+    "logs": [],
+    "useConductor": false,
+    "createdAt": "2026-03-21T10:27:14.899Z",
+    "updatedAt": "2026-03-21T10:27:14.906Z"
+  },
+  {
+    "id": "374fe5aa-db50-413e-95d3-59e5445d9401",
+    "name": "Test Agent",
+    "goal": "",
+    "status": "idle",
+    "workingDir": null,
+    "files": [],
+    "threads": [],
+    "tickets": [],
+    "interventions": [],
+    "sessions": [
+      {
+        "id": "71ce6434-2da2-45a0-b1ed-0318d29aa019",
+        "type": "chat",
+        "status": "active",
+        "createdAt": "2026-03-21T10:27:23.495Z"
+      }
+    ],
+    "deployments": [
+      {
+        "id": "d29a89ce-0370-465f-81a4-4aa9fedb4855",
+        "provider": "cloudflare",
+        "status": "deployed",
+        "url": "https://test.workers.dev",
+        "createdAt": "2026-03-21T10:27:23.497Z"
+      }
+    ],
+    "checkpoints": [],
+    "pendingQuestions": [],
+    "todos": [],
+    "logs": [],
+    "useConductor": false,
+    "createdAt": "2026-03-21T10:27:23.491Z",
+    "updatedAt": "2026-03-21T10:27:23.497Z"
+  },
+  {
+    "id": "59e1f983-6477-442a-a48b-a8ad24a53e78",
+    "name": "Test Agent",
+    "goal": "",
+    "status": "idle",
+    "workingDir": null,
+    "files": [],
+    "threads": [],
+    "tickets": [],
+    "interventions": [],
+    "sessions": [
+      {
+        "id": "a61c8bba-35d3-4df4-93c8-efcd07d02589",
+        "type": "chat",
+        "status": "active",
+        "createdAt": "2026-03-21T10:28:19.162Z"
+      }
+    ],
+    "deployments": [
+      {
+        "id": "fe37e87b-9c2c-4f96-a320-193e24ebb339",
+        "provider": "cloudflare",
+        "status": "deployed",
+        "url": "https://test.workers.dev",
+        "createdAt": "2026-03-21T10:28:19.164Z"
+      }
+    ],
+    "checkpoints": [],
+    "pendingQuestions": [],
+    "todos": [],
+    "logs": [],
+    "useConductor": false,
+    "createdAt": "2026-03-21T10:28:19.158Z",
+    "updatedAt": "2026-03-21T10:28:19.164Z"
+  },
+  {
+    "id": "107d86af-0618-42fc-a3e0-24b2a4beefc1",
+    "name": "Proxy Test",
+    "goal": "",
+    "status": "idle",
+    "workingDir": null,
+    "files": [],
+    "threads": [],
+    "tickets": [],
+    "interventions": [],
+    "sessions": [
+      {
+        "id": "460ffd7d-14ec-4f76-9a0d-a8823e8d9310",
+        "type": "unified",
+        "status": "idle",
+        "createdAt": "2026-03-21T10:29:55.932Z"
+      }
+    ],
+    "deployments": [],
+    "checkpoints": [],
+    "pendingQuestions": [],
+    "todos": [],
+    "logs": [],
+    "useConductor": false,
+    "createdAt": "2026-03-21T10:29:55.928Z",
+    "updatedAt": "2026-03-21T10:29:55.932Z"
+  },
+  {
+    "id": "b5ad1533-cfba-40f4-b1c4-41e23b00ce7b",
+    "name": "Proxy Test",
+    "goal": "",
+    "status": "idle",
+    "workingDir": null,
+    "files": [],
+    "threads": [],
+    "tickets": [],
+    "interventions": [],
+    "sessions": [
+      {
+        "id": "2f89823d-ceb9-4e5c-88d3-cfe5336357ad",
+        "type": "unified",
+        "status": "idle",
+        "createdAt": "2026-03-21T10:31:00.061Z"
+      }
+    ],
+    "deployments": [],
+    "checkpoints": [],
+    "pendingQuestions": [],
+    "todos": [],
+    "logs": [],
+    "useConductor": false,
+    "createdAt": "2026-03-21T10:31:00.057Z",
+    "updatedAt": "2026-03-21T10:31:00.061Z"
+  },
+  {
+    "id": "9ffeead2-2d84-4b23-a50e-54ba1b2ea1ea",
+    "name": "Proxy Test",
+    "goal": "",
+    "status": "idle",
+    "workingDir": null,
+    "files": [],
+    "threads": [],
+    "tickets": [],
+    "interventions": [],
+    "sessions": [
+      {
+        "id": "8ead7ef9-d798-46b7-9887-ae1288d4d4f6",
+        "type": "unified",
+        "status": "idle",
+        "createdAt": "2026-03-21T10:31:36.223Z"
+      }
+    ],
+    "deployments": [],
+    "checkpoints": [],
+    "pendingQuestions": [],
+    "todos": [],
+    "logs": [],
+    "useConductor": false,
+    "createdAt": "2026-03-21T10:31:36.218Z",
+    "updatedAt": "2026-03-21T10:31:36.223Z"
   }
 ]

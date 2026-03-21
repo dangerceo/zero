@@ -110,6 +110,12 @@ class AgentsRepository(
         } catch (_: Exception) {}
     }
 
+    suspend fun deploy(agentId: String) {
+        try {
+            api.deploy(agentId)
+        } catch (_: Exception) {}
+    }
+
     suspend fun getInterventions(): List<com.zero.android.data.model.Intervention> {
         return try {
             api.getInterventions()

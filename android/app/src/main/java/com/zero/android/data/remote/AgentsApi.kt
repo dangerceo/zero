@@ -25,6 +25,9 @@ interface AgentsApi {
     @POST("api/agents/{id}/intervene")
     suspend fun intervene(@Path("id") id: String, @Body request: InterventionResponse): Agent
 
+    @POST("api/agents/{id}/deploy")
+    suspend fun deploy(@Path("id") id: String): Map<String, Any>
+
     @GET("api/interventions")
     suspend fun getInterventions(): List<com.zero.android.data.model.Intervention>
 

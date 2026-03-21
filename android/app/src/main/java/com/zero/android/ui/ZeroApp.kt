@@ -144,6 +144,7 @@ fun ZeroApp(
             ProjectDetailScreen(
                 agentId = agentId,
                 agents = agents,
+                onDeploy = { viewModel.deploy(it) },
                 onBack = { navController.popBackStack() }
             )
         }
