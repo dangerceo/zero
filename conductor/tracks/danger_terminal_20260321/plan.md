@@ -26,3 +26,6 @@
 - [x] Task: End-to-End Verification
     - [x] Test the full loop from agent spawning a blocked process -> Android notification -> User response -> Agent resumes.
 - [x] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md)
+
+## Phase: Review Fixes
+- [x] Task: Apply review suggestions 766e5f4
