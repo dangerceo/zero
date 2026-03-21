@@ -21,6 +21,9 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     private val _connection = MutableStateFlow(ConnectionState.Disconnected)
     val connection: StateFlow<ConnectionState> = _connection.asStateFlow()
 
+    private val _interventions = MutableStateFlow<List<com.zero.android.data.model.Intervention>>(emptyList())
+    val interventions: StateFlow<List<com.zero.android.data.model.Intervention>> = _interventions.asStateFlow()
+
     private val _agyProjects = MutableStateFlow<List<com.zero.android.data.model.AgyProject>>(emptyList())
     val agyProjects: StateFlow<List<com.zero.android.data.model.AgyProject>> = _agyProjects.asStateFlow()
 
@@ -54,6 +57,20 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     fun createAgent(goal: String, isMeta: Boolean = false) {
         viewModelScope.launch {
             repository?.createAgent(goal, isMeta)
+            refreshInterventions()
+        }
+    }
+
+    fun intervene(agentId: String, interventionId: String, response: String) {
+        viewModelScope.launch {
+            repository?.intervene(agentId, interventionId, response)
+            refreshInterventions()
+        }
+    }
+
+    private fun refreshInterventions() {
+        viewModelScope.launch {
+            _interventions.value = repository?.getInterventions() ?: emptyList()
         }
     }
 
@@ -94,6 +111,7 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
         val repo = AgentsRepository(url, container.okHttpClient, container.moshi, viewModelScope)
         repository = repo
         repo.start()
+        refreshInterventions()
         
         val job1 = viewModelScope.launch {
             repo.agents.collectLatest { _agents.value = it }

@@ -76,15 +76,35 @@ app.post('/api/notifications', (req, res) => { res.json(notificationService.addN
 
 app.get('/api/interventions', async (req, res) => {
     const agents = await agentStore.getAll();
-    const active = agents.flatMap(a => (a.interventions || [])
-        .filter(i => !i.resolved)
-        .map(i => ({ ...i, agentName: a.name }))
-    );
+    const active = agents.flatMap(a => {
+        const interventions = (a.interventions || [])
+            .filter(i => !i.resolved)
+            .map(i => ({ ...i, agentName: a.name }));
+            
+        const questions = (a.pendingQuestions || [])
+            .filter(q => !q.answer)
+            .map(q => ({
+                id: q.id,
+                agentId: a.id,
+                agentName: a.name,
+                type: 'input',
+                message: q.question,
+                createdAt: q.createdAt,
+                resolved: false
+            }));
+            
+        return [...interventions, ...questions];
+    });
     res.json(active);
 });
 
 app.post('/api/agents/:id/intervene', async (req, res) => {
     const { interventionId, response } = req.body;
+    
+    // First, try to answer if it's a regular question
+    await agentStore.answerQuestion(req.params.id, interventionId, response);
+    
+    // Then resolve as intervention
     const agent = await agentStore.resolveIntervention(req.params.id, interventionId, response);
     if (!agent) return res.status(404).send('Agent not found');
     

@@ -116,9 +116,20 @@ async function runGeminiStreaming(agentId, prompt, workingDir, broadcast, resume
                         }
                     } else if (data.text.includes('[QUESTION]')) {
                         const question = data.text.split('[QUESTION]')[1].split('\n')[0].trim();
+                        // Also treat [QUESTION] as an intervention for the Android app
+                        await agentStore.addIntervention(agentId, {
+                            type: 'input',
+                            message: question
+                        });
                         await agentStore.addQuestion(agentId, question);
                         await agentStore.update(agentId, { status: 'waiting' });
                         streamLog(agentId, broadcast, '❓ ' + question, 'warning', true);
+                        broadcast({ 
+                            type: 'notification:new', 
+                            agentId, 
+                            message: question, 
+                            intervention: { type: 'input', message: question } 
+                        });
                     } else streamLog(agentId, broadcast, data.text, 'output');
                 }
                 if (data.type === 'call') {

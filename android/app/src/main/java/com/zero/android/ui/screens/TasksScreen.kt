@@ -60,6 +60,7 @@ fun TasksScreen(
     onRefresh: () -> Unit,
     onSettings: () -> Unit,
     onWearables: () -> Unit,
+    onInbox: () -> Unit,
     onProjects: () -> Unit,
     onAgentSelected: (String) -> Unit,
     onCreateAgent: (String) -> Unit
@@ -98,6 +99,7 @@ fun TasksScreen(
             BottomNavBar(
                 current = BottomTab.Tasks,
                 onProjects = onProjects,
+                onInbox = onInbox,
                 onTasks = {},
                 onCamera = onWearables
             )

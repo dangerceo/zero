@@ -2,6 +2,7 @@ package com.zero.android.ui.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.Inbox
 import androidx.compose.material.icons.filled.ListAlt
 import androidx.compose.material.icons.filled.Workspaces
 import androidx.compose.material3.Icon
@@ -12,6 +13,7 @@ import androidx.compose.runtime.Composable
 
 enum class BottomTab {
     Projects,
+    Inbox,
     Tasks,
     Camera
 }
@@ -20,6 +22,7 @@ enum class BottomTab {
 fun BottomNavBar(
     current: BottomTab,
     onProjects: () -> Unit,
+    onInbox: () -> Unit,
     onTasks: () -> Unit,
     onCamera: () -> Unit
 ) {
@@ -29,6 +32,12 @@ fun BottomNavBar(
             onClick = onProjects,
             icon = { Icon(Icons.Default.Workspaces, contentDescription = "Projects") },
             label = { Text("Projects") }
+        )
+        NavigationBarItem(
+            selected = current == BottomTab.Inbox,
+            onClick = onInbox,
+            icon = { Icon(Icons.Default.Inbox, contentDescription = "Inbox") },
+            label = { Text("Inbox") }
         )
         NavigationBarItem(
             selected = false,

@@ -14,6 +14,7 @@ import com.zero.android.service.MonitoringManager
 import com.zero.android.ui.screens.OnboardingScreen
 import com.zero.android.ui.screens.ProjectDetailScreen
 import com.zero.android.ui.screens.ProjectsScreen
+import com.zero.android.ui.screens.InboxScreen
 import com.zero.android.ui.screens.SettingsScreen
 import com.zero.android.ui.screens.TasksScreen
 import com.zero.android.ui.screens.WearablesScreen
@@ -22,6 +23,7 @@ import com.zero.android.wearables.cameraaccess.CameraAccessScreen
 private object Routes {
     const val Onboarding = "onboarding"
     const val Projects = "projects"
+    const val Inbox = "inbox"
     const val Tasks = "tasks"
     const val ProjectDetail = "projectDetail"
     const val TaskDetail = "taskDetail"
@@ -91,6 +93,11 @@ fun ZeroApp(
                 onRefresh = { viewModel.refresh() },
                 onSettings = { navController.navigate(Routes.Settings) },
                 onWearables = { navController.navigate(Routes.Wearables) },
+                onInbox = {
+                    navController.navigate(Routes.Inbox) {
+                        launchSingleTop = true
+                    }
+                },
                 onTasks = {
                     navController.navigate(Routes.Tasks) {
                         launchSingleTop = true
@@ -108,6 +115,11 @@ fun ZeroApp(
                 onRefresh = { viewModel.refresh() },
                 onSettings = { navController.navigate(Routes.Settings) },
                 onWearables = { navController.navigate(Routes.Wearables) },
+                onInbox = {
+                    navController.navigate(Routes.Inbox) {
+                        launchSingleTop = true
+                    }
+                },
                 onProjects = {
                     navController.navigate(Routes.Projects) {
                         launchSingleTop = true
@@ -120,6 +132,9 @@ fun ZeroApp(
                     viewModel.createAgent(goal)
                 }
             )
+        }
+        composable(Routes.Inbox) {
+            InboxScreen(viewModel = viewModel)
         }
         composable(
             route = "${Routes.ProjectDetail}/{agentId}",

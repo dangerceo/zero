@@ -49,6 +49,7 @@ fun ProjectsScreen(
     onRefresh: () -> Unit,
     onSettings: () -> Unit,
     onWearables: () -> Unit,
+    onInbox: () -> Unit,
     onTasks: () -> Unit,
     onAgentSelected: (String) -> Unit
 ) {
@@ -75,6 +76,7 @@ fun ProjectsScreen(
             BottomNavBar(
                 current = BottomTab.Projects,
                 onProjects = {},
+                onInbox = onInbox,
                 onTasks = onTasks,
                 onCamera = onWearables
             )

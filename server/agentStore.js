@@ -183,6 +183,13 @@ class AgentStore {
             inv.resolved = true;
             inv.response = response;
             inv.resolvedAt = new Date().toISOString();
+            
+            // Also check if there's a corresponding pendingQuestion with the same message
+            const q = (agent.pendingQuestions || []).find(q => q.question === inv.message && !q.answer);
+            if (q) {
+                q.answer = response;
+                q.answeredAt = new Date().toISOString();
+            }
         }
         const unresolved = (agent.interventions || []).filter(i => !i.resolved);
         const unansweredQuestions = (agent.pendingQuestions || []).filter(q => !q.answer);
