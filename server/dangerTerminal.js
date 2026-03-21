@@ -2,12 +2,28 @@ import pty from 'node-pty-prebuilt-multiarch';
 import { detectBlock } from './dangerHeuristics.js';
 import EventEmitter from 'events';
 
+/**
+ * Manages PTY sessions for AI agents and detects interactive blocks.
+ * @extends EventEmitter
+ */
 class DangerTerminal extends EventEmitter {
+  /**
+   * Initializes the DangerTerminal instance.
+   */
   constructor() {
     super();
-    this.sessions = new Map(); // agentId -> { ptyProcess, output, lastActivity, isBlocked }
+    /** @type {Map<string, Object>} Map of agentId to session details. */
+    this.sessions = new Map();
   }
 
+  /**
+   * Spawns a new PTY session for an agent.
+   * @param {string} agentId The unique ID of the agent.
+   * @param {string} command The command to execute.
+   * @param {Array<string>} args Arguments for the command.
+   * @param {Object} options PTY and process options.
+   * @returns {Object} The spawned ptyProcess.
+   */
   spawn(agentId, command, args, options = {}) {
     if (this.sessions.has(agentId)) {
       this.kill(agentId);
@@ -56,6 +72,11 @@ class DangerTerminal extends EventEmitter {
     return ptyProcess;
   }
 
+  /**
+   * Writes data to an agent's PTY session.
+   * @param {string} agentId The agent's ID.
+   * @param {string} data The string data to write.
+   */
   write(agentId, data) {
     const session = this.sessions.get(agentId);
     if (session) {
@@ -65,6 +86,10 @@ class DangerTerminal extends EventEmitter {
     }
   }
 
+  /**
+   * Kills an agent's PTY session.
+   * @param {string} agentId The agent's ID.
+   */
   kill(agentId) {
     const session = this.sessions.get(agentId);
     if (session) {
@@ -74,6 +99,10 @@ class DangerTerminal extends EventEmitter {
     }
   }
 
+  /**
+   * Stops the block-detection monitoring for an agent.
+   * @param {string} agentId The agent's ID.
+   */
   stopMonitoring(agentId) {
     const session = this.sessions.get(agentId);
     if (session && session.checkInterval) {
@@ -82,9 +111,15 @@ class DangerTerminal extends EventEmitter {
     }
   }
 
+  /**
+   * Retrieves an active session for an agent.
+   * @param {string} agentId The agent's ID.
+   * @returns {Object|undefined} The session object if found.
+   */
   getSession(agentId) {
     return this.sessions.get(agentId);
   }
 }
 
+/** @type {DangerTerminal} Singleton instance of DangerTerminal. */
 export const dangerTerminal = new DangerTerminal();
