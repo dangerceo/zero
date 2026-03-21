@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Terminal } from '@xterm/xterm';
-import { FitAddon } from '@xterm/addon-fit';
-import '@xterm/xterm/css/xterm.css';
 import Editor from '@monaco-editor/react';
-import { WebContainer } from '@webcontainer/api';
 import TeslaDashboard from './TeslaDashboard';
 
 function Settings({ agents, agyProjects, onBack }) {
@@ -22,10 +18,12 @@ function Settings({ agents, agyProjects, onBack }) {
         enableTelemetry: true
     });
     const [androidUpdate, setAndroidUpdate] = useState(null);
+    const [systemTools, setSystemTools] = useState([]);
 
     useEffect(() => {
         fetch('/api/settings').then(res => res.json()).then(setSettings).catch(console.error);
         fetch('/api/android/update').then(res => res.json()).then(setAndroidUpdate).catch(() => {});
+        fetch('/api/system/tools').then(res => res.json()).then(setSystemTools).catch(() => {});
     }, []);
 
     const saveSettings = async (newSettings) => {
@@ -48,7 +46,7 @@ function Settings({ agents, agyProjects, onBack }) {
             </div>
 
             <div className='dashboard-tabs' style={{ display: 'flex', gap: '24px', marginBottom: '32px', borderBottom: '1px solid var(--border)' }}>
-                {['workspaces', 'modules', 'advanced'].map(t => (
+                {['workspaces', 'danger terminal', 'advanced'].map(t => (
                     <button 
                         key={t}
                         className={'tab-btn ' + (dashboardTab === t ? 'active' : '')}
@@ -74,7 +72,42 @@ function Settings({ agents, agyProjects, onBack }) {
                 </div>
             )}
 
-            {dashboardTab === 'modules' && <TeslaDashboard />}
+            {dashboardTab === 'danger terminal' && (
+                <div className='modules-settings' style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                    <p style={{ margin: 0, color: 'var(--fg3)', fontSize: '14px' }}>
+                        Select the primary automation tool to drive your agents. These tools must be installed on your system.
+                    </p>
+                    {systemTools.map(tool => {
+                        const isEnabled = (settings.modules || []).find(m => m.enabled)?.command === tool.command;
+                        return (
+                        <div key={tool.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg2)', padding: '16px', borderRadius: '8px', border: '1px solid var(--border)', opacity: tool.installed ? 1 : 0.5 }}>
+                            <div>
+                                <h4 style={{ margin: 0, fontSize: '14px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    {tool.name}
+                                    {!tool.installed && <span style={{ fontSize: '10px', background: 'var(--bg)', padding: '2px 6px', borderRadius: '4px', border: '1px solid var(--border)' }}>Not Installed</span>}
+                                </h4>
+                                <code style={{ fontSize: '11px', color: 'var(--fg3)' }}>{tool.path || `Command: ${tool.command}`}</code>
+                            </div>
+                            <input
+                                type='radio'
+                                name='enabled-module'
+                                checked={isEnabled}
+                                disabled={!tool.installed}
+                                onChange={() => {
+                                    const updatedModules = systemTools.map(t => ({
+                                        id: t.id,
+                                        name: t.name,
+                                        command: t.command,
+                                        enabled: t.command === tool.command
+                                    }));
+                                    saveSettings({ modules: updatedModules });
+                                }}
+                                style={{ cursor: tool.installed ? 'pointer' : 'not-allowed' }}
+                            />
+                        </div>
+                    )})}
+                </div>
+            )}
 
             {dashboardTab === 'advanced' && (
                 <div className='advanced-settings' style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
@@ -94,7 +127,7 @@ function Settings({ agents, agyProjects, onBack }) {
                                     Download v{androidUpdate.version}
                                 </button>
                             ) : (
-                                <div style={{ fontSize: '12px', color: 'var(--error)' }}>No APK found on server.</div>
+                                <div style={{ fontSize: '12px', color: 'var(--fg3)' }}>Run `npm run android:build` to compile an APK.</div>
                             )}
                         </div>
                     </section>

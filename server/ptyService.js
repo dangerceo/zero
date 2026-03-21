@@ -50,7 +50,7 @@ export function attachPtyServer(httpServer) {
             attachWsToSession(ws, session);
         } else {
             // ── Create New Session ────
-            const id = randomUUID();
+            const id = params.get('id') || randomUUID();
             const cwd = params.get('cwd') || homedir();
             const cmd = params.get('cmd') || 'gemini';
             const shell = process.env.SHELL || '/bin/zsh';

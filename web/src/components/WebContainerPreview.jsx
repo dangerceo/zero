@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { WebContainer } from '@webcontainer/api';
-import { Terminal } from '@xterm/xterm';
-import { FitAddon } from '@xterm/addon-fit';
-import '@xterm/xterm/css/xterm.css';
+
 
 function WebContainerPreview({ workingDir }) {
     const [status, setStatus] = useState('idle');
@@ -17,29 +15,66 @@ function WebContainerPreview({ workingDir }) {
     const fitAddonRef = useRef(null);
 
     useEffect(() => {
-        if (terminalDivRef.current && !terminalRef.current) {
-            const term = new Terminal({
-                theme: { background: '#1e1e1e' },
-                fontFamily: 'var(--mono)',
-                fontSize: 12,
-                convertEol: true,
-                cursorBlink: true
-            });
-            const fitAddon = new FitAddon();
-            term.loadAddon(fitAddon);
-            term.open(terminalDivRef.current);
-            fitAddon.fit();
-            terminalRef.current = term;
-            fitAddonRef.current = fitAddon;
+        let isCancelled = false;
 
-            term.onData(data => {
-                if (shellProcess?.input) {
-                    const writer = shellProcess.input.getWriter();
-                    writer.write(data);
-                    writer.releaseLock();
+        const initTerminal = async () => {
+            if (terminalDivRef.current && !terminalRef.current) {
+                // Clear container to prevent double-renders in Strict Mode
+                terminalDivRef.current.innerHTML = '';
+                try {
+                    const { Terminal } = await import('@xterm/xterm');
+                    const { FitAddon } = await import('@xterm/addon-fit');
+                    await import('@xterm/xterm/css/xterm.css');
+                    
+                    if (isCancelled || terminalRef.current) return;
+
+                    const term = new Terminal({
+                        theme: { background: '#1e1e1e' },
+                        fontFamily: 'var(--mono)',
+                        fontSize: 12,
+                        convertEol: true,
+                        cursorBlink: true
+                    });
+                    const fitAddon = new FitAddon();
+                    term.loadAddon(fitAddon);
+                    term.open(terminalDivRef.current);
+                    fitAddon.fit();
+                    terminalRef.current = term;
+                    fitAddonRef.current = fitAddon;
+
+                    term.onData(data => {
+                        if (shellProcess?.input) {
+                            const writer = shellProcess.input.getWriter();
+                            writer.write(data);
+                            writer.releaseLock();
+                        }
+                    });
+                } catch (e) {
+                    console.error("Failed to load xterm in WebContainerPreview:", e);
                 }
-            });
-        }
+            } else if (terminalRef.current && shellProcess) {
+                // Update the datastream if shellProcess changes
+                terminalRef.current.onData(data => {
+                    if (shellProcess?.input) {
+                        try {
+                            const writer = shellProcess.input.getWriter();
+                            writer.write(data);
+                            writer.releaseLock();
+                        } catch {}
+                    }
+                });
+            }
+        };
+
+        initTerminal();
+
+        return () => {
+            isCancelled = true;
+            if (terminalRef.current) {
+                try { terminalRef.current.dispose(); } catch (e) {}
+                terminalRef.current = null;
+            }
+        };
     }, [shellProcess]);
 
     const boot = async () => {

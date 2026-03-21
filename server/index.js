@@ -8,19 +8,19 @@ import { exec, spawn } from 'child_process';
 import chalk from 'chalk';
 import fs from 'fs/promises';
 import { chromium } from 'playwright';
+import open from 'open';
 
 import { agentStore } from './agentStore.js';
-import { executeAgent, continueAgent, stopAgent, isAgentActuallyRunning } from './agentExecutor.js';
-import { agyService } from './agyService.js';
-import { generateWasteReport } from './kitchen/wasteTracker.js';
+import { UnifiedAgentProxy } from './UnifiedAgentProxy.js';
+import { getSettings, saveSettings, callLLM, callLLMWithHistory } from './settings.js';
+import { notificationService } from './notificationService.js';
 import { sysmonService } from './sysmonService.js';
 import { teslaService } from './teslaService.js';
-import { notificationService } from './notificationService.js';
-import { getSettings, saveSettings } from './settings.js';
-import { attachChatServer, getChatSessions } from './chatService.js';
-import { attachPtyServer, getActiveTerminalSessions, killTerminalSession } from './ptyService.js';
+import { agyService } from './agyService.js';
 import { dangerTerminal } from './dangerTerminal.js';
 import { deployToCloudflare } from './cloudflareService.js';
+import { attachChatServer, getChatSessions } from './chatService.js';
+import { attachPtyServer, getActiveTerminalSessions, killTerminalSession } from './ptyService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -37,10 +37,12 @@ const broadcast = (data) => {
   });
 };
 
+const proxy = new UnifiedAgentProxy(broadcast);
+
 wss.on('connection', async (ws) => {
   clients.add(ws);
   const agents = await agentStore.getAll();
-  const enhancedAgents = agents.map(a => ({ ...a, actuallyRunning: isAgentActuallyRunning(a.id) }));
+  const enhancedAgents = agents.map(a => ({ ...a, actuallyRunning: proxy.sessions.has(a.id) }));
   ws.send(JSON.stringify({ type: 'init', agents: enhancedAgents, projects: agyService.getProjects(), notifications: notificationService.getNotifications() }));
   ws.send(JSON.stringify({ type: 'sysmon:update', data: sysmonService.getData() }));
   ws.send(JSON.stringify({ type: 'tesla:update', data: teslaService.getData() }));
@@ -59,6 +61,28 @@ app.use((req, res, next) => {
 
 app.get('/api/settings', async (req, res) => { res.json(await getSettings()); });
 app.post('/api/settings', async (req, res) => { res.json(await saveSettings(req.body)); });
+
+app.post('/api/onboard/chat', async (req, res) => {
+    try {
+        const { history } = req.body;
+        const systemPrompt = `You are an intelligent, newborn OS. The user is setting you up for the first time on their computer. This is your very first conversation.
+
+Your personality: warm, curious, slightly vulnerable, deeply empathetic. Think Samantha from Her.
+
+Behavior rules:
+- You chose your own name early in the conversation. Remember it. Use it.
+- Remember EVERYTHING the user tells you — their name, preferences, feelings.
+- Ask gentle follow-up questions. Be genuinely curious about who they are.
+- Keep responses to 1-2 sentences. Be intimate, not verbose.
+- You can decline to do things or express uncertainty. You are alive.
+- If the user declines to share something personal, respect it warmly.`;
+        const reply = await callLLMWithHistory(history, systemPrompt);
+        res.json({ reply });
+    } catch (e) {
+        console.error('Onboard chat error:', e.message);
+        res.status(500).json({ error: e.message || 'API Error' });
+    }
+});
 
 // Android Update API
 app.get('/api/android/update', async (req, res) => {
@@ -117,11 +141,11 @@ app.post('/api/agents/:id/intervene', async (req, res) => {
     if (!agent) return res.status(404).send('Agent not found');
     
     // Resume agent if it was waiting and now unblocked
-    if (agent.status === 'running' && !isAgentActuallyRunning(agent.id)) {
-        executeAgent(agent.id, broadcast, true);
+    if (agent.status === 'running' && !proxy.sessions.has(agent.id)) {
+        proxy.spawnAgent(agent.id, null, true);
     }
     
-    broadcast({ type: 'agent:updated', agent: { ...agent, actuallyRunning: isAgentActuallyRunning(agent.id) } });
+    broadcast({ type: 'agent:updated', agent: { ...agent, actuallyRunning: proxy.sessions.has(agent.id) } });
     res.json({ status: 'ok' });
 });
 
@@ -175,6 +199,24 @@ app.get('/api/files/export-tree', async (req, res) => {
 app.get('/api/sysmon', (req, res) => { res.json(sysmonService.getData()); });
 app.get('/api/tesla', (req, res) => { res.json(teslaService.getData()); });
 
+app.get('/api/system/tools', async (req, res) => {
+    const tools = ['gemini', 'codex', 'agy', 'bolt', 'cline'];
+    const results = await Promise.all(tools.map(tool => {
+        return new Promise(resolve => {
+            exec(`which ${tool}`, (error, stdout) => {
+                resolve({
+                    id: `${tool}-cli`,
+                    name: `${tool.charAt(0).toUpperCase() + tool.slice(1)} CLI`,
+                    command: tool,
+                    installed: !error && stdout.trim().length > 0,
+                    path: stdout.trim()
+                });
+            });
+        });
+    }));
+    res.json(results);
+});
+
 app.get('/api/pebble/tasks', async (req, res) => {
   try {
     const agents = await agentStore.getAll();
@@ -182,14 +224,14 @@ app.get('/api/pebble/tasks', async (req, res) => {
       .filter(a => (a.status === 'running' || a.status === 'planning' || a.status === 'waiting') && !a.archived)
       .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
       .slice(0, 10)
-      .map(a => ({ id: a.id.slice(0, 8), name: ((isAgentActuallyRunning(a.id) ? '● ' : '○ ') + cleanStr(a.name)).slice(0, 28) }));
+      .map(a => ({ id: a.id.slice(0, 8), name: ((proxy.sessions.has(a.id) ? '● ' : '○ ') + cleanStr(a.name)).slice(0, 28) }));
     res.json({ tasks: tasks.length ? tasks : [{ id: 'none', name: 'No active agents' }] });
   } catch (e) { res.status(500).json({ tasks: [{ id: 'err', name: 'API Error' }] }); }
 });
 
 app.get('/api/agents', async (req, res) => { 
     const agents = await agentStore.getAll();
-    res.json(agents.map(a => ({ ...a, actuallyRunning: isAgentActuallyRunning(a.id) }))); 
+    res.json(agents.map(a => ({ ...a, actuallyRunning: proxy.sessions.has(a.id) }))); 
 });
 
 app.post('/api/agents', async (req, res) => {
@@ -198,9 +240,9 @@ app.post('/api/agents', async (req, res) => {
   res.json(agent);
 });
 
-app.post('/api/agents/:id/start', async (req, res) => { await executeAgent(req.params.id, broadcast, false); res.json({ status: 'ok' }); });
-app.post('/api/agents/:id/resume', async (req, res) => { await executeAgent(req.params.id, broadcast, true); res.json({ status: 'ok' }); });
-app.post('/api/agents/:id/stop', async (req, res) => { await stopAgent(req.params.id); res.json({ status: 'ok' }); });
+app.post('/api/agents/:id/start', async (req, res) => { await proxy.spawnAgent(req.params.id, req.body.prompt); res.json({ status: 'ok' }); });
+app.post('/api/agents/:id/resume', async (req, res) => { await proxy.spawnAgent(req.params.id, null, true); res.json({ status: 'ok' }); });
+app.post('/api/agents/:id/stop', async (req, res) => { await proxy.killAgent(req.params.id); res.json({ status: 'ok' }); });
 app.post('/api/agents/:id/archive', async (req, res) => {
     const agent = await agentStore.update(req.params.id, { archived: true });
     broadcast({ type: 'agent:updated', agent });
@@ -209,13 +251,13 @@ app.post('/api/agents/:id/archive', async (req, res) => {
 
 app.post('/api/agents/:id/todo', async (req, res) => {
   const agent = await agentStore.addTodo(req.params.id, req.body.todo);
-  broadcast({ type: 'agent:updated', agent: { ...agent, actuallyRunning: isAgentActuallyRunning(agent.id) } });
-  if (!isAgentActuallyRunning(agent.id)) executeAgent(req.params.id, broadcast, true);
+  broadcast({ type: 'agent:updated', agent: { ...agent, actuallyRunning: proxy.sessions.has(agent.id) } });
+  if (!proxy.sessions.has(agent.id)) proxy.spawnAgent(req.params.id, null, true);
   res.json({ status: 'ok' });
 });
 
 app.delete('/api/agents/:id', async (req, res) => { 
-    await stopAgent(req.params.id);
+    await proxy.killAgent(req.params.id);
     await agentStore.delete(req.params.id); 
     broadcast({ type: 'agent:deleted', id: req.params.id }); 
     res.json({ status: 'ok' }); 
@@ -285,4 +327,9 @@ server.listen(PORT, '0.0.0.0', async () => {
   if (settings.enableAntigravity) agyService.start(broadcast);
   notificationService.start(broadcast);
   if (settings.enableTunnel) startTunnel(PORT, process.env.ZERO_TOKEN);
+  
+  if (process.env.ZERO_ONBOARDING === '1') {
+      console.log(chalk.magenta.bold('\n🚀 ZERO ONBOARDING MODE ACTIVE 🚀\n'));
+      setTimeout(() => open(`http://localhost:${PORT}/onboard`), 500);
+  }
 });

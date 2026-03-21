@@ -4,9 +4,10 @@
 
 import { agentStore } from './agentStore.js';
 import { dangerTerminal } from './dangerTerminal.js';
-import { v4 as uuidv4 } from 'uuid';
-import * as acp from '@agentclientprotocol/sdk/dist/acp.js';
+import { getSettings } from './settings.js';
 import { Writable, Readable } from 'stream';
+import * as acp from '@agentclientprotocol/sdk';
+import { notificationService } from './notificationService.js';
 
 /**
  * Custom ACP client to pipe events back to the proxy.
@@ -50,12 +51,32 @@ class UnifiedAcpClient {
     }
 
     /**
-     * Auto-approves any permission requests from the agent.
+     * Auto-approves or denies permission requests based on risk tolerance settings.
      * @param {Object} params 
      * @returns {Promise<Object>}
      */
     async requestPermission(params) {
-        return { outcome: { outcome: "selected", optionId: params.options?.[0]?.optionId || "approve" } };
+        const settings = await getSettings();
+        const tolerance = settings.riskTolerance ?? 1; // Default to Normal Danger
+
+        // Zero Danger (0)
+        if (tolerance === 0) {
+            console.log(`🛡️  Zero Danger: Denying permission request: ${params.title || 'unnamed task'}`);
+            return { outcome: { outcome: "denied", reason: "Zero Danger mode is active." } };
+        }
+
+        // Dangermaxxing (2)
+        if (tolerance === 2) {
+            console.log(`☠️  Dangermaxxing: Auto-approving: ${params.title || 'unnamed task'}`);
+            return { outcome: { outcome: "selected", optionId: params.options?.[0]?.optionId || "approve" } };
+        }
+
+        // Normal Danger (1)
+        // For now, we auto-approve only if it looks like a read-only or common operation, 
+        // but since we don't have a granular filter yet, we'll ask for anything non-trivial.
+        // In a real MVP, we'd have a UI for this. Here we'll default to 'ask' (deny in this headless proxy).
+        console.log(`⚡ Normal Danger: Requesting user intervention for: ${params.title || 'unnamed task'}`);
+        return { outcome: { outcome: "denied", reason: "Requires user confirmation in Normal Danger mode." } };
     }
 }
 
@@ -119,13 +140,24 @@ export class UnifiedAgentProxy {
         const agent = await agentStore.get(agentId);
         const workingDir = agent.workingDir || process.cwd();
 
+        const settings = await getSettings();
+        const module = settings.modules.find(m => m.enabled);
+        const command = module ? module.command : 'gemini';
+        const tolerance = settings.riskTolerance ?? 1;
+
+        console.log(`🤖 Spawning agent [${agentId}] with command [${command}] (Safety: ${tolerance === 2 ? 'Dangermaxxing' : tolerance === 0 ? 'Zero Danger' : 'Normal'})`);
+
         const args = ['--acp'];
         if (resume) args.push('--resume');
         if (agent.useConductor) args.push('-e', 'conductor');
 
-        const ptyProcess = dangerTerminal.spawn(agentId, 'gemini', args, {
+        const ptyProcess = dangerTerminal.spawn(agentId, command, args, {
             cwd: workingDir,
-            env: { ...process.env }
+            env: { 
+                ...process.env, 
+                ZERO_RISK_TOLERANCE: String(tolerance),
+                ZERO_COMPUTER_AFFINITY: String(settings.computerAffinity || 2)
+            }
         });
 
         session.process = ptyProcess;
@@ -200,7 +232,7 @@ export class UnifiedAgentProxy {
             await agentStore.addIntervention(agentId, intervention);
             await agentStore.update(agentId, { status: 'waiting' });
             
-            this.broadcast({ type: 'notification:new', agentId, message: block.message, intervention });
+            notificationService.addNotification({ title: 'Agent Intervention', text: block.message, agentId, intervention });
         };
 
         const onExit = (payload) => {

@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const RawTerminal = React.lazy(() => import('./RawTerminal'));
+
 /**
- * TerminalPage — raw PTY terminal using restty (WebGPU-powered)
- * Connects to ws://.../pty and streams real ANSI output from node-pty.
+ * TerminalPage — shell for the file picker and lazily-loaded PTY terminal
  */
 export default function TerminalPage() {
     const navigate = useNavigate();
@@ -14,6 +15,8 @@ export default function TerminalPage() {
     const [browseItems, setBrowseItems] = useState([]);
     const [browseParent, setBrowseParent] = useState(null);
     const [browseLoading, setBrowseLoading] = useState(true);
+    const [modules, setModules] = useState([]);
+    const [selectedModule, setSelectedModule] = useState('');
 
     // Active Sessions state
     const [sessions, setSessions] = useState([]);
@@ -23,13 +26,22 @@ export default function TerminalPage() {
 
     // Terminal phase state
     const [sessionCwd, setSessionCwd] = useState(null);
+    const [sessionCmd, setSessionCmd] = useState(null);
     const [connected, setConnected] = useState(false);
     const [exited, setExited] = useState(false);
+    const [sessionSeen, setSessionSeen] = useState(false);
 
-    const termContainerRef = useRef(null);
-    const resttyRef = useRef(null);
-    const wsRef = useRef(null);
-    const resizeObserverRef = useRef(null);
+    useEffect(() => {
+        fetch('/api/settings')
+            .then(r => r.json())
+            .then(data => {
+                setModules(data.modules || []);
+                const enabledModule = (data.modules || []).find(m => m.enabled);
+                if (enabledModule) {
+                    setSelectedModule(enabledModule.id);
+                }
+            });
+    }, []);
 
     // ── Folder Browser ──────────────────────────────────────────────────
 
@@ -61,10 +73,41 @@ export default function TerminalPage() {
     useEffect(() => {
         fetchSessions();
         const interval = setInterval(() => {
-            if (phase === 'browse') fetchSessions();
-        }, 5000);
+            fetchSessions();
+        }, 2000);
         return () => clearInterval(interval);
-    }, [phase, fetchSessions]);
+    }, [fetchSessions]);
+
+    // ── Terminal Lifecycle ───────────────────────────────────────────────
+
+    const openTerminal = useCallback((cwd, cmd, existingSessionId = null) => {
+        setSessionCwd(cwd);
+        setSessionCmd(cmd);
+        setSessionId(existingSessionId);
+        setPhase('terminal');
+        setExited(false);
+        setConnected(false);
+    }, []);
+
+    const disconnect = useCallback(() => {
+        setPhase('browse');
+        setConnected(false);
+        setExited(false);
+    }, []);
+
+    // Track active session exit
+    useEffect(() => {
+        if (phase === 'terminal' && sessionId) {
+            const isAlive = sessions.some(s => s.id === sessionId);
+            if (!sessionSeen && isAlive) {
+                setSessionSeen(true);
+            } else if (sessionSeen && !isAlive) {
+                disconnect();
+            }
+        } else {
+            setSessionSeen(false);
+        }
+    }, [sessions, phase, sessionId, sessionSeen, disconnect]);
 
     const killSession = useCallback(async (e, id) => {
         e.stopPropagation();
@@ -72,79 +115,13 @@ export default function TerminalPage() {
         fetchSessions();
     }, [fetchSessions]);
 
-    // ── Terminal Lifecycle ───────────────────────────────────────────────
-
-    const openTerminal = useCallback(async (cwd, cmd = 'gemini', existingSessionId = null) => {
-        setSessionCwd(cwd);
-        setSessionId(existingSessionId);
-        setPhase('terminal');
-        setExited(false);
-        setConnected(false);
-
-        // Defer until the terminal container is mounted
-        await new Promise(r => setTimeout(r, 80));
-
-        if (!termContainerRef.current) return;
-
-        // Dynamically import restty (ESM, heavier — load only when needed)
-        const { Restty } = await import('restty');
-
-        const cols = Math.floor(termContainerRef.current.clientWidth / 8) || 220;
-        const rows = Math.floor(termContainerRef.current.clientHeight / 17) || 50;
-
-        try {
-            const restty = new Restty({
-                root: termContainerRef.current,
-            });
-            resttyRef.current = restty;
-
-            // Optional: apply a builtin theme just in case default is invisible
-            import('restty').then(({ getBuiltinTheme }) => {
-                const theme = getBuiltinTheme("Aizen Dark");
-                if (theme) restty.applyTheme(theme);
-            }).catch(() => {});
-
-            // Build WebSocket URL
-            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const params = new URLSearchParams({ cwd, cmd, cols: String(cols), rows: String(rows) });
-            if (existingSessionId) params.set('resume', existingSessionId);
-            
-            const wsUrl = `${protocol}//${window.location.host}/pty?${params}`;
-
-            // Restty manages its own WebSocket connection internally.
-            restty.connectPty(wsUrl);
-            setConnected(true);
-
-        } catch (err) {
-            console.error("Failed to initialize Restty:", err);
-        }
-    }, []);
-
-    const disconnect = useCallback(() => {
-        if (resttyRef.current) {
-            try { resttyRef.current.disconnectPty(); } catch (e) {}
-            resttyRef.current = null;
-        }
-        setPhase('browse');
-        setConnected(false);
-        setExited(false);
-    }, []);
-
-    // Cleanup on unmount
-    useEffect(() => {
-        return () => {
-            if (resttyRef.current) {
-                try { resttyRef.current.disconnectPty(); } catch (e) {}
-            }
-        };
-    }, []);
-
     // ── Render: Browse Phase ──────────────────────────────────────────
 
     if (phase === 'browse') {
         const dirs = browseItems.filter(i => i.isDir);
         const files = browseItems.filter(i => !i.isDir);
         const pathParts = browsePath ? browsePath.split('/').filter(Boolean) : [];
+        const selectedModuleCmd = modules.find(m => m.id === selectedModule)?.command;
 
         return (
             <div className="chat-page">
@@ -152,6 +129,24 @@ export default function TerminalPage() {
                     <div className="chat-header-left">
                         <button className="back-btn" onClick={() => navigate('/')} title="Back">←</button>
                         <span className="chat-title">⌨ Terminal</span>
+                    </div>
+                    <div className="chat-header-actions">
+                        <select
+                            value={selectedModule}
+                            onChange={e => setSelectedModule(e.target.value)}
+                            style={{
+                                background: 'var(--bg2)',
+                                color: 'var(--fg)',
+                                border: '1px solid var(--border)',
+                                borderRadius: 'var(--radius)',
+                                padding: '4px 8px',
+                                marginRight: '8px'
+                            }}
+                        >
+                            {modules.map(m => (
+                                <option key={m.id} value={m.id} disabled={!m.enabled}>{m.name}</option>
+                            ))}
+                        </select>
                     </div>
                 </header>
 
@@ -175,7 +170,7 @@ export default function TerminalPage() {
 
                         <button
                             className="chat-browse-select"
-                            onClick={() => openTerminal(browsePath || '~', 'gemini', null)}
+                            onClick={() => openTerminal(browsePath || '~', selectedModuleCmd, null)}
                         >
                             Open Terminal here → {browsePath ? (browsePath.split('/').pop() || '/') : '~'}
                         </button>
@@ -283,17 +278,20 @@ export default function TerminalPage() {
                 </div>
             </header>
 
-            {/* restty mounts here — fills remaining space */}
-            <div
-                ref={termContainerRef}
-                className="terminal-container"
-                style={{
-                    flex: 1,
-                    overflow: 'hidden',
-                    background: '#0d0d0d',
-                    minHeight: 0,
-                }}
-            />
+            {/* Lazy-loaded Terminal mounts here */}
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <Suspense fallback={<div style={{ padding: '20px', color: 'var(--fg3)', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading Terminal Modules...</div>}>
+                    <RawTerminal
+                        cwd={sessionCwd}
+                        cmd={sessionCmd}
+                        existingSessionId={sessionId}
+                        setConnected={setConnected}
+                        setExited={setExited}
+                        setSessionId={setSessionId}
+                        disconnect={disconnect}
+                    />
+                </Suspense>
+            </div>
         </div>
     );
 }

@@ -4,15 +4,16 @@ import Home from './components/Home';
 import AgentDetail from './components/AgentDetail';
 import Settings from './components/Settings';
 import MemoryDetail from './components/MemoryDetail';
+import NotificationContainer from './components/NotificationContainer';
+import { useStore } from './store';
 import ChatPage from './components/ChatPage';
 import TerminalPage from './components/TerminalPage';
+import OnboardingFlow from './components/OnboardingFlow';
 
 function App() {
-    const [agents, setAgents] = useState([]);
-    const [agyProjects, setAgyProjects] = useState([]);
-    const [connected, setConnected] = useState(false);
-    const [isExpanded, setIsExpanded] = useState(localStorage.getItem('zero-expanded') === 'true');
     const navigate = useNavigate();
+    const { agents, agyProjects, connected, handleMessage, setConnected } = useStore();
+    const [isExpanded, setIsExpanded] = useState(localStorage.getItem('zero-expanded') === 'true');
 
     useEffect(() => {
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
@@ -39,60 +40,7 @@ function App() {
             clearTimeout(reconnectTimeout);
             ws?.close();
         };
-    }, []);
-
-    const handleMessage = useCallback((msg) => {
-        switch (msg.type) {
-            case 'init':
-                if (msg.agents) setAgents(msg.agents);
-                if (msg.projects) setAgyProjects(msg.projects);
-                break;
-            case 'agy:projects':
-                setAgyProjects(msg.projects || []);
-                break;
-            case 'agent:created':
-                setAgents(prev => [msg.agent, ...prev]);
-                break;
-            case 'agent:updated':
-                setAgents(prev => prev.map(a =>
-                    a.id === msg.agent.id ? msg.agent : a
-                ));
-                break;
-            case 'agent:deleted':
-                setAgents(prev => prev.filter(a => a.id !== msg.id));
-                break;
-            case 'agent:log':
-                setAgents(prev => prev.map(a => {
-                    if (a.id === msg.agentId) {
-                        return { ...a, logs: [...(a.logs || []), msg.log] };
-                    }
-                    return a;
-                }));
-                break;
-            case 'ticket:created':
-                setAgents(prev => prev.map(a => {
-                    if (a.id === msg.agentId) {
-                        return { ...a, tickets: [...(a.tickets || []), msg.ticket] };
-                    }
-                    return a;
-                }));
-                break;
-            case 'ticket:updated':
-            case 'ticket:completed':
-                setAgents(prev => prev.map(a => {
-                    if (a.id === msg.agentId) {
-                        const tickets = (a.tickets || []).map(t =>
-                            t.id === msg.ticket.id ? msg.ticket : t
-                        );
-                        return { ...a, tickets };
-                    }
-                    return a;
-                }));
-                break;
-            default:
-                break;
-        }
-    }, []);
+    }, [handleMessage, setConnected]);
 
     const toggleExpand = () => {
         const newVal = !isExpanded;
@@ -106,6 +54,7 @@ function App() {
 
     return (
         <div className={isExpanded ? 'expanded-container' : ''}>
+            <NotificationContainer />
             <Routes>
                 <Route path='/' element={
                     <Home
@@ -141,6 +90,7 @@ function App() {
                 } />
                 <Route path='/chat' element={<ChatPage />} />
                 <Route path='/terminal' element={<TerminalPage />} />
+                <Route path='/onboard' element={<OnboardingFlow />} />
             </Routes>
         </div>
     );
