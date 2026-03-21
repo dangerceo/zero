@@ -19,6 +19,7 @@ Zero Computer is a powerful tool designed for Developers and Power Users who nee
 - **Proactive Intelligence:** An AI system that doesn't just wait for commands but proactively identifies and suggests automation opportunities.
 - **Real-time Connectivity:** Seamless communication between mobile and Mac for instant control and feedback.
 - **Interactive Inbox:** A mobile-first inbox for quickly unblocking AI agents via interactive notifications and a dedicated response UI.
+- **Danger Terminal:** A heuristic-based PTY harness that automatically detects when AI agents are blocked by interactive CLI prompts and routes them to the Inbox.
 
 ## User Experience
 The experience is centered around a "proactive" AI that suggests and performs actions. It's designed to feel less like a remote desktop and more like an intelligent companion that understands the user's workflow and helps optimize it through automation.

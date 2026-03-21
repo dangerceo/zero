@@ -7,7 +7,6 @@
 ## Backend
 - **Node.js (Express):** Core server framework for handling API requests and serving the web app.
 - **WebSocket (ws):** Real-time communication for terminal streaming and agent updates.
-- **Playwright (Chromium):** Used for AI agents to interact with the web and perform automated tasks.
 - **node-pty:** PTY support for providing full terminal access on macOS.
 
 ## Frontend
