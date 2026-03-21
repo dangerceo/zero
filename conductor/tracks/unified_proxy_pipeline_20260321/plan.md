@@ -14,12 +14,12 @@
     - [x] Ensure all tool-driven shell commands use the heuristic harness.
 - [x] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md)
 
-## Phase 3: Cloudflare Integration & UI
+## Phase 3: Cloudflare Integration & UI [checkpoint: ef537dd]
 - [x] Task: Implement Cloudflare Deployment Tool 80113
     - [x] Add `deployToCloudflare` tool to the backend.
     - [x] Handle wrangler/API authentication.
 - [x] Task: Update Android & Web UI 80113
     - [x] Add "Deploy" button and deployment status indicators.
-- [~] Task: End-to-End Verification
-    - [ ] Verify: Create Agent -> Build Worker -> Deploy to Cloudflare -> View live on phone.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md)
+- [x] Task: End-to-End Verification
+    - [x] Verify: Create Agent -> Build Worker -> Deploy to Cloudflare -> View live on phone.
+- [x] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md)
