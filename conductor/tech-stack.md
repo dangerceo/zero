@@ -8,6 +8,7 @@
 - **Node.js (Express):** Core server framework for handling API requests and serving the web app.
 - **WebSocket (ws):** Real-time communication for terminal streaming and agent updates.
 - **node-pty:** PTY support for providing full terminal access on macOS.
+- **UnifiedAgentProxy:** Internal service unifying ACP chat and PTY execution paths.
 
 ## Frontend
 - **React (Vite):** Modern frontend library for the web-based control dashboard.
@@ -28,3 +29,4 @@
 ## Infrastructure
 - **Vite:** Build tool and development server for the web frontend.
 - **Gradle:** Build system for the Android mobile application.
+- **Wrangler:** CLI tool for Cloudflare Workers deployment and management.
