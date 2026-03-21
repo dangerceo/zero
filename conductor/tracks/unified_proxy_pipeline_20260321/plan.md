@@ -7,12 +7,12 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
 
 ## Phase 2: Unified Agent Proxy Implementation
-- [ ] Task: Build `UnifiedAgentProxy.js`
-    - [ ] Merge logic from `chatService.js` and `agentExecutor.js`.
-    - [ ] Implement a unified event emitter for all agent activity.
-- [ ] Task: Integrate `danger-terminal` into Proxy
-    - [ ] Ensure all tool-driven shell commands use the heuristic harness.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md)
+- [x] Task: Build `UnifiedAgentProxy.js` f03254b
+    - [x] Merge logic from `chatService.js` and `agentExecutor.js`.
+    - [x] Implement a unified event emitter for all agent activity.
+- [x] Task: Integrate `danger-terminal` into Proxy f03254b
+    - [x] Ensure all tool-driven shell commands use the heuristic harness.
+- [~] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md)
 
 ## Phase 3: Cloudflare Integration & UI
 - [ ] Task: Implement Cloudflare Deployment Tool
