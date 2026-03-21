@@ -1,5 +1,13 @@
+# Build artifacts
 node_modules/
 dist/
+build/
+android/app/build/
+android/.gradle/
+ios/build/
+ios/Pods/
+
+# Environment and logs
 .env
 *.log
 .DS_Store
