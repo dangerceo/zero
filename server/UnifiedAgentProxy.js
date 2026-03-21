@@ -1,16 +1,31 @@
+/**
+ * @fileoverview Unified proxy for all agent communication and execution.
+ */
+
 import { agentStore } from './agentStore.js';
 import { dangerTerminal } from './dangerTerminal.js';
 import { v4 as uuidv4 } from 'uuid';
 import * as acp from '@agentclientprotocol/sdk/dist/acp.js';
 import { Writable, Readable } from 'stream';
 
+/**
+ * Custom ACP client to pipe events back to the proxy.
+ */
 class UnifiedAcpClient {
+    /**
+     * @param {UnifiedAgentProxy} proxy The parent proxy.
+     * @param {Object} session The agent session.
+     */
     constructor(proxy, session) {
         this.proxy = proxy;
         this.session = session;
         this.currentGeminiText = "";
     }
 
+    /**
+     * Handles ACP session updates and broadcasts them.
+     * @param {Object} params 
+     */
     async sessionUpdate(params) {
         const update = params.update;
         const agentId = this.session.agentId;
@@ -34,6 +49,11 @@ class UnifiedAcpClient {
         }
     }
 
+    /**
+     * Auto-approves any permission requests from the agent.
+     * @param {Object} params 
+     * @returns {Promise<Object>}
+     */
     async requestPermission(params) {
         return { outcome: { outcome: "selected", optionId: params.options?.[0]?.optionId || "approve" } };
     }
@@ -44,6 +64,9 @@ class UnifiedAcpClient {
  * Merges logic from agentExecutor.js and chatService.js.
  */
 export class UnifiedAgentProxy {
+    /**
+     * @param {function} broadcast The main WebSocket broadcast function.
+     */
     constructor(broadcast) {
         this.broadcast = broadcast;
         /** @type {Map<string, Object>} agentId -> session */
@@ -54,7 +77,7 @@ export class UnifiedAgentProxy {
      * Gets an existing session or creates a new one for an agent.
      * @param {string} agentId 
      * @param {Object} options 
-     * @returns {Promise<Object>}
+     * @returns {Promise<Object>} The session object.
      */
     async getOrCreateSession(agentId, options = {}) {
         let session = this.sessions.get(agentId);
@@ -84,8 +107,8 @@ export class UnifiedAgentProxy {
     /**
      * Spawns an agent using the unified PTY + ACP proxy.
      * @param {string} agentId 
-     * @param {string} prompt 
-     * @param {boolean} resume 
+     * @param {string} prompt The initial user prompt.
+     * @param {boolean} resume Whether to resume the agent's last session.
      */
     async spawnAgent(agentId, prompt, resume = false) {
         const session = await this.getOrCreateSession(agentId);
@@ -122,6 +145,11 @@ export class UnifiedAgentProxy {
         }
     }
 
+    /**
+     * Sets up the Agent Client Protocol (ACP) bridge for a session.
+     * @param {Object} session 
+     * @param {Object} ptyProcess The node-pty process.
+     */
     async setupAcp(session, ptyProcess) {
         const agentId = session.agentId;
         
@@ -158,6 +186,10 @@ export class UnifiedAgentProxy {
         session.acpSessionId = sessionResult.sessionId;
     }
 
+    /**
+     * Wires up danger-terminal events for a session.
+     * @param {Object} session 
+     */
     setupHeuristics(session) {
         const agentId = session.agentId;
         
@@ -187,6 +219,10 @@ export class UnifiedAgentProxy {
         dangerTerminal.on('exit', onExit);
     }
 
+    /**
+     * Kills an agent's PTY session and cleans up listeners.
+     * @param {string} agentId 
+     */
     killAgent(agentId) {
         const session = this.sessions.get(agentId);
         if (session && session.process) {
