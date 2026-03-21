@@ -19,6 +19,7 @@ import { notificationService } from './notificationService.js';
 import { getSettings, saveSettings } from './settings.js';
 import { attachChatServer, getChatSessions } from './chatService.js';
 import { attachPtyServer, getActiveTerminalSessions, killTerminalSession } from './ptyService.js';
+import { dangerTerminal } from './dangerTerminal.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -104,6 +105,12 @@ app.post('/api/agents/:id/intervene', async (req, res) => {
     // First, try to answer if it's a regular question
     await agentStore.answerQuestion(req.params.id, interventionId, response);
     
+    // Check if there's a dangerTerminal session for this agent
+    const session = dangerTerminal.getSession(req.params.id);
+    if (session && session.isBlocked) {
+        dangerTerminal.write(req.params.id, response + '\r');
+    }
+
     // Then resolve as intervention
     const agent = await agentStore.resolveIntervention(req.params.id, interventionId, response);
     if (!agent) return res.status(404).send('Agent not found');
