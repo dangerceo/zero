@@ -1,10 +1,10 @@
 # Implementation Plan: Unified Agent Proxy and Deployment Pipeline
 
-## Phase 1: Storage Upgrade & Unified Schema
+## Phase 1: Storage Upgrade & Unified Schema [checkpoint: c0bdd2b]
 - [x] Task: Refactor `agentStore.js` for Session Persistence 473dbfd
     - [x] Add `sessions` table/array to track live process metadata.
     - [x] Implement `Deployment` schema (status, URL, provider: 'cloudflare').
-- [~] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
 
 ## Phase 2: Unified Agent Proxy Implementation
 - [ ] Task: Build `UnifiedAgentProxy.js`
