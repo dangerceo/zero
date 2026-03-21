@@ -34,3 +34,6 @@
     - [x] Verify full flow: Agent blocks -> Notification -> User response -> Agent resumes.
     - [x] Final UI/UX polish for Material 3 compliance.
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Android Inbox UI & Polish' (Protocol in workflow.md)
+
+## Phase: Review Fixes
+- [x] Task: Apply review suggestions b7b4913
