@@ -1,0 +1,8 @@
+{
+  "track_id": "unified_proxy_pipeline_20260321",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-03-21T11:00:00Z",
+  "updated_at": "2026-03-21T11:00:00Z",
+  "description": "Build Unified Agent Proxy and Deployment Pipeline"
+}
