@@ -1,10 +1,10 @@
 import { agentStore } from './agentStore.js';
-import { spawn } from 'child_process';
 import { mkdir, readdir, stat, readFile } from 'fs/promises';
 export { readdir, stat, readFile };
 import { join } from 'path';
 import { homedir } from 'os';
 import { runKitchen } from './kitchen/pass.js';
+import { dangerTerminal } from './dangerTerminal.js';
 
 const AGENTS_DIR = join(homedir(), 'ZeroProjects');
 const activeProcesses = new Map();
@@ -94,9 +94,41 @@ async function runGeminiStreaming(agentId, prompt, workingDir, broadcast, resume
         if (resume) args.push('--resume');
         args.push(prompt);
 
-        const child = spawn('gemini', args, { cwd: workingDir, env: { ...process.env } });
+        const child = dangerTerminal.spawn(agentId, 'gemini', args, { cwd: workingDir, env: { ...process.env } });
         activeProcesses.set(agentId, child);
-        child.stdin.end();
+
+        const onBlock = async (block) => {
+            if (block.agentId !== agentId) return;
+            const intervention = { type: block.type, message: block.message, options: block.options };
+            await agentStore.addIntervention(agentId, intervention);
+            await agentStore.update(agentId, { status: 'waiting' });
+            streamLog(agentId, broadcast, '🛡️ Terminal Block Detected: ' + (block.message || block.type), 'warning', true);
+            broadcast({ type: 'notification:new', agentId, message: block.message, intervention });
+        };
+
+        const onData = (payload) => {
+            if (payload.agentId !== agentId) return;
+            processChunk(payload.data);
+        };
+
+        const onExit = (payload) => {
+            if (payload.agentId !== agentId) return;
+            dangerTerminal.off('block', onBlock);
+            dangerTerminal.off('data', onData);
+            dangerTerminal.off('exit', onExit);
+            
+            activeProcesses.delete(agentId);
+            lastProgressTime.delete(agentId);
+            if (fullOutput.trim()) agentStore.addThread(agentId, 'agent', fullOutput.trim().slice(0, 500));
+            agentStore.update(agentId, { status: payload.exitCode === 0 ? 'completed' : 'failed' });
+            streamLog(agentId, broadcast, payload.exitCode === 0 ? '✅ Done' : '❌ Failed', payload.exitCode === 0 ? 'success' : 'error', true);
+            broadcastAgentUpdate(agentId, broadcast);
+            resolve();
+        };
+
+        dangerTerminal.on('block', onBlock);
+        dangerTerminal.on('data', onData);
+        dangerTerminal.on('exit', onExit);
 
         let fullOutput = '';
         const processChunk = async (line) => {
@@ -149,24 +181,6 @@ async function runGeminiStreaming(agentId, prompt, workingDir, broadcast, resume
                 }
             } catch (e) { if (line.trim()) streamLog(agentId, broadcast, line, 'output'); }
         };
-
-        let buffer = '';
-        child.stdout.on('data', async (data) => {
-            buffer += data.toString();
-            const lines = buffer.split('\n');
-            buffer = lines.pop();
-            for (const line of lines) if (line.trim()) await processChunk(line);
-        });
-
-        child.on('close', async (code) => {
-            activeProcesses.delete(agentId);
-            lastProgressTime.delete(agentId);
-            if (fullOutput.trim()) await agentStore.addThread(agentId, 'agent', fullOutput.trim().slice(0, 500));
-            await agentStore.update(agentId, { status: code === 0 ? 'completed' : 'failed' });
-            streamLog(agentId, broadcast, code === 0 ? '✅ Done' : '❌ Failed', code === 0 ? 'success' : 'error', true);
-            broadcastAgentUpdate(agentId, broadcast);
-            resolve();
-        });
     });
 }
 
