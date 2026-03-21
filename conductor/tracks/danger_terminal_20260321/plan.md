@@ -1,14 +1,14 @@
 # Implementation Plan: Danger Terminal Harness
 
-## Phase 1: Test Infrastructure & Heuristics Core
-- [ ] Task: Setup Test Harness for PTY
-    - [ ] Create mock CLI scripts (e.g., password prompt, long-build, standard prompt, numbered choice list).
-    - [ ] Write initial test cases defining the expected heuristic behavior.
-- [ ] Task: Implement Heuristic Block Detection
-    - [ ] Build the detection logic (timeouts, regex matching for trailing prompts).
-    - [ ] Implement basic choice list extraction (regex-based parsing of numbered options).
-    - [ ] Ensure all tests pass, validating no false positives on long-running tasks.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
+## Phase 1: Test Infrastructure & Heuristics Core [checkpoint: 820fe4c]
+- [x] Task: Setup Test Harness for PTY
+    - [x] Create mock CLI scripts (e.g., password prompt, long-build, standard prompt, numbered choice list).
+    - [x] Write initial test cases defining the expected heuristic behavior.
+- [x] Task: Implement Heuristic Block Detection
+    - [x] Build the detection logic (timeouts, regex matching for trailing prompts).
+    - [x] Implement basic choice list extraction (regex-based parsing of numbered options).
+    - [x] Ensure all tests pass, validating no false positives on long-running tasks.
+- [x] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
 
 ## Phase 2: Danger Terminal Service Integration
 - [ ] Task: Build `danger-terminal.js` Service
