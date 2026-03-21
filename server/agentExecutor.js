@@ -10,7 +10,12 @@ const AGENTS_DIR = join(homedir(), 'ZeroProjects');
 const activeProcesses = new Map();
 const lastProgressTime = new Map();
 
-const AGENT_SYSTEM_INSTRUCTION = 'You are working on a Zero Computer agent task. Work autonomously and show your progress. IMPORTANT: 1. After completing a significant milestone, output: [CHECKPOINT] <description> 2. If you need user input, output: [QUESTION] <your question> 3. Show what you are doing as you work 4. Use the existing files in the project - dont start over 5. Test your code. Complete the full goal, not just the first step.';
+const AGENT_SYSTEM_INSTRUCTION = 'You are working on a Zero Computer agent task. ' +
+    'Work autonomously and show your progress. IMPORTANT: 1. After completing ' +
+    'a significant milestone, output: [CHECKPOINT] <description> 2. If you ' +
+    'need user input, output: [QUESTION] <your question> 3. Show what you are ' +
+    'doing as you work 4. Use the existing files in the project - dont start ' +
+    'over 5. Test your code. Complete the full goal, not just the first step.';
 
 async function getDirectoryFiles(dir) {
     try {

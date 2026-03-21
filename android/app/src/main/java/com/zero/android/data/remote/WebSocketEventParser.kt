@@ -2,9 +2,9 @@ package com.zero.android.data.remote
 
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import com.zero.android.data.model.Agent
 import com.zero.android.data.model.AgentLog
-import org.json.JSONObject
 
 sealed class WsEvent {
     data class AgentCreated(val agent: Agent) : WsEvent()
@@ -23,48 +23,49 @@ sealed class WsEvent {
 object WebSocketEventParser {
     fun parse(text: String, moshi: Moshi): WsEvent? {
         return try {
-            val json = JSONObject(text)
-            val type = json.optString("type")
+            val mapAdapter = moshi.adapter<Map<String, Any>>(
+                Types.newParameterizedType(Map::class.java, String::class.java, Any::class.java)
+            )
+            val jsonMap = mapAdapter.fromJson(text) ?: return null
+            val type = jsonMap["type"] as? String ?: return null
+            
             when (type) {
                 "agent:created" -> {
-                    val agentJson = json.optJSONObject("agent") ?: return null
-                    val adapter: JsonAdapter<Agent> = moshi.adapter(Agent::class.java)
-                    val agent = adapter.fromJson(agentJson.toString()) ?: return null
-                    WsEvent.AgentCreated(agent)
+                    val agentMap = jsonMap["agent"] as? Map<*, *> ?: return null
+                    val adapter = moshi.adapter(Agent::class.java)
+                    adapter.fromJsonValue(agentMap)?.let { WsEvent.AgentCreated(it) }
                 }
                 "agent:updated" -> {
-                    val agentJson = json.optJSONObject("agent") ?: return null
-                    val adapter: JsonAdapter<Agent> = moshi.adapter(Agent::class.java)
-                    val agent = adapter.fromJson(agentJson.toString()) ?: return null
-                    WsEvent.AgentUpdated(agent)
+                    val agentMap = jsonMap["agent"] as? Map<*, *> ?: return null
+                    val adapter = moshi.adapter(Agent::class.java)
+                    adapter.fromJsonValue(agentMap)?.let { WsEvent.AgentUpdated(it) }
                 }
                 "agent:deleted" -> {
-                    val agentId = json.optString("id")
+                    val agentId = jsonMap["id"] as? String
                     if (agentId.isNullOrBlank()) null else WsEvent.AgentDeleted(agentId)
                 }
                 "agent:progress" -> {
-                    val agentId = json.optString("agentId")
-                    val step = json.optString("step")
-                    val stepCount = json.optInt("stepCount", 0)
-                    val actionType = json.optString("actionType", null)
+                    val agentId = (jsonMap["agentId"] as? String) ?: ""
+                    val step = (jsonMap["step"] as? String) ?: ""
+                    val stepCount = (jsonMap["stepCount"] as? Double)?.toInt() ?: 0
+                    val actionType = jsonMap["actionType"] as? String
                     WsEvent.AgentProgressEvent(agentId, step, stepCount, actionType)
                 }
                 "agent:log" -> {
-                    val agentId = json.optString("agentId")
-                    val logJson = json.optJSONObject("log") ?: return null
-                    val adapter: JsonAdapter<AgentLog> = moshi.adapter(AgentLog::class.java)
-                    val log = adapter.fromJson(logJson.toString()) ?: return null
-                    WsEvent.AgentLogEvent(agentId, log)
+                    val agentId = jsonMap["agentId"] as? String ?: return null
+                    val logMap = jsonMap["log"] as? Map<*, *> ?: return null
+                    val adapter = moshi.adapter(AgentLog::class.java)
+                    adapter.fromJsonValue(logMap)?.let { WsEvent.AgentLogEvent(agentId, it) }
                 }
                 "agy:projects" -> {
-                    val projectsJson = json.optJSONArray("projects")?.toString() ?: return null
+                    val projectsList = jsonMap["projects"] as? List<*> ?: return null
                     val adapter: JsonAdapter<List<com.zero.android.data.model.AgyProject>> = 
-                        moshi.adapter(com.squareup.moshi.Types.newParameterizedType(List::class.java, com.zero.android.data.model.AgyProject::class.java))
-                    adapter.fromJson(projectsJson)?.let { WsEvent.AgyProjects(it) }
+                        moshi.adapter(Types.newParameterizedType(List::class.java, com.zero.android.data.model.AgyProject::class.java))
+                    adapter.fromJsonValue(projectsList)?.let { WsEvent.AgyProjects(it) }
                 }
                 else -> null
             }
-        } catch (_: Exception) {
+        } catch (e: Exception) {
             null
         }
     }
