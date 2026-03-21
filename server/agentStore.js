@@ -21,6 +21,8 @@ function createAgent(data) {
         threads: [],   // [{ id, role: 'user'|'agent', content, timestamp, metadata }]
         tickets: [],   // Kitchen tickets [{ id, title, status, ... }]
         interventions: [], // AI agent interventions [{ id, type, message, options, resolved, response, ... }]
+        sessions: [],  // Live sessions metadata [{ id, type: 'chat'|'terminal', status, ... }]
+        deployments: [], // Deployment metadata [{ id, provider, status, url, createdAt }]
         checkpoints: [],
         pendingQuestions: [],
         todos: [],
@@ -42,6 +44,9 @@ function migrateProject(p) {
         files: [],
         threads: [],
         tickets: [],
+        interventions: [],
+        sessions: [],
+        deployments: [],
         checkpoints: p.checkpoints || [],
         pendingQuestions: p.pendingQuestions || [],
         todos: p.todos || p.comments || [],
@@ -112,6 +117,18 @@ class AgentStore {
     async get(id) {
         await this.ensureLoaded();
         return this.agents.get(id);
+    }
+
+    async getSessions(agentId) {
+        await this.ensureLoaded();
+        const agent = this.agents.get(agentId);
+        return agent ? (agent.sessions || []) : [];
+    }
+
+    async getDeployments(agentId) {
+        await this.ensureLoaded();
+        const agent = this.agents.get(agentId);
+        return agent ? (agent.deployments || []) : [];
     }
 
     async getAll() {
@@ -200,6 +217,38 @@ class AgentStore {
         agent.updatedAt = new Date().toISOString();
         await this.save();
         return agent;
+    }
+
+    async addSession(agentId, session) {
+        await this.ensureLoaded();
+        const agent = this.agents.get(agentId);
+        if (!agent) return null;
+        if (!agent.sessions) agent.sessions = [];
+        const newSession = {
+            id: uuidv4(),
+            ...session,
+            createdAt: new Date().toISOString()
+        };
+        agent.sessions.push(newSession);
+        agent.updatedAt = new Date().toISOString();
+        await this.save();
+        return newSession;
+    }
+
+    async addDeployment(agentId, deployment) {
+        await this.ensureLoaded();
+        const agent = this.agents.get(agentId);
+        if (!agent) return null;
+        if (!agent.deployments) agent.deployments = [];
+        const newDeployment = {
+            id: uuidv4(),
+            ...deployment,
+            createdAt: new Date().toISOString()
+        };
+        agent.deployments.push(newDeployment);
+        agent.updatedAt = new Date().toISOString();
+        await this.save();
+        return newDeployment;
     }
 
     async addCheckpoint(id, checkpoint) {
