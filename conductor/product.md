@@ -18,6 +18,7 @@ Zero Computer is a powerful tool designed for Developers and Power Users who nee
 - **AI Automation:** Specialized AI agents that execute complex, multi-step tasks using the latest automation standards (e.g., ACP).
 - **Proactive Intelligence:** An AI system that doesn't just wait for commands but proactively identifies and suggests automation opportunities.
 - **Real-time Connectivity:** Seamless communication between mobile and Mac for instant control and feedback.
+- **Interactive Inbox:** A mobile-first inbox for quickly unblocking AI agents via interactive notifications and a dedicated response UI.
 
 ## User Experience
 The experience is centered around a "proactive" AI that suggests and performs actions. It's designed to feel less like a remote desktop and more like an intelligent companion that understands the user's workflow and helps optimize it through automation.

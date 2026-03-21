@@ -23,14 +23,14 @@
     - [x] Ensure the Android app receives and displays intervention notifications via the existing monitoring service.
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Android Core & Notifications' (Protocol in workflow.md)
 
-## Phase 3: Android Inbox UI & Polish
+## Phase 3: Android Inbox UI & Polish [checkpoint: 379dd19]
 - [x] Task: Build the Inbox Screen in Jetpack Compose
     - [x] Create `InboxScreen.kt` with a list of active interventions.
     - [x] Design Material 3 cards for different intervention types (Text vs. Choice).
 - [x] Task: Integrate Inbox with App Navigation
     - [x] Add "Inbox" to the `BottomNavBar` and `MainViewModel`.
     - [x] Ensure deep-linking from notifications to the Inbox works correctly.
-- [~] Task: End-to-End Verification & Polish
-    - [ ] Verify full flow: Agent blocks -> Notification -> User response -> Agent resumes.
-    - [ ] Final UI/UX polish for Material 3 compliance.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Android Inbox UI & Polish' (Protocol in workflow.md)
+- [x] Task: End-to-End Verification & Polish
+    - [x] Verify full flow: Agent blocks -> Notification -> User response -> Agent resumes.
+    - [x] Final UI/UX polish for Material 3 compliance.
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Android Inbox UI & Polish' (Protocol in workflow.md)

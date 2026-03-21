@@ -20,6 +20,7 @@
 - **Jetpack Compose:** Declarative UI toolkit for a modern, Material 3-compliant experience.
 - **Retrofit & Moshi:** Type-safe HTTP client and JSON parsing for API communication.
 - **CameraX & ML Kit:** For barcode scanning and other computer vision tasks.
+- **Interactive Notifications:** Android RemoteInput and Action buttons for real-time agent unblocking.
 - **DataStore:** For persistent local storage of settings and data.
 
 ## Database & Storage
