@@ -1,0 +1,7 @@
+<voice-interaction-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:sessionService="com.zero.android.service.ZeroVoiceInteractionSessionService"
+    android:recognitionService="com.zero.android.service.ZeroRecognitionService"
+    android:settingsActivity="com.zero.android.MainActivity"
+    android:supportsAssist="true"
+    android:supportsLaunchVoiceAssistFromKeyguard="true"
+    android:supportsLocalInteraction="true" />

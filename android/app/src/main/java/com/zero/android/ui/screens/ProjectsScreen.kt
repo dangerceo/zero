@@ -16,7 +16,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DeviceHub
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
@@ -66,9 +65,6 @@ fun ProjectsScreen(
                     IconButton(onClick = onRefresh) {
                         Icon(Icons.Default.Refresh, contentDescription = "Refresh")
                     }
-                    IconButton(onClick = onWearables) {
-                        Icon(Icons.Default.DeviceHub, contentDescription = "Wearables")
-                    }
                     IconButton(onClick = onSettings) {
                         Icon(Icons.Default.Settings, contentDescription = "Settings")
                     }
@@ -79,7 +75,8 @@ fun ProjectsScreen(
             BottomNavBar(
                 current = BottomTab.Projects,
                 onProjects = {},
-                onTasks = onTasks
+                onTasks = onTasks,
+                onCamera = onWearables
             )
         }
     ) { padding ->
@@ -102,7 +99,7 @@ fun ProjectsScreen(
                     if (agents.isNotEmpty()) {
                         item {
                             Text(
-                                text = "Zero Agents",
+                                text = "zero agents",
                                 style = MaterialTheme.typography.labelLarge,
                                 color = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.padding(bottom = 8.dp)
@@ -113,18 +110,35 @@ fun ProjectsScreen(
                         }
                     }
 
-                    if (agyProjects.isNotEmpty()) {
+                    val geminiCloud = agyProjects.filter { it.type.startsWith("gemini-") }
+                    if (geminiCloud.isNotEmpty()) {
                         item {
                             Spacer(modifier = Modifier.height(16.dp))
                             Text(
-                                text = "Agy (Remote Editor)",
+                                text = "gemini cloud projects",
                                 style = MaterialTheme.typography.labelLarge,
                                 color = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.padding(bottom = 8.dp)
                             )
                         }
-                        items(agyProjects, key = { it.id }) { project ->
-                            AgyProjectCard(project = project)
+                        items(geminiCloud, key = { it.id }) { project ->
+                            AgyProjectCard(project = project, onClick = { onAgentSelected(project.id) })
+                        }
+                    }
+
+                    val editorProjects = agyProjects.filter { !it.type.startsWith("gemini-") }
+                    if (editorProjects.isNotEmpty()) {
+                        item {
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text(
+                                text = "agy (remote editor)",
+                                style = MaterialTheme.typography.labelLarge,
+                                color = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.padding(bottom = 8.dp)
+                            )
+                        }
+                        items(editorProjects, key = { it.id }) { project ->
+                            AgyProjectCard(project = project, onClick = { onAgentSelected(project.id) })
                         }
                     }
                 }
@@ -133,7 +147,7 @@ fun ProjectsScreen(
     }
 }
 
-private val ZeroSecondary = Color(0xFF6200EE) // Fallback or should be defined elsewhere
+private val ZeroSecondary = Color(0xFF6200EE)
 
 @Composable
 private fun ConnectionBadge(state: ConnectionState) {
@@ -198,9 +212,11 @@ private fun AgentCard(agent: AgentUiModel, onClick: () -> Unit) {
 }
 
 @Composable
-private fun AgyProjectCard(project: AgyProject) {
+private fun AgyProjectCard(project: AgyProject, onClick: () -> Unit) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() },
         shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
     ) {
@@ -214,11 +230,26 @@ private fun AgyProjectCard(project: AgyProject) {
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Medium
                 )
+                val subtitle = buildString {
+                    append(project.type.replace("gemini-", "").replaceFirstChar { it.uppercase() })
+                    project.age?.let { append(" • ") }
+                }
                 Text(
-                    text = "External ${project.type}",
+                    text = subtitle,
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                 )
+            }
+            if (project.hasWalkthrough == true) {
+                Box(
+                    modifier = Modifier
+                        .padding(end = 12.dp)
+                        .clip(RoundedCornerShape(4.dp))
+                        .background(Color(0xFF2ECC71).copy(alpha = 0.2f))
+                        .padding(horizontal = 6.dp, vertical = 2.dp)
+                ) {
+                    Text("DOCS", style = MaterialTheme.typography.labelSmall, color = Color(0xFF2ECC71))
+                }
             }
             StatusChip(status = project.status)
         }

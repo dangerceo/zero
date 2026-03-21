@@ -98,7 +98,8 @@ fun TasksScreen(
             BottomNavBar(
                 current = BottomTab.Tasks,
                 onProjects = onProjects,
-                onTasks = {}
+                onTasks = {},
+                onCamera = onWearables
             )
         }
     ) { padding ->

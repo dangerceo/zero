@@ -13,6 +13,7 @@ drawable camera_access_icon
 drawable camera_icon
 drawable hourglass_icon
 drawable ic_launcher_foreground
+drawable ic_reply
 drawable ic_stat_zero
 drawable smart_glasses_icon
 drawable sound_icon
@@ -23,6 +24,7 @@ drawable walking_icon
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name
+string assistant_label
 string camera_access_icon_description
 string capture_photo
 string captured_photo
@@ -71,3 +73,4 @@ string unregister_button_title
 string waiting_for_active_device
 style Theme.Zero
 xml file_paths
+xml voice_interaction_service

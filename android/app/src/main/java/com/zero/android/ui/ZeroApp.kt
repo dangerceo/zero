@@ -33,7 +33,8 @@ private object Routes {
 @Composable
 fun ZeroApp(
     viewModel: MainViewModel,
-    initialAgentId: String?
+    initialAgentId: String?,
+    isAssistantMode: Boolean = false
 ) {
     val navController = rememberNavController()
     val baseUrl by viewModel.baseUrl.collectAsState()
@@ -43,7 +44,13 @@ fun ZeroApp(
     val monitoringEnabled by viewModel.monitoringEnabled.collectAsState()
     val context = LocalContext.current
 
-    val startDestination = if (baseUrl.isNullOrBlank()) Routes.Onboarding else Routes.Projects
+    val startDestination = if (baseUrl.isNullOrBlank()) {
+        Routes.Onboarding
+    } else if (isAssistantMode) {
+        Routes.Tasks
+    } else {
+        Routes.Projects
+    }
 
     LaunchedEffect(baseUrl) {
         if (!baseUrl.isNullOrBlank()) {
@@ -129,6 +136,8 @@ fun ZeroApp(
             SettingsScreen(
                 baseUrl = baseUrl,
                 monitoringEnabled = monitoringEnabled,
+                agents = agents,
+                agyProjects = agyProjects,
                 onBaseUrlUpdate = viewModel::setBaseUrl,
                 onClearBaseUrl = viewModel::clearBaseUrl,
                 onMonitoringToggle = viewModel::setMonitoringEnabled,

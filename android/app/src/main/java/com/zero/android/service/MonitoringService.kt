@@ -11,9 +11,7 @@ import com.zero.android.MainActivity
 import com.zero.android.R
 import com.zero.android.ZeroApplication
 import com.zero.android.data.model.Agent
-import com.zero.android.data.model.AgentLog
 import com.zero.android.data.model.AgentProgressEvent
-import com.zero.android.data.model.AgentUiModel
 import com.zero.android.data.remote.AgentsApi
 import com.zero.android.data.remote.WebSocketEventParser
 import com.zero.android.data.remote.WsEvent
@@ -35,29 +33,14 @@ import kotlin.math.absoluteValue
 class MonitoringService : Service() {
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private var webSocket: WebSocket? = null
-
     private val agents = mutableMapOf<String, Agent>()
     private val progress = mutableMapOf<String, AgentProgressEvent>()
-
-    private val notificationManager by lazy {
-        getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    }
-
-    private val okHttpClient: OkHttpClient by lazy {
-        (application as ZeroApplication).container.okHttpClient
-    }
-
-    private val moshi: Moshi by lazy {
-        (application as ZeroApplication).container.moshi
-    }
+    private val notificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
+    private val okHttpClient: OkHttpClient by lazy { (application as ZeroApplication).container.okHttpClient }
+    private val moshi: Moshi by lazy { (application as ZeroApplication).container.moshi }
 
     override fun onBind(intent: Intent?): IBinder? = null
-
-    override fun onCreate() {
-        super.onCreate()
-        NotificationHelper.ensureChannels(this)
-    }
-
+    override fun onCreate() { super.onCreate(); NotificationHelper.ensureChannels(this) }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             ACTION_START -> startMonitoring()
@@ -65,43 +48,19 @@ class MonitoringService : Service() {
         }
         return START_STICKY
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        stopMonitoring()
-        serviceScope.cancel()
-    }
+    override fun onDestroy() { super.onDestroy(); stopMonitoring(); serviceScope.cancel() }
 
     private fun startMonitoring() {
         startForeground(SERVICE_ID, NotificationHelper.buildServiceNotification(this, 0))
-
         serviceScope.launch {
-            val baseUrl = (application as ZeroApplication)
-                .container
-                .userPreferences
-                .baseUrlFlow
-                .firstOrNull()
-
-            if (baseUrl.isNullOrBlank()) {
-                stopSelf()
-                return@launch
-            }
-
-            val api = Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .client(okHttpClient)
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .build()
-                .create(AgentsApi::class.java)
-
+            val baseUrl = (application as ZeroApplication).container.userPreferences.baseUrlFlow.firstOrNull()
+            if (baseUrl.isNullOrBlank()) { stopSelf(); return@launch }
+            val api = Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient).addConverterFactory(MoshiConverterFactory.create(moshi)).build().create(AgentsApi::class.java)
             try {
                 val list = api.getAgents()
                 list.forEach { agents[it.id] = it }
                 updateNotifications()
-            } catch (_: Exception) {
-                // Ignore initial fetch failures.
-            }
-
+            } catch (_: Exception) { }
             connectWebSocket(baseUrl)
         }
     }
@@ -114,66 +73,41 @@ class MonitoringService : Service() {
     }
 
     private fun connectWebSocket(baseUrl: String) {
-        val wsUrl = baseUrlToWebSocketUrl(baseUrl)
-        val request = Request.Builder().url(wsUrl).build()
+        val request = Request.Builder().url(baseUrlToWebSocketUrl(baseUrl)).build()
         webSocket?.close(1000, "restart")
-
         webSocket = okHttpClient.newWebSocket(request, object : WebSocketListener() {
             override fun onMessage(webSocket: WebSocket, text: String) {
                 when (val event = WebSocketEventParser.parse(text, moshi)) {
-                    is WsEvent.AgentCreated -> {
-                        agents[event.agent.id] = event.agent
-                        updateNotifications()
-                    }
-                    is WsEvent.AgentUpdated -> {
-                        agents[event.agent.id] = event.agent
-                        updateNotifications()
-                    }
-                    is WsEvent.AgentLogEvent -> {
-                        val agent = agents[event.agentId]
-                        if (agent != null) {
-                            agents[event.agentId] = agent.copy(logs = agent.logs + event.log)
-                        }
-                    }
+                    is WsEvent.AgentCreated -> { agents[event.agent.id] = event.agent; updateNotifications() }
+                    is WsEvent.AgentUpdated -> { agents[event.agent.id] = event.agent; updateNotifications() }
                     is WsEvent.AgentProgressEvent -> {
-                        progress[event.agentId] = AgentProgressEvent(
-                            step = event.step,
-                            stepCount = event.stepCount,
-                            actionType = event.actionType
-                        )
+                        progress[event.agentId] = AgentProgressEvent(step = event.step, stepCount = event.stepCount, actionType = event.actionType)
                         updateNotifications()
                     }
                     is WsEvent.AgentDeleted -> {
-                        agents.remove(event.agentId)
-                        progress.remove(event.agentId)
+                        agents.remove(event.agentId); progress.remove(event.agentId)
                         notificationManager.cancel(event.agentId.hashCode().absoluteValue)
                         updateNotifications()
                     }
-                    null -> Unit
                     else -> Unit
                 }
-            }
-
-            override fun onFailure(webSocket: WebSocket, t: Throwable, response: okhttp3.Response?) {
-                updateNotifications()
-            }
-
-            override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
-                updateNotifications()
             }
         })
     }
 
     private fun updateNotifications() {
-        val activeCount = agents.values.count { it.status == "running" || it.status == "waiting" }
-        val serviceNotification = NotificationHelper.buildServiceNotification(this, activeCount)
-        notificationManager.notify(SERVICE_ID, serviceNotification)
+        val activeAgents = agents.values.filter { it.status == "running" || it.status == "waiting" || it.status == "planning" }
+        notificationManager.notify(SERVICE_ID, NotificationHelper.buildServiceNotification(this, activeAgents.size))
 
-        agents.values.forEach { agent ->
+        // Clear notifications for agents that are no longer active
+        val allAgentIds = agents.keys
+        val activeAgentIds = activeAgents.map { it.id }.toSet()
+        allAgentIds.subtract(activeAgentIds).forEach { id ->
+            notificationManager.cancel(id.hashCode().absoluteValue)
+        }
+
+        activeAgents.forEach { agent ->
             val progressInfo = progress[agent.id]
-            val ongoing = agent.status == "running" || agent.status == "waiting"
-            val progressValue = progressInfo?.stepCount?.let { it * 10 }?.coerceAtMost(100) ?: 0
-            
             val pendingIntent = PendingIntent.getActivity(
                 this,
                 agent.id.hashCode().absoluteValue,
@@ -184,22 +118,36 @@ class MonitoringService : Service() {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
 
-            val notification = NotificationHelper.buildAgentNotification(
-                context = this,
-                agentId = agent.id,
-                agentName = agent.name,
-                status = agent.status,
-                currentStep = progressInfo?.step,
-                progress = progressValue,
-                ongoing = ongoing,
-                pendingIntent = pendingIntent
-            )
-            notificationManager.notify(agent.id.hashCode().absoluteValue, notification)
+            val unresolvedIntervention = agent.interventions?.find { !it.resolved }
+            if (agent.status == "waiting" && unresolvedIntervention != null) {
+                val notification = NotificationHelper.buildInterventionNotification(
+                    this,
+                    agent.id,
+                    agent.name,
+                    unresolvedIntervention.id,
+                    unresolvedIntervention.message,
+                    unresolvedIntervention.type,
+                    unresolvedIntervention.options.map { it.label to it.value },
+                    pendingIntent
+                )
+                notificationManager.notify(agent.id.hashCode().absoluteValue, notification)
+            } else {
+                val notification = NotificationHelper.buildAgentNotification(
+                    this,
+                    agent.id,
+                    agent.name,
+                    agent.status,
+                    progressInfo?.step,
+                    progressInfo?.stepCount?.let { it * 10 }?.coerceAtMost(100) ?: 0,
+                    true,
+                    pendingIntent
+                )
+                notificationManager.notify(agent.id.hashCode().absoluteValue, notification)
+            }
         }
 
-        if (agents.isNotEmpty()) {
-            val summary = NotificationHelper.buildSummaryNotification(this, agents.size)
-            notificationManager.notify(SUMMARY_ID, summary)
+        if (activeAgents.isNotEmpty()) {
+            notificationManager.notify(SUMMARY_ID, NotificationHelper.buildSummaryNotification(this, activeAgents.size))
         } else {
             notificationManager.cancel(SUMMARY_ID)
         }

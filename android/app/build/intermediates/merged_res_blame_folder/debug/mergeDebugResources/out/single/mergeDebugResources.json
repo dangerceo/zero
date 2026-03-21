@@ -1,58 +1,66 @@
 [
     {
-        "merged": "com.zero.android.app-debug-70:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.zero.android.app-main-72:/drawable/ic_launcher_foreground.xml"
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "com.zero.android.app-debug-70:/drawable_camera_icon.xml.flat",
-        "source": "com.zero.android.app-main-72:/drawable/camera_icon.xml"
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/drawable_walking_icon.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/drawable/walking_icon.xml"
     },
     {
-        "merged": "com.zero.android.app-debug-70:/drawable_camera_access_icon.xml.flat",
-        "source": "com.zero.android.app-main-72:/drawable/camera_access_icon.xml"
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/drawable_camera_access_icon.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/drawable/camera_access_icon.xml"
     },
     {
-        "merged": "com.zero.android.app-debug-70:/drawable_tap_icon.xml.flat",
-        "source": "com.zero.android.app-main-72:/drawable/tap_icon.xml"
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "com.zero.android.app-debug-70:/xml_file_paths.xml.flat",
-        "source": "com.zero.android.app-main-72:/xml/file_paths.xml"
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/drawable_ic_stat_zero.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/drawable/ic_stat_zero.xml"
     },
     {
-        "merged": "com.zero.android.app-debug-70:/drawable_ic_stat_zero.xml.flat",
-        "source": "com.zero.android.app-main-72:/drawable/ic_stat_zero.xml"
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/drawable_smart_glasses_icon.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/drawable/smart_glasses_icon.xml"
     },
     {
-        "merged": "com.zero.android.app-debug-70:/drawable_timer_icon.xml.flat",
-        "source": "com.zero.android.app-main-72:/drawable/timer_icon.xml"
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/drawable_video_icon.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/drawable/video_icon.xml"
     },
     {
-        "merged": "com.zero.android.app-debug-70:/drawable_sound_icon.xml.flat",
-        "source": "com.zero.android.app-main-72:/drawable/sound_icon.xml"
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/drawable_hourglass_icon.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/drawable/hourglass_icon.xml"
     },
     {
-        "merged": "com.zero.android.app-debug-70:/drawable_walking_icon.xml.flat",
-        "source": "com.zero.android.app-main-72:/drawable/walking_icon.xml"
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/drawable_camera_icon.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/drawable/camera_icon.xml"
     },
     {
-        "merged": "com.zero.android.app-debug-70:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.zero.android.app-main-72:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/drawable_tap_icon.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/drawable/tap_icon.xml"
     },
     {
-        "merged": "com.zero.android.app-debug-70:/drawable_smart_glasses_icon.xml.flat",
-        "source": "com.zero.android.app-main-72:/drawable/smart_glasses_icon.xml"
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/drawable_timer_icon.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/drawable/timer_icon.xml"
     },
     {
-        "merged": "com.zero.android.app-debug-70:/drawable_video_icon.xml.flat",
-        "source": "com.zero.android.app-main-72:/drawable/video_icon.xml"
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "com.zero.android.app-debug-70:/drawable_hourglass_icon.xml.flat",
-        "source": "com.zero.android.app-main-72:/drawable/hourglass_icon.xml"
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/xml_file_paths.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/xml/file_paths.xml"
     },
     {
-        "merged": "com.zero.android.app-debug-70:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.zero.android.app-main-72:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/drawable_sound_icon.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/drawable/sound_icon.xml"
+    },
+    {
+        "merged": "com.zero.android.app-debug-70:/drawable_ic_reply.xml.flat",
+        "source": "com.zero.android.app-main-72:/drawable/ic_reply.xml"
+    },
+    {
+        "merged": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-debug-70:/xml_voice_interaction_service.xml.flat",
+        "source": "/Users/dalnk/.gradle/daemon/8.13/com.zero.android.app-main-72:/xml/voice_interaction_service.xml"
     }
 ]

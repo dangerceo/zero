@@ -9,6 +9,7 @@ data class Agent(
     val files: List<AgentFile> = emptyList(),
     val threads: List<ThreadEntry> = emptyList(),
     val checkpoints: List<Checkpoint> = emptyList(),
+    val interventions: List<Intervention> = emptyList(),
     val logs: List<AgentLog> = emptyList(),
     val createdAt: String? = null,
     val updatedAt: String? = null

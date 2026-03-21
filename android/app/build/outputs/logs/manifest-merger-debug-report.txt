@@ -1,41 +1,9 @@
 -- Merging decision tree log ---
-meta-data#com.meta.wearable.mwdat.APPLICATION_ID
-INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:22:9-24:55
-	android:value
-		INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:24:13-52
-	android:name
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:23:13-66
-meta-data#com.meta.wearable.mwdat.CLIENT_TOKEN
-INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:25:9-27:53
-	android:value
-		INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:27:13-50
-	android:name
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:26:13-64
-meta-data#com.meta.wearable.mwdat.ANALYTICS_OPT_OUT
-INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:28:9-30:58
-	android:value
-		INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:30:13-55
-	android:name
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:29:13-69
-provider#androidx.core.content.FileProvider
-INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:62:9-70:20
-	android:grantUriPermissions
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:66:13-47
-	android:authorities
-		INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:64:13-64
-	android:exported
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:65:13-37
-	android:name
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:63:13-62
 manifest
-ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:1:1-73:12
-INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:1:1-73:12
-INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:1:1-73:12
-INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:1:1-73:12
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:1:1-119:12
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:1:1-119:12
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:1:1-119:12
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:1:1-119:12
 MERGED from [androidx.navigation:navigation-common:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/0ed4ab61d6e536dfa4288ff1b577f833/transformed/navigation-common-2.8.5/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-runtime:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/9c9ea35eeb500080d62150124713ecb7/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /Users/dalnk/.gradle/caches/8.13/transforms/5bfa68fb08b94e58ab6f1f3ea803a479/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
@@ -208,8 +176,8 @@ ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:10
 	android:name
 		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:10:22-84
 application
-ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:12:5-71:19
-INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:12:5-71:19
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:12:5-117:19
+INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:12:5-117:19
 MERGED from [com.google.android.material:material:1.12.0] /Users/dalnk/.gradle/caches/8.13/transforms/f20d037c5921e2d5303db068fd9c8f8d/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] /Users/dalnk/.gradle/caches/8.13/transforms/f20d037c5921e2d5303db068fd9c8f8d/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.camera:camera-camera2:1.4.1] /Users/dalnk/.gradle/caches/8.13/transforms/55faa9ed22f879d0f3557acbc2d3156a/transformed/camera-camera2-1.4.1/AndroidManifest.xml:23:5-34:19
@@ -280,6 +248,24 @@ MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/dalnk/.gradle/cac
 		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:20:9-44
 	android:name
 		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:13:9-40
+meta-data#com.meta.wearable.mwdat.APPLICATION_ID
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:22:9-24:32
+	android:value
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:24:13-29
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:23:13-66
+meta-data#com.meta.wearable.mwdat.CLIENT_TOKEN
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:25:9-27:32
+	android:value
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:27:13-29
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:26:13-64
+meta-data#com.meta.wearable.mwdat.ANALYTICS_OPT_OUT
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:28:9-30:32
+	android:value
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:30:13-29
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:29:13-69
 activity#com.zero.android.MainActivity
 ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:32:9-47:20
 	android:launchMode
@@ -330,24 +316,106 @@ ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:49
 		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:52:13-53
 	android:name
 		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:50:13-54
-receiver#com.zero.android.service.QuickReplyReceiver
-ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:54:9-60:20
+service#com.zero.android.service.ZeroNotificationListenerService
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:54:9-62:19
+	android:label
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:56:13-38
 	android:exported
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:56:13-37
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:58:13-36
+	android:permission
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:57:13-87
 	android:name
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:55:13-55
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:55:13-68
+intent-filter#action:name:android.service.notification.NotificationListenerService
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:59:13-61:29
+action#android.service.notification.NotificationListenerService
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:60:17-99
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:60:25-96
+receiver#com.zero.android.service.QuickReplyReceiver
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:64:9-70:20
+	android:exported
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:66:13-37
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:65:13-55
 intent-filter#action:name:com.zero.android.ACTION_REPLY
-ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:57:13-59:29
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:67:13-69:29
 action#com.zero.android.ACTION_REPLY
-ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:58:17-72
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:68:17-72
 	android:name
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:58:25-69
-meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:67:13-69:54
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:68:25-69
+service#com.zero.android.service.ZeroVoiceInteractionSessionService
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:72:9-83:19
+	android:label
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:74:13-52
+	android:exported
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:76:13-36
+	android:permission
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:75:13-75
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:73:13-71
+intent-filter#action:name:android.service.voice.VoiceInteractionService
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:77:13-79:29
+action#android.service.voice.VoiceInteractionService
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:78:17-88
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:78:25-85
+meta-data#android.voice_interaction
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:80:13-82:69
 	android:resource
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:69:17-51
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:82:17-66
 	android:name
-		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:68:17-67
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:81:17-57
+service#com.zero.android.service.ZeroRecognitionService
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:85:9-93:19
+	android:exported
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:88:13-36
+	android:permission
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:87:13-75
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:86:13-59
+intent-filter#action:name:android.speech.RecognitionService+category:name:android.intent.category.DEFAULT
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:89:13-92:29
+action#android.speech.RecognitionService
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:90:17-76
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:90:25-73
+activity#com.zero.android.ui.AssistantActivity
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:95:9-106:20
+	android:excludeFromRecents
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:98:13-46
+	android:launchMode
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:100:13-48
+	android:exported
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:101:13-36
+	android:theme
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:97:13-46
+	android:taskAffinity
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:99:13-36
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:96:13-49
+intent-filter#action:name:android.intent.action.ASSIST+category:name:android.intent.category.DEFAULT
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:102:13-105:29
+action#android.intent.action.ASSIST
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:103:17-71
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:103:25-68
+provider#androidx.core.content.FileProvider
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:108:9-116:20
+	android:grantUriPermissions
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:112:13-47
+	android:authorities
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:110:13-48
+	android:exported
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:111:13-37
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:109:13-62
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:113:13-115:54
+	android:resource
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:115:17-51
+	android:name
+		ADDED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml:114:17-67
 uses-sdk
 INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/dalnk/Desktop/zero/android/app/src/main/AndroidManifest.xml

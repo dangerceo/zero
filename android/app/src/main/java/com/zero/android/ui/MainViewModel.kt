@@ -51,9 +51,15 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
         repository?.refresh()
     }
 
-    fun createAgent(goal: String) {
+    fun createAgent(goal: String, isMeta: Boolean = false) {
         viewModelScope.launch {
-            repository?.createAgent(goal)
+            repository?.createAgent(goal, isMeta)
+        }
+    }
+
+    fun addTodo(agentId: String, todo: String) {
+        viewModelScope.launch {
+            repository?.addTodo(agentId, todo)
         }
     }
 

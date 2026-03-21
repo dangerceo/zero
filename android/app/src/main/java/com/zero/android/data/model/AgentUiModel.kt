@@ -8,7 +8,8 @@ data class AgentUiModel(
     val progress: Int = 0,
     val currentStep: String? = null,
     val lastLog: String? = null,
-    val logs: List<AgentLog> = emptyList()
+    val logs: List<AgentLog> = emptyList(),
+    val threads: List<ThreadEntry> = emptyList()
 ) {
     companion object {
         fun from(agent: Agent, progressEvent: AgentProgressEvent? = null): AgentUiModel {
@@ -20,7 +21,8 @@ data class AgentUiModel(
                 progress = progressEvent?.stepCount?.let { it * 10 }?.coerceAtMost(100) ?: 0,
                 currentStep = progressEvent?.step,
                 lastLog = agent.logs.lastOrNull()?.message,
-                logs = agent.logs
+                logs = agent.logs,
+                threads = agent.threads
             )
         }
     }

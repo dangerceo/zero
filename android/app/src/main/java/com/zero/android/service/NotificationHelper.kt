@@ -16,8 +16,11 @@ object NotificationHelper {
     const val CHANNEL_ALERTS = "agents_alerts"
     const val GROUP_KEY = "zero_agents_group"
     const val ACTION_REPLY = "com.zero.android.ACTION_REPLY"
+    const val ACTION_INTERVENE = "com.zero.android.ACTION_INTERVENE"
     const val KEY_TEXT_REPLY = "key_text_reply"
     const val EXTRA_AGENT_ID = "extra_agent_id"
+    const val EXTRA_INTERVENTION_ID = "extra_intervention_id"
+    const val EXTRA_RESPONSE_VALUE = "extra_response_value"
 
     fun ensureChannels(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -45,7 +48,7 @@ object NotificationHelper {
         return NotificationCompat.Builder(context, CHANNEL_AGENTS)
             .setSmallIcon(R.drawable.ic_stat_zero)
             .setContentTitle(context.getString(R.string.monitoring_active))
-            .setContentText("Tracking $activeCount active project(s)")
+            .setContentText("Tracking  active project(s)")
             .setOngoing(true)
             .setOnlyAlertOnce(true)
             .build()
@@ -62,7 +65,7 @@ object NotificationHelper {
         pendingIntent: PendingIntent?
     ): Notification {
         val content = currentStep?.takeIf { it.isNotBlank() } ?: status
-        return NotificationCompat.Builder(context, CHANNEL_AGENTS)
+        val builder = NotificationCompat.Builder(context, CHANNEL_AGENTS)
             .setSmallIcon(R.drawable.ic_stat_zero)
             .setContentTitle(agentName)
             .setContentText(content)
@@ -71,14 +74,131 @@ object NotificationHelper {
             .setProgress(100, progress, false)
             .setOngoing(ongoing)
             .setContentIntent(pendingIntent)
+
+        // Add Quick Reply action
+        val remoteInput = RemoteInput.Builder(KEY_TEXT_REPLY)
+            .setLabel("Reply to agent...")
             .build()
+
+        val replyIntent = Intent(context, QuickReplyReceiver::class.java).apply {
+            action = ACTION_REPLY
+            putExtra(EXTRA_AGENT_ID, agentId)
+        }
+
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+        } else {
+            PendingIntent.FLAG_UPDATE_CURRENT
+        }
+
+        val replyPendingIntent = PendingIntent.getBroadcast(
+            context,
+            agentId.hashCode(),
+            replyIntent,
+            flags
+        )
+
+        val action = NotificationCompat.Action.Builder(
+            R.drawable.ic_reply,
+            "Quick Reply",
+            replyPendingIntent
+        ).addRemoteInput(remoteInput).build()
+
+        builder.addAction(action)
+
+        return builder.build()
+    }
+
+    fun buildInterventionNotification(
+        context: Context,
+        agentId: String,
+        agentName: String,
+        interventionId: String,
+        message: String,
+        type: String,
+        options: List<Pair<String, String>>, // label, value
+        pendingIntent: PendingIntent?
+    ): Notification {
+        val builder = NotificationCompat.Builder(context, CHANNEL_ALERTS)
+            .setSmallIcon(R.drawable.ic_stat_zero)
+            .setContentTitle(agentName)
+            .setContentText(message)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setCategory(NotificationCompat.CATEGORY_ALARM)
+            .setOnlyAlertOnce(true)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+        } else {
+            PendingIntent.FLAG_UPDATE_CURRENT
+        }
+
+        if (type == "input" || type == "confirm") {
+            val remoteInput = RemoteInput.Builder(KEY_TEXT_REPLY)
+                .setLabel(if (type == "confirm") "Confirm (Yes/No)" else "Reply...")
+                .build()
+
+            val replyIntent = Intent(context, QuickReplyReceiver::class.java).apply {
+                action = ACTION_INTERVENE
+                putExtra(EXTRA_AGENT_ID, agentId)
+                putExtra(EXTRA_INTERVENTION_ID, interventionId)
+            }
+
+            val replyPendingIntent = PendingIntent.getBroadcast(
+                context,
+                interventionId.hashCode(),
+                replyIntent,
+                flags
+            )
+
+            val action = NotificationCompat.Action.Builder(
+                R.drawable.ic_reply,
+                "Reply",
+                replyPendingIntent
+            ).addRemoteInput(remoteInput).build()
+
+            builder.addAction(action)
+        }
+
+        if (type == "choice" || type == "confirm") {
+            val actualOptions = if (type == "confirm") {
+                listOf("Yes" to "yes", "No" to "no")
+            } else options
+
+            actualOptions.take(3).forEachIndexed { index, (label, value) ->
+                val actionIntent = Intent(context, QuickActionReceiver::class.java).apply {
+                    action = ACTION_INTERVENE + "_" + index
+                    putExtra(EXTRA_AGENT_ID, agentId)
+                    putExtra(EXTRA_INTERVENTION_ID, interventionId)
+                    putExtra(EXTRA_RESPONSE_VALUE, value)
+                }
+
+                val actionPendingIntent = PendingIntent.getBroadcast(
+                    context,
+                    (interventionId + value).hashCode(),
+                    actionIntent,
+                    flags
+                )
+
+                val action = NotificationCompat.Action.Builder(
+                    0, // Icons not required for simple buttons
+                    label,
+                    actionPendingIntent
+                ).build()
+                builder.addAction(action)
+            }
+        }
+
+        return builder.build()
     }
 
     fun buildSummaryNotification(context: Context, count: Int): Notification {
         return NotificationCompat.Builder(context, CHANNEL_AGENTS)
             .setSmallIcon(R.drawable.ic_stat_zero)
             .setContentTitle("Zero Agents")
-            .setContentText("$count project(s) updating")
+            .setContentText(" project(s) updating")
             .setStyle(NotificationCompat.InboxStyle())
             .setGroup(GROUP_KEY)
             .setGroupSummary(true)

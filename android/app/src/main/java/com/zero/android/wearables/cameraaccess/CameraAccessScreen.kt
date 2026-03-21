@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,6 +43,7 @@ fun CameraAccessScreen(onBack: () -> Unit) {
     val context = LocalContext.current
     val activity = LocalActivity.current
     val viewModel: WearablesViewModel = viewModel()
+    val uiState by viewModel.uiState.collectAsState()
 
     val permissionMutex = remember { Mutex() }
     var permissionContinuation by remember { mutableStateOf<CancellableContinuation<PermissionStatus>?>(null) }
@@ -100,15 +102,20 @@ fun CameraAccessScreen(onBack: () -> Unit) {
             viewModel.startMonitoring()
         } else if (activity != null) {
             permissionLauncher.launch(requiredPermissions)
-        } else {
-            viewModel.setRecentError("Activity not available")
+        }
+    }
+
+    // Auto-launch streaming mode if registered and active device detected
+    LaunchedEffect(uiState.isRegistered, uiState.hasActiveDevice, uiState.isStreaming) {
+        if (uiState.isRegistered && uiState.hasActiveDevice && !uiState.isStreaming) {
+            viewModel.navigateToStreaming(requestWearablesPermission)
         }
     }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Camera Access") },
+                title = { Text(text = "Camera HUD") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")

@@ -19,8 +19,14 @@ interface AgentsApi {
     @POST("api/agents/{id}/start")
     suspend fun startAgent(@Path("id") id: String): Map<String, String>
 
-    @POST("api/agents/{id}/comment")
-    suspend fun addComment(@Path("id") id: String, @Body request: CommentRequest): Agent
+    @POST("api/agents/{id}/todo")
+    suspend fun addTodo(@Path("id") id: String, @Body request: TodoRequest): Agent
+
+    @POST("api/agents/{id}/intervene")
+    suspend fun intervene(@Path("id") id: String, @Body request: InterventionResponse): Agent
+
+    @GET("api/interventions")
+    suspend fun getInterventions(): List<com.zero.android.data.model.Intervention>
 
     @POST("api/agents/{id}/questions/{qid}/answer")
     suspend fun answerQuestion(
@@ -28,18 +34,27 @@ interface AgentsApi {
         @Path("qid") qid: String,
         @Body request: AnswerRequest
     ): Agent
+
+    @POST("api/notifications")
+    suspend fun syncNotification(@Body payload: Map<String, String>)
 }
 
 data class CreateAgentRequest(
     val goal: String,
     val name: String? = null,
+    val workingDir: String? = null,
     val files: List<com.zero.android.data.model.AgentFile> = emptyList()
 )
 
-data class CommentRequest(
-    val comment: String
+data class TodoRequest(
+    val todo: String
 )
 
 data class AnswerRequest(
     val answer: String
+)
+
+data class InterventionResponse(
+    val interventionId: String,
+    val response: String
 )

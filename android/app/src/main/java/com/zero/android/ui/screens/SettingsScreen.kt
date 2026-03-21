@@ -5,6 +5,8 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,6 +15,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.DeviceHub
@@ -25,9 +30,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,8 +41,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import com.zero.android.data.model.AgentUiModel
+import com.zero.android.data.model.AgyProject
+import com.zero.android.data.model.ChatProject
 import com.zero.android.service.MonitoringManager
 import com.zero.android.util.normalizeBaseUrl
 
@@ -46,6 +55,8 @@ import com.zero.android.util.normalizeBaseUrl
 fun SettingsScreen(
     baseUrl: String?,
     monitoringEnabled: Boolean,
+    agents: List<AgentUiModel>,
+    agyProjects: List<AgyProject>,
     onBaseUrlUpdate: (String) -> Unit,
     onClearBaseUrl: () -> Unit,
     onMonitoringToggle: (Boolean) -> Unit,
@@ -56,6 +67,7 @@ fun SettingsScreen(
     val context = LocalContext.current
     var baseUrlInput by remember(baseUrl) { mutableStateOf(baseUrl ?: "") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
+    var expandedLogId by remember { mutableStateOf<String?>(null) }
 
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -184,6 +196,89 @@ fun SettingsScreen(
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.error
                 )
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+            Text(text = "Dev Dashboard", style = MaterialTheme.typography.headlineSmall)
+            
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                Card(modifier = Modifier.weight(1f)) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(text = "${agents.size + agyProjects.size}", style = MaterialTheme.typography.headlineMedium)
+                        Text(text = "Total Projects", style = MaterialTheme.typography.labelMedium)
+                    }
+                }
+                Card(modifier = Modifier.weight(1f)) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        val totalLogs = agents.sumOf { it.logs.size } + agyProjects.sumOf { it.logs.size }
+                        Text(text = "$totalLogs", style = MaterialTheme.typography.headlineMedium)
+                        Text(text = "Action Logs", style = MaterialTheme.typography.labelMedium)
+                    }
+                }
+            }
+
+            Text(text = "Active Inspectors", style = MaterialTheme.typography.titleMedium)
+            
+            val allProjects = remember(agents, agyProjects) {
+                agents.map { ChatProject(it.id, it.name, it.status, it.logs, it.threads) } + 
+                agyProjects.map { ChatProject(it.id, it.name, it.status, it.logs, it.threads) }
+            }
+
+            allProjects.forEach { p ->
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(text = p.name, style = MaterialTheme.typography.titleMedium)
+                                Text(text = p.id, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
+                            }
+                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                if (p.id.startsWith("gemini-") || p.id.startsWith("agy-")) {
+                                    Button(onClick = {
+                                        val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse("http://10.0.0.141:3000"))
+                                        context.startActivity(intent)
+                                    }) {
+                                        Text("Preview")
+                                    }
+                                }
+                                Button(onClick = { expandedLogId = if (expandedLogId == p.id) null else p.id }) {
+                                    Text("Logs")
+                                }
+                            }
+                        }
+                        
+                        AnimatedVisibility(visible = expandedLogId == p.id) {
+                            Column {
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(text = "Logs", style = MaterialTheme.typography.titleSmall)
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Card(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    colors = androidx.compose.material3.CardDefaults.cardColors(
+                                        containerColor = MaterialTheme.colorScheme.surfaceVariant
+                                    )
+                                ) {
+                                    Column(
+                                        modifier = Modifier
+                                            .padding(12.dp)
+                                            .height(200.dp)
+                                    ) {
+                                        LazyColumn {
+                                            items(p.logs) { log ->
+                                                Text(
+                                                    text = "> ${log.message}",
+                                                    style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
+                                                    modifier = Modifier.padding(vertical = 2.dp)
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(8.dp))
             }
         }
     }

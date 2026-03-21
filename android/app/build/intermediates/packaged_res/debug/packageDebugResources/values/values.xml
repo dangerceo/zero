@@ -10,6 +10,7 @@
     <color name="zero_surface_light">#FFFFFF</color>
     <color name="zero_warning">#E6A23C</color>
     <string name="app_name">Zero</string>
+    <string name="assistant_label">Zero Assistant</string>
     <string name="camera_access_icon_description">Camera Access icon</string>
     <string name="capture_photo">Capture Photo</string>
     <string name="captured_photo">Captured Photo</string>

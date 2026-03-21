@@ -83,9 +83,11 @@ class AgentsRepository(
         }
     }
 
-    suspend fun createAgent(goal: String): Agent? {
+    suspend fun createAgent(goal: String, isMeta: Boolean = false): Agent? {
         return try {
-            val agent = api.createAgent(CreateAgentRequest(goal = goal, name = goal.take(50)))
+            val workingDir = if (isMeta) "/Users/dalnk/Desktop/zero" else null
+            val name = (if (isMeta) "\uD83D\uDD27 " else "") + goal.take(50)
+            val agent = api.createAgent(CreateAgentRequest(goal = goal, name = name, workingDir = workingDir))
             upsertAgent(agent)
             api.startAgent(agent.id)
             agent
@@ -94,11 +96,26 @@ class AgentsRepository(
         }
     }
 
-    suspend fun addComment(agentId: String, comment: String) {
+    suspend fun addTodo(agentId: String, todo: String) {
         try {
-            val agent = api.addComment(agentId, com.zero.android.data.remote.CommentRequest(comment))
+            val agent = api.addTodo(agentId, com.zero.android.data.remote.TodoRequest(todo))
             upsertAgent(agent)
         } catch (_: Exception) {}
+    }
+
+    suspend fun intervene(agentId: String, interventionId: String, response: String) {
+        try {
+            val agent = api.intervene(agentId, com.zero.android.data.remote.InterventionResponse(interventionId, response))
+            upsertAgent(agent)
+        } catch (_: Exception) {}
+    }
+
+    suspend fun getInterventions(): List<com.zero.android.data.model.Intervention> {
+        return try {
+            api.getInterventions()
+        } catch (_: Exception) {
+            emptyList()
+        }
     }
 
     private fun connectWebSocket() {
@@ -170,14 +187,27 @@ class AgentsRepository(
     }
 
     private fun appendLog(agentId: String, log: com.zero.android.data.model.AgentLog) {
-        val updated = _agents.value.map { agent ->
+        var foundInAgents = false
+        val updatedAgents = _agents.value.map { agent ->
             if (agent.id == agentId) {
+                foundInAgents = true
                 agent.copy(logs = agent.logs + log)
             } else {
                 agent
             }
         }
-        _agents.value = updated
+        if (foundInAgents) {
+            _agents.value = updatedAgents
+        } else {
+            val updatedAgy = _agyProjects.value.map { p ->
+                if (p.id == agentId) {
+                    p.copy(logs = p.logs + log)
+                } else {
+                    p
+                }
+            }
+            _agyProjects.value = updatedAgy
+        }
     }
 
     private fun removeAgent(agentId: String) {

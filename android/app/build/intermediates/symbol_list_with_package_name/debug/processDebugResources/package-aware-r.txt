@@ -3006,6 +3006,7 @@ drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_reply
 drawable ic_search_black_24
 drawable ic_stat_zero
 drawable indeterminate_static
@@ -3794,6 +3795,7 @@ string abc_toolbar_collapse_description
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
+string assistant_label
 string autofill
 string bottom_sheet_behavior
 string bottomsheet_action_collapse
@@ -5363,3 +5365,4 @@ styleable ViewBackgroundHelper android_background backgroundTint backgroundTintM
 styleable ViewPager2 android_orientation
 styleable ViewStubCompat android_id android_layout android_inflatedId
 xml file_paths
+xml voice_interaction_service
