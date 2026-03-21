@@ -2,10 +2,11 @@
 
 ## Phase 1: Test Infrastructure & Heuristics Core
 - [ ] Task: Setup Test Harness for PTY
-    - [ ] Create mock CLI scripts (e.g., password prompt, long-build, standard prompt).
+    - [ ] Create mock CLI scripts (e.g., password prompt, long-build, standard prompt, numbered choice list).
     - [ ] Write initial test cases defining the expected heuristic behavior.
 - [ ] Task: Implement Heuristic Block Detection
     - [ ] Build the detection logic (timeouts, regex matching for trailing prompts).
+    - [ ] Implement basic choice list extraction (regex-based parsing of numbered options).
     - [ ] Ensure all tests pass, validating no false positives on long-running tasks.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
 

@@ -9,6 +9,7 @@ When an AI agent (running via the Gemini CLI) executes a sub-command that requir
 ## Requirements
 1. **PTY Wrapper:** Wrap agent or tool executions in `node-pty` to capture raw `stdout` and inject `stdin`.
 2. **Heuristic Block Detection:** Implement sophisticated heuristics to detect when a sub-command is waiting for input (e.g., quiet threshold + trailing prompt characters without newlines), distinguishing it from long-running output.
-3. **Intervention Mapping:** When a block is detected, automatically generate a `type: "input"` intervention and route it to the Android Inbox.
-4. **Input Injection:** Route the user's Inbox response back into the PTY's `stdin` and resume the process.
-5. **Robust Test Suite:** Extensive test coverage to prevent false positives (e.g., builds) and handle various CLI prompt types (hidden inputs, choices, standard prompts).
+3. **Intervention Mapping:** When a block is detected, automatically generate a `type: "input"` or `type: "choice"` intervention and route it to the Android Inbox.
+4. **Multiple Choice Extraction:** Implement heuristics to detect numbered/bulleted choice lists (e.g., `1) Yes, 2) No`) and extract them as interactive options for the Inbox.
+5. **Input Injection:** Route the user's Inbox response (text or choice selection) back into the PTY's `stdin` and resume the process.
+6. **Robust Test Suite:** Extensive test coverage to prevent false positives (e.g., builds) and handle various CLI prompt types (hidden inputs, choices, standard prompts).
