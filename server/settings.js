@@ -7,10 +7,13 @@ const __dirname = dirname(__filename);
 const SETTINGS_FILE = join(__dirname, '../.settings.json');
 
 const defaults = {
-    provider: 'claude', // 'claude' or 'gemini'
+    provider: 'claude',
     claudeApiKey: '',
     geminiApiKey: '',
-    model: 'claude-sonnet-4-20250514'
+    model: 'claude-sonnet-4-20250514',
+    enableTunnel: true,
+    enableAntigravity: true,
+    enableTelemetry: true
 };
 
 export async function getSettings() {
@@ -31,7 +34,6 @@ export async function saveSettings(settings) {
 
 export async function callLLM(prompt, systemPrompt = '') {
     const settings = await getSettings();
-
     if (settings.provider === 'claude' && settings.claudeApiKey) {
         return await callClaude(prompt, systemPrompt, settings);
     } else if (settings.provider === 'gemini' && settings.geminiApiKey) {
@@ -56,34 +58,29 @@ async function callClaude(prompt, systemPrompt, settings) {
             messages: [{ role: 'user', content: prompt }]
         })
     });
-
     if (!response.ok) {
         const err = await response.text();
-        throw new Error(`Claude API error: ${err}`);
+        throw new Error('Claude API error: ' + err);
     }
-
     const data = await response.json();
     return data.content[0]?.text || '';
 }
 
 async function callGemini(prompt, systemPrompt, settings) {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${settings.geminiApiKey}`;
-
+    const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=' + settings.geminiApiKey;
     const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             contents: [{
-                parts: [{ text: systemPrompt ? `${systemPrompt}\n\n${prompt}` : prompt }]
+                parts: [{ text: systemPrompt ? systemPrompt + '\n\n' + prompt : prompt }]
             }]
         })
     });
-
     if (!response.ok) {
         const err = await response.text();
-        throw new Error(`Gemini API error: ${err}`);
+        throw new Error('Gemini API error: ' + err);
     }
-
     const data = await response.json();
     return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
 }

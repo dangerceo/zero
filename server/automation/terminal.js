@@ -48,12 +48,14 @@ export const terminalActions = {
             // With JSON output for structured results
             const child = spawn('gemini', [
                 '--yolo',
-                '--output-format', 'text',
+                '--output-format', 'json',
                 prompt
             ], {
                 cwd,
                 env: { ...process.env }
             });
+
+            child.stdin.end();
 
             child.stdout.on('data', (data) => {
                 const text = data.toString();

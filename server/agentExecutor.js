@@ -1,21 +1,16 @@
 import { agentStore } from './agentStore.js';
 import { spawn } from 'child_process';
 import { mkdir, readdir, stat, readFile } from 'fs/promises';
+export { readdir, stat, readFile };
 import { join } from 'path';
 import { homedir } from 'os';
+import { runKitchen } from './kitchen/pass.js';
 
 const AGENTS_DIR = join(homedir(), 'ZeroProjects');
+const activeProcesses = new Map();
+const lastProgressTime = new Map();
 
-const AGENT_SYSTEM_INSTRUCTION = `You are working on a Zero Computer agent task. Work autonomously and show your progress.
-
-IMPORTANT:
-1. After completing a significant milestone, output: [CHECKPOINT] <description>
-2. If you need user input, output: [QUESTION] <your question>
-3. Show what you're doing as you work
-4. Use the existing files in the project - don't start over
-5. Test your code
-
-Complete the full goal, not just the first step.`;
+const AGENT_SYSTEM_INSTRUCTION = 'You are working on a Zero Computer agent task. Work autonomously and show your progress. IMPORTANT: 1. After completing a significant milestone, output: [CHECKPOINT] <description> 2. If you need user input, output: [QUESTION] <your question> 3. Show what you are doing as you work 4. Use the existing files in the project - dont start over 5. Test your code. Complete the full goal, not just the first step.';
 
 async function getDirectoryFiles(dir) {
     try {
@@ -24,314 +19,159 @@ async function getDirectoryFiles(dir) {
         for (const entry of entries) {
             if (entry.name.startsWith('.') || entry.name === 'node_modules') continue;
             const path = join(dir, entry.name);
-            if (entry.isDirectory()) {
-                files.push(`${entry.name}/`);
-            } else {
+            if (entry.isDirectory()) files.push(entry.name + '/');
+            else {
                 const s = await stat(path);
-                files.push(`${entry.name} (${Math.round(s.size / 1024)}KB)`);
+                files.push(entry.name + ' (' + Math.round(s.size / 1024) + 'KB)');
             }
         }
         return files;
-    } catch {
-        return [];
-    }
+    } catch { return []; }
 }
 
-async function readFileContent(filePath) {
-    try {
-        const content = await readFile(filePath, 'utf-8');
-        // Truncate very large files
-        if (content.length > 5000) {
-            return content.slice(0, 2000) + '\n... (truncated) ...\n' + content.slice(-2000);
-        }
-        return content;
-    } catch {
-        return null;
-    }
+export function isAgentActuallyRunning(agentId) {
+    return activeProcesses.has(agentId);
 }
 
-export async function executeAgent(agentId, broadcast) {
+export async function stopAgent(agentId) {
+    const process = activeProcesses.get(agentId);
+    if (process) {
+        process.kill();
+        activeProcesses.delete(agentId);
+        await agentStore.update(agentId, { status: 'paused' });
+        return true;
+    }
+    return false;
+}
+
+export async function executeAgent(agentId, broadcast, resume = false) {
+    if (activeProcesses.has(agentId)) await stopAgent(agentId);
     const agent = await agentStore.get(agentId);
     if (!agent) return;
 
     const agentDir = agent.workingDir || join(AGENTS_DIR, agent.id);
+    try { await mkdir(agentDir, { recursive: true }); } catch (e) { }
 
-    try {
-        await mkdir(agentDir, { recursive: true });
-    } catch (e) {
-        await agentStore.update(agentId, { status: 'failed' });
-        streamLog(agentId, broadcast, `❌ Failed to create directory: ${e.message}`, 'error');
-        broadcastAgentUpdate(agentId, broadcast);
-        return;
-    }
-
-    const fileList = await getDirectoryFiles(agentDir);
-
-    await agentStore.update(agentId, {
-        workingDir: agentDir,
-        status: 'running',
-        startedAt: new Date().toISOString()
-    });
-
-    // Record the user's goal as a thread entry if this is the first run
-    if (agent.threads.length === 0 && agent.goal) {
-        await agentStore.addThread(agentId, 'user', agent.goal);
-    }
-
+    await agentStore.update(agentId, { workingDir: agentDir, status: 'running', startedAt: new Date().toISOString() });
+    if (agent.threads.length === 0 && agent.goal) await agentStore.addThread(agentId, 'user', agent.goal);
     broadcastAgentUpdate(agentId, broadcast);
-    streamLog(agentId, broadcast, '🚀 Starting work...', 'info');
+
+    if (!resume) {
+        try { await runKitchen(agentId, broadcast); return; } catch (e) { }
+    }
+
+    streamLog(agentId, broadcast, (resume ? '🔄 Resuming session...' : '🚀 Starting work...'), 'info', true);
 
     try {
-        let prompt = `${AGENT_SYSTEM_INSTRUCTION}\n\n`;
-        prompt += `GOAL: ${agent.goal}\n`;
-        prompt += `WORKING DIRECTORY: ${agentDir}\n\n`;
-
-        if (fileList.length > 0) {
-            prompt += `EXISTING FILES:\n${fileList.join('\n')}\n\n`;
-            prompt += `These files already exist - build on them, don't start over.\n\n`;
-        }
-
-        // Include specified files with content
-        if (agent.files && agent.files.length > 0) {
-            prompt += `FOCUS FILES (read these carefully):\n`;
-            for (const f of agent.files) {
-                const content = await readFileContent(f.path);
-                if (content) {
-                    prompt += `\n--- ${f.path} ---\n${content}\n---\n`;
-                } else {
-                    prompt += `- ${f.path} (could not read)\n`;
-                }
-                if (f.description) {
-                    prompt += `  Note: ${f.description}\n`;
-                }
-            }
-            prompt += '\n';
-        }
-
-        if (agent.checkpoints?.length > 0) {
-            prompt += `COMPLETED CHECKPOINTS:\n`;
-            agent.checkpoints.forEach((cp, i) => {
-                prompt += `${i + 1}. ${cp.summary}\n`;
-            });
-            prompt += `\nContinue from where we left off.\n\n`;
-        }
-
-        const answeredQuestions = (agent.pendingQuestions || []).filter(q => q.answer);
-        if (answeredQuestions.length > 0) {
-            prompt += `USER ANSWERS:\n`;
-            for (const q of answeredQuestions) {
-                prompt += `Q: ${q.question}\nA: ${q.answer}\n\n`;
+        const fileList = await getDirectoryFiles(agentDir);
+        let prompt = resume ? 'Resume work.' : (AGENT_SYSTEM_INSTRUCTION + '\n\nGOAL: ' + agent.goal + '\n\n');
+        
+        const unprocessedTodos = (agent.todos || []).filter(t => !t.processed);
+        if (unprocessedTodos.length > 0) {
+            prompt += '\n\nNEW DIRECTIVES:\n';
+            for (const t of unprocessedTodos) {
+                prompt += '• ' + t.text + '\n';
+                await agentStore.markTodoProcessed(agentId, t.id);
             }
         }
 
-        const unprocessedComments = (agent.comments || []).filter(c => !c.processed);
-        if (unprocessedComments.length > 0) {
-            streamLog(agentId, broadcast, `📝 Processing ${unprocessedComments.length} follow-up instruction(s)...`, 'info');
-            prompt += `\n\nIMPORTANT - FOLLOW-UP INSTRUCTIONS FROM USER (address these first):\n`;
-            for (const c of unprocessedComments) {
-                prompt += `• ${c.text}\n`;
-                streamLog(agentId, broadcast, `  → ${c.text}`, 'output');
-                await agentStore.markCommentProcessed(agentId, c.id);
-            }
-            prompt += `\nPrioritize these instructions before continuing other work.\n`;
-        }
-
-        prompt += `Begin now.`;
-
-        streamLog(agentId, broadcast, '🤖 Agent is working...', 'info');
-        await runGeminiStreaming(agentId, prompt, agentDir, broadcast);
-
+        await runGeminiStreaming(agentId, prompt, agentDir, broadcast, resume);
     } catch (error) {
-        console.error('Agent execution error:', error);
         await agentStore.update(agentId, { status: 'failed' });
-        streamLog(agentId, broadcast, `❌ Error: ${error.message}`, 'error');
+        streamLog(agentId, broadcast, '❌ Error: ' + error.message, 'error', true);
         broadcastAgentUpdate(agentId, broadcast);
     }
 }
 
-async function runGeminiStreaming(agentId, prompt, workingDir, broadcast) {
-    return new Promise(async (resolve) => {
-        const child = spawn('gemini', ['--yolo', '--output-format', 'json', prompt], {
-            cwd: workingDir,
-            env: { ...process.env }
-        });
+async function runGeminiStreaming(agentId, prompt, workingDir, broadcast, resume = false) {
+    return new Promise((resolve) => {
+        const args = ['--yolo', '--output-format', 'json'];
+        if (resume) args.push('--resume');
+        args.push(prompt);
 
-        let hasError = false;
-        let currentStep = 'Starting...';
-        let stepCount = 0;
+        const child = spawn('gemini', args, { cwd: workingDir, env: { ...process.env } });
+        activeProcesses.set(agentId, child);
+        child.stdin.end();
+
         let fullOutput = '';
-
-        const ACTION_PATTERNS = [
-            { pattern: /^(Creating|Making|Initializing|Setting up)\s+(.+)/i, type: 'creating' },
-            { pattern: /^(Installing|Adding|Downloading)\s+(.+)/i, type: 'installing' },
-            { pattern: /^(Writing|Editing|Updating|Modifying)\s+(.+)/i, type: 'writing' },
-            { pattern: /^(Running|Executing|Starting|Building)\s+(.+)/i, type: 'running' },
-            { pattern: /^(Reading|Analyzing|Checking)\s+(.+)/i, type: 'reading' },
-            { pattern: /^(Done|Finished|Complete|Ready|Success)/i, type: 'done' },
-            { pattern: /^(Error|Failed|Cannot|Could not)/i, type: 'error' },
-            { pattern: /^(Okay|Ok,|I'll|I'm|I will|Let me)\s+(.+)/i, type: 'thinking' },
-        ];
-
-        const extractAction = (line) => {
-            for (const { pattern, type } of ACTION_PATTERNS) {
-                const match = line.match(pattern);
-                if (match) return { type, action: match[0].slice(0, 60) };
-            }
-            return null;
+        const processChunk = async (line) => {
+            try {
+                const data = JSON.parse(line);
+                if (data.type === 'text') {
+                    fullOutput += data.text;
+                    if (data.text.includes('[CHECKPOINT]')) {
+                        const summary = data.text.split('[CHECKPOINT]')[1].split('\n')[0].trim();
+                        await agentStore.addCheckpoint(agentId, { summary });
+                        streamLog(agentId, broadcast, '📍 ' + summary, 'success', true);
+                    } else if (data.text.includes('[INTERVENTION]')) {
+                        try {
+                            const json = data.text.split('[INTERVENTION]')[1].split('\n')[0].trim();
+                            const intervention = JSON.parse(json);
+                            await agentStore.addIntervention(agentId, intervention);
+                            await agentStore.update(agentId, { status: 'waiting' });
+                            streamLog(agentId, broadcast, '🛡️ Intervention: ' + (intervention.message || intervention.type), 'warning', true);
+                            broadcast({ type: 'notification:new', agentId, message: intervention.message, intervention });
+                        } catch (e) {
+                            streamLog(agentId, broadcast, '❌ Failed to parse intervention JSON: ' + e.message, 'error', true);
+                        }
+                    } else if (data.text.includes('[QUESTION]')) {
+                        const question = data.text.split('[QUESTION]')[1].split('\n')[0].trim();
+                        await agentStore.addQuestion(agentId, question);
+                        await agentStore.update(agentId, { status: 'waiting' });
+                        streamLog(agentId, broadcast, '❓ ' + question, 'warning', true);
+                    } else streamLog(agentId, broadcast, data.text, 'output');
+                }
+                if (data.type === 'call') {
+                    const now = Date.now();
+                    const lastTime = lastProgressTime.get(agentId) || 0;
+                    // Throttle progress updates to once every 5 seconds to reduce notification noise
+                    if (now - lastTime > 5000) {
+                        const callName = data.call.name + '(' + Object.keys(data.call.args || {}).join(', ') + ')';
+                        broadcast({ type: 'agent:progress', agentId, step: callName });
+                        lastProgressTime.set(agentId, now);
+                    }
+                }
+            } catch (e) { if (line.trim()) streamLog(agentId, broadcast, line, 'output'); }
         };
 
-        const processLine = async (line) => {
-            if (line.includes('DeprecationWarning')) return;
-            if (line.includes('[WARN] Skipping')) return;
-            if (line.includes('--trace-deprecation')) return;
-            if (line.includes('YOLO mode')) return;
-            if (line.includes('Loaded cached')) return;
-            if (line.trim() === '') return;
-
-            fullOutput += line + '\n';
-
-            if (line.includes('[CHECKPOINT]')) {
-                const summary = line.replace('[CHECKPOINT]', '').trim();
-                await agentStore.addCheckpoint(agentId, { summary });
-                streamLog(agentId, broadcast, `📍 ${summary}`, 'success');
-                broadcastAgentUpdate(agentId, broadcast);
-                return;
-            }
-
-            if (line.includes('[QUESTION]')) {
-                const question = line.replace('[QUESTION]', '').trim();
-                await agentStore.addQuestion(agentId, question);
-                await agentStore.update(agentId, { status: 'waiting' });
-                streamLog(agentId, broadcast, `❓ ${question}`, 'warning');
-                broadcastAgentUpdate(agentId, broadcast);
-                return;
-            }
-
-            const action = extractAction(line);
-            if (action && action.type !== 'thinking') {
-                stepCount++;
-                currentStep = action.action;
-                broadcast({
-                    type: 'agent:progress',
-                    agentId,
-                    step: currentStep,
-                    stepCount,
-                    actionType: action.type
-                });
-            }
-
-            streamLog(agentId, broadcast, line, 'output');
-        };
-
+        let buffer = '';
         child.stdout.on('data', async (data) => {
-            const lines = data.toString().split('\n');
-            for (const line of lines) {
-                await processLine(line);
-            }
-        });
-
-        child.stderr.on('data', async (data) => {
-            const text = data.toString().trim();
-            if (text &&
-                !text.includes('DeprecationWarning') &&
-                !text.includes('[WARN]') &&
-                !text.includes('YOLO mode') &&
-                !text.includes('Loaded cached') &&
-                !text.includes('credentials')) {
-                hasError = true;
-                streamLog(agentId, broadcast, text, 'error');
-            }
-        });
-
-        child.on('error', async (err) => {
-            hasError = true;
-            await agentStore.update(agentId, { status: 'failed' });
-            streamLog(agentId, broadcast, `❌ Failed to start: ${err.message}`, 'error');
-            broadcastAgentUpdate(agentId, broadcast);
-            resolve();
+            buffer += data.toString();
+            const lines = buffer.split('\n');
+            buffer = lines.pop();
+            for (const line of lines) if (line.trim()) await processChunk(line);
         });
 
         child.on('close', async (code) => {
-            const agent = await agentStore.get(agentId);
-
-            // Record agent's output as a thread entry
-            if (fullOutput.trim()) {
-                // Summarize: take first 500 chars as the thread content
-                const summary = fullOutput.trim().slice(0, 500);
-                await agentStore.addThread(agentId, 'agent', summary, {
-                    exitCode: code,
-                    stepCount,
-                    fullLength: fullOutput.length
-                });
-            }
-
-            if (agent.status !== 'waiting') {
-                const unprocessedComments = (agent.comments || []).filter(c => !c.processed);
-
-                if (code === 0 && unprocessedComments.length > 0) {
-                    streamLog(agentId, broadcast, `📝 Processing ${unprocessedComments.length} pending comment(s)...`, 'info');
-                    broadcastAgentUpdate(agentId, broadcast);
-                    resolve();
-                    setTimeout(() => executeAgent(agentId, broadcast), 1000);
-                    return;
-                } else if (code === 0 && !hasError) {
-                    await agentStore.update(agentId, { status: 'completed' });
-                    streamLog(agentId, broadcast, '✅ Completed!', 'success');
-                } else if (code !== 0) {
-                    await agentStore.update(agentId, { status: 'failed' });
-                    streamLog(agentId, broadcast, `❌ Exited with code ${code}`, 'error');
-                }
-            }
-
+            activeProcesses.delete(agentId);
+            lastProgressTime.delete(agentId);
+            if (fullOutput.trim()) await agentStore.addThread(agentId, 'agent', fullOutput.trim().slice(0, 500));
+            await agentStore.update(agentId, { status: code === 0 ? 'completed' : 'failed' });
+            streamLog(agentId, broadcast, code === 0 ? '✅ Done' : '❌ Failed', code === 0 ? 'success' : 'error', true);
             broadcastAgentUpdate(agentId, broadcast);
             resolve();
         });
-
-        // Activity timeout
-        let activityTimeout;
-        const resetActivityTimeout = () => {
-            clearTimeout(activityTimeout);
-            activityTimeout = setTimeout(async () => {
-                child.kill();
-                await agentStore.update(agentId, { status: 'failed' });
-                streamLog(agentId, broadcast, '⏱️ No activity for 3 minutes', 'error');
-                broadcastAgentUpdate(agentId, broadcast);
-            }, 180000);
-        };
-        resetActivityTimeout();
-        child.stdout.on('data', resetActivityTimeout);
-
-        // Hard timeout 15 min
-        setTimeout(async () => {
-            clearTimeout(activityTimeout);
-            child.kill();
-            await agentStore.update(agentId, { status: 'failed' });
-            streamLog(agentId, broadcast, '⏱️ Timed out after 15 minutes', 'error');
-            broadcastAgentUpdate(agentId, broadcast);
-        }, 900000);
     });
 }
 
-async function streamLog(agentId, broadcast, message, type) {
+async function streamLog(agentId, broadcast, message, type, notify = false) {
     await agentStore.addLog(agentId, message, type);
-    broadcast({
-        type: 'agent:log',
-        agentId,
-        log: { message, type, timestamp: new Date().toISOString() }
+    broadcast({ 
+        type: 'agent:log', 
+        agentId, 
+        log: { message, type, timestamp: new Date().toISOString() },
+        notify 
     });
 }
 
 async function broadcastAgentUpdate(agentId, broadcast) {
     const agent = await agentStore.get(agentId);
-    broadcast({ type: 'agent:updated', agent });
+    if (agent) {
+        agent.actuallyRunning = activeProcesses.has(agentId);
+        broadcast({ type: 'agent:updated', agent });
+    }
 }
 
 export async function continueAgent(agentId, broadcast) {
-    const agent = await agentStore.get(agentId);
-    if (!agent) return;
-
-    const unanswered = (agent.pendingQuestions || []).filter(q => !q.answer);
-    if (unanswered.length > 0) return;
-
-    await executeAgent(agentId, broadcast);
+    await executeAgent(agentId, broadcast, true);
 }

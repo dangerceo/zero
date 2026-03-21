@@ -19,10 +19,13 @@ function createAgent(data) {
         workingDir: data.workingDir || null,
         files: data.files || [], // [{ path, description }]
         threads: [],   // [{ id, role: 'user'|'agent', content, timestamp, metadata }]
+        tickets: [],   // Kitchen tickets [{ id, title, status, ... }]
+        interventions: [], // AI agent interventions [{ id, type, message, options, resolved, response, ... }]
         checkpoints: [],
         pendingQuestions: [],
-        comments: [],
+        todos: [],
         logs: [],
+        useConductor: data.useConductor || false,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
     };
@@ -38,9 +41,10 @@ function migrateProject(p) {
         workingDir: p.workingDir || null,
         files: [],
         threads: [],
+        tickets: [],
         checkpoints: p.checkpoints || [],
         pendingQuestions: p.pendingQuestions || [],
-        comments: p.comments || [],
+        todos: p.todos || p.comments || [],
         logs: (p.logs || []).slice(-50), // keep last 50 logs to avoid bloat
         createdAt: p.createdAt || new Date().toISOString(),
         updatedAt: p.updatedAt || new Date().toISOString()
@@ -151,6 +155,46 @@ class AgentStore {
         return agent;
     }
 
+    async addIntervention(id, intervention) {
+        await this.ensureLoaded();
+        const agent = this.agents.get(id);
+        if (!agent) return null;
+        if (!agent.interventions) agent.interventions = [];
+        const newIntervention = {
+            id: uuidv4(),
+            ...intervention,
+            createdAt: new Date().toISOString(),
+            resolved: false,
+            response: null
+        };
+        agent.interventions.push(newIntervention);
+        agent.status = 'waiting';
+        agent.updatedAt = new Date().toISOString();
+        await this.save();
+        return newIntervention;
+    }
+
+    async resolveIntervention(agentId, interventionId, response) {
+        await this.ensureLoaded();
+        const agent = this.agents.get(agentId);
+        if (!agent) return null;
+        const inv = (agent.interventions || []).find(i => i.id === interventionId);
+        if (inv) {
+            inv.resolved = true;
+            inv.response = response;
+            inv.resolvedAt = new Date().toISOString();
+        }
+        const unresolved = (agent.interventions || []).filter(i => !i.resolved);
+        const unansweredQuestions = (agent.pendingQuestions || []).filter(q => !q.answer);
+        
+        if (unresolved.length === 0 && unansweredQuestions.length === 0 && agent.status === 'waiting') {
+            agent.status = 'running';
+        }
+        agent.updatedAt = new Date().toISOString();
+        await this.save();
+        return agent;
+    }
+
     async addCheckpoint(id, checkpoint) {
         await this.ensureLoaded();
         const agent = this.agents.get(id);
@@ -199,14 +243,14 @@ class AgentStore {
         return agent;
     }
 
-    async addComment(id, comment) {
+    async addTodo(id, text) {
         await this.ensureLoaded();
         const agent = this.agents.get(id);
         if (!agent) return null;
-        if (!agent.comments) agent.comments = [];
-        agent.comments.push({
+        if (!agent.todos) agent.todos = [];
+        agent.todos.push({
             id: uuidv4(),
-            text: comment,
+            text,
             processed: false,
             createdAt: new Date().toISOString()
         });
@@ -214,7 +258,7 @@ class AgentStore {
         agent.threads.push({
             id: uuidv4(),
             role: 'user',
-            content: comment,
+            content: text,
             timestamp: new Date().toISOString()
         });
         agent.updatedAt = new Date().toISOString();
@@ -222,12 +266,12 @@ class AgentStore {
         return agent;
     }
 
-    async markCommentProcessed(agentId, commentId) {
+    async markTodoProcessed(agentId, todoId) {
         await this.ensureLoaded();
         const agent = this.agents.get(agentId);
         if (!agent) return null;
-        const comment = (agent.comments || []).find(c => c.id === commentId);
-        if (comment) comment.processed = true;
+        const todo = (agent.todos || []).find(t => t.id === todoId);
+        if (todo) todo.processed = true;
         agent.updatedAt = new Date().toISOString();
         await this.save();
         return agent;
