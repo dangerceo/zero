@@ -3,22 +3,46 @@ import { create } from 'zustand';
 export const useStore = create((set) => ({
     agents: [],
     agyProjects: [],
+    previewPorts: [],
     notifications: [],
+
     connected: false,
+    sysData: null,
+    teslaData: null,
     setConnected: (connected) => set({ connected }),
     setAgents: (agents) => set({ agents }),
     setAgyProjects: (agyProjects) => set({ agyProjects }),
+    setSysData: (sysData) => set({ sysData }),
+    setTeslaData: (teslaData) => set({ teslaData }),
     addNotification: (notification) => set(state => ({ notifications: [...state.notifications, notification] })),
     dismissNotification: (id) => set(state => ({ notifications: state.notifications.filter(n => n.id !== id) })),
     handleMessage: (msg) => {
         const { type, ...data } = msg;
         switch (type) {
             case 'init':
-                set({ agents: data.agents || [], agyProjects: data.projects || [] });
+                set({ 
+                    agents: data.agents || [], 
+                    agyProjects: data.projects || [],
+                    previewPorts: data.previewPorts || [],
+                    notifications: data.notifications || [],
+
+                    sysData: data.sysmonData || null,
+                    teslaData: data.teslaData || null
+                });
+                break;
+            case 'sysmon:update':
+                set({ sysData: data.data });
+                break;
+            case 'tesla:update':
+                set({ teslaData: data.data });
                 break;
             case 'agy:projects':
                 set({ agyProjects: data.projects || [] });
                 break;
+            case 'preview:ports':
+                set({ previewPorts: data.ports || [] });
+                break;
+
             case 'agent:created':
                 set(state => ({ agents: [data.agent, ...state.agents] }));
                 break;

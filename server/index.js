@@ -9,6 +9,8 @@ import chalk from 'chalk';
 import fs from 'fs/promises';
 import { chromium } from 'playwright';
 import open from 'open';
+import cookieParser from 'cookie-parser';
+import * as auth from './auth.js';
 
 import { agentStore } from './agentStore.js';
 import { UnifiedAgentProxy } from './UnifiedAgentProxy.js';
@@ -20,7 +22,9 @@ import { agyService } from './agyService.js';
 import { dangerTerminal } from './dangerTerminal.js';
 import { deployToCloudflare } from './cloudflareService.js';
 import { attachChatServer, getChatSessions } from './chatService.js';
-import { attachPtyServer, getActiveTerminalSessions, killTerminalSession } from './ptyService.js';
+import { attachPtyServer, getActiveTerminalSessions, killTerminalSession, writeToPtySession } from './ptyService.js';
+import { previewService } from './previewService.js';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -43,9 +47,16 @@ wss.on('connection', async (ws) => {
   clients.add(ws);
   const agents = await agentStore.getAll();
   const enhancedAgents = agents.map(a => ({ ...a, actuallyRunning: proxy.sessions.has(a.id) }));
-  ws.send(JSON.stringify({ type: 'init', agents: enhancedAgents, projects: agyService.getProjects(), notifications: notificationService.getNotifications() }));
-  ws.send(JSON.stringify({ type: 'sysmon:update', data: sysmonService.getData() }));
-  ws.send(JSON.stringify({ type: 'tesla:update', data: teslaService.getData() }));
+  ws.send(JSON.stringify({ 
+      type: 'init', 
+      agents: enhancedAgents, 
+      projects: agyService.getProjects(), 
+      previewPorts: previewService.getPorts(),
+      notifications: notificationService.getNotifications(),
+
+      sysmonData: sysmonService.getData(),
+      teslaData: teslaService.getData()
+  }));
   ws.on('close', () => clients.delete(ws));
 });
 
@@ -53,11 +64,56 @@ const PORT = process.env.PORT || 3847;
 const cleanStr = (s) => (s || '').replace(/[^\x00-\x7F]/g, '').trim();
 
 app.use(express.json());
+app.use(cookieParser());
+
+
+
+
+
+// Auth Middleware: Protect remote access
+app.use(async (req, res, next) => {
+    // Check if truly local. 
+    const isLocalHost = req.hostname === 'localhost' || req.hostname === '127.0.0.1';
+    const isTrulyLocal = isLocalHost && (req.ip === '127.0.0.1' || req.ip === '::1' || req.ip === '::ffff:127.0.0.1');
+
+    const settings = await getSettings();
+    const hasPasskey = !!settings.passkey;
+    const isStrict = settings.riskTolerance === 0;
+    
+    // Auth routes + PWA assets + Onboarding are public during setup phase
+    const isPublicRoute = req.path.startsWith('/api/auth/') || 
+                         req.path === '/login' || 
+                         req.path === '/onboard' || 
+                         req.path.startsWith('/api/onboard') || 
+                         req.path === '/manifest.json' || 
+                         req.path.startsWith('/icon-') || 
+                         req.path === '/sw.js';
+
+    if (!isTrulyLocal && !isPublicRoute) {
+        // If we have a passkey, it is ALWAYS required for remote access
+        if (hasPasskey) {
+            if (req.cookies.zero_auth !== '1') {
+                if (req.path.startsWith('/api')) {
+                    return res.status(401).json({ error: 'Unauthorized' });
+                }
+                return res.redirect('/login');
+            }
+        } else if (isStrict) {
+            // STRICT MODE: If no passkey exists, block remote access entirely (must onboard first)
+            return res.status(403).send('Remote access is restricted. Please complete onboarding at ' + req.headers.host + '/onboard');
+        }
+    }
+    next();
+});
 app.use((req, res, next) => {
   res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
   next();
 });
+
+// PREVIEW PROXY (After Auth)
+app.use(previewService.getMiddleware());
+
 
 app.get('/api/settings', async (req, res) => { res.json(await getSettings()); });
 app.post('/api/settings', async (req, res) => { res.json(await saveSettings(req.body)); });
@@ -82,6 +138,47 @@ Behavior rules:
         console.error('Onboard chat error:', e.message);
         res.status(500).json({ error: e.message || 'API Error' });
     }
+});
+
+// PASSKEY AUTH ENDPOINTS
+app.get('/api/auth/register-options', async (req, res) => {
+    try {
+        const origin = `${req.protocol}://${req.headers.host}`;
+        res.json(auth.generateRegistration(origin));
+    } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.post('/api/auth/register-verify', async (req, res) => {
+    try {
+        const origin = `${req.protocol}://${req.headers.host}`;
+        const result = await auth.verifyRegistration(req.body, origin);
+
+        if (result.verified) {
+             const isSecure = req.protocol === 'https' || req.headers['x-forwarded-proto'] === 'https';
+             res.cookie('zero_auth', '1', { httpOnly: true, secure: isSecure, maxAge: 365 * 24 * 60 * 60 * 1000, sameSite: 'lax' });
+        }
+        res.json(result);
+    } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.get('/api/auth/login-options', async (req, res) => {
+    try {
+        const origin = `${req.protocol}://${req.headers.host}`;
+        res.json(await auth.generateAuthentication(origin));
+    } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.post('/api/auth/login-verify', async (req, res) => {
+    try {
+        const origin = `${req.protocol}://${req.headers.host}`;
+        const result = await auth.verifyAuthentication(req.body, origin);
+
+        if (result.verified) {
+            const isSecure = req.protocol === 'https' || req.headers['x-forwarded-proto'] === 'https';
+            res.cookie('zero_auth', '1', { httpOnly: true, secure: isSecure, maxAge: 365 * 24 * 60 * 60 * 1000, sameSite: 'lax' });
+        }
+        res.json(result);
+    } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
 // Android Update API
@@ -198,6 +295,8 @@ app.get('/api/files/export-tree', async (req, res) => {
 
 app.get('/api/sysmon', (req, res) => { res.json(sysmonService.getData()); });
 app.get('/api/tesla', (req, res) => { res.json(teslaService.getData()); });
+app.get('/api/preview-ports', (req, res) => { res.json(previewService.getPorts()); });
+
 
 app.get('/api/system/tools', async (req, res) => {
     const tools = ['gemini', 'codex', 'agy', 'bolt', 'cline'];
@@ -286,9 +385,56 @@ app.delete('/api/pty/sessions/:id', (req, res) => {
     const success = killTerminalSession(req.params.id);
     res.json({ status: success ? 'ok' : 'not_found' });
 });
+app.post('/api/pty/sessions/:id/input', (req, res) => {
+    const { data } = req.body;
+    if (!data) return res.status(400).json({ error: 'data required' });
+    const ok = writeToPtySession(req.params.id, data);
+    res.json({ status: ok ? 'ok' : 'not_found' });
+});
+
+
+app.post('/api/system/rebuild-and-restart', async (req, res) => {
+    console.log(chalk.yellow('🛠️  Starting system rebuild...'));
+    
+    // First, run npm run build
+    exec('npm run build', (error, stdout, stderr) => {
+        if (error) {
+            console.error(chalk.red('❌ Build failed:'), stderr);
+            return res.status(500).json({ 
+                status: 'error', 
+                message: 'Build failed', 
+                output: stderr || stdout 
+            });
+        }
+        
+        console.log(chalk.green('✅ Build successful. Restarting server...'));
+        res.json({ status: 'ok', message: 'Build successful. Restarting...' });
+
+        // Trigger the detached restart after a short delay to allow the response to be sent
+        setTimeout(() => {
+            const child = spawn('npm', ['start'], {
+                detached: true,
+                stdio: 'inherit',
+                cwd: process.cwd(),
+                env: { ...process.env }
+            });
+            child.unref();
+            process.exit(0);
+        }, 1000);
+    });
+});
+
 
 // Serving static files including Android distribution
-app.use(express.static(join(__dirname, '../web/dist')));
+app.use(express.static(join(__dirname, '../web/dist'), {
+    setHeaders: (res, path) => {
+        if (path.endsWith('sw.js') || path.endsWith('manifest.json')) {
+            res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+            res.setHeader('Pragma', 'no-cache');
+            res.setHeader('Expires', '0');
+        }
+    }
+}));
 app.get('*', (req, res, next) => {
   if (req.path.startsWith('/api')) return next();
   res.sendFile(join(__dirname, '../web/dist/index.html'));
@@ -300,6 +446,18 @@ const ptyWss  = attachPtyServer(null);  // noServer mode — raw PTY terminal
 // Route WebSocket upgrades: /chat → chatWss, /pty → ptyWss, everything else → main wss
 server.on('upgrade', (request, socket, head) => {
     const { pathname } = new URL(request.url, 'http://localhost');
+    let proxyPort = null;
+    const match = pathname.match(/^\/host\/(\d+)/);
+    if (match) {
+        proxyPort = parseInt(match[1]);
+    } else if (request.headers.referer) {
+        try {
+            const refUrl = new URL(request.headers.referer);
+            const refMatch = refUrl.pathname.match(/^\/host\/(\d+)/);
+            if (refMatch) proxyPort = parseInt(refMatch[1]);
+        } catch(e) {}
+    }
+
     if (pathname === '/chat') {
         chatWss.handleUpgrade(request, socket, head, (ws) => {
             chatWss.emit('connection', ws, request);
@@ -308,12 +466,20 @@ server.on('upgrade', (request, socket, head) => {
         ptyWss.handleUpgrade(request, socket, head, (ws) => {
             ptyWss.emit('connection', ws, request);
         });
+    } else if (proxyPort) {
+        const proxy = previewService.getProxy(proxyPort);
+        if (proxy && proxy.upgrade) {
+            proxy.upgrade(request, socket, head);
+        } else {
+            socket.destroy();
+        }
     } else {
         wss.handleUpgrade(request, socket, head, (ws) => {
             wss.emit('connection', ws, request);
         });
     }
 });
+
 
 import { startTunnel } from './tunnel.js';
 server.listen(PORT, '0.0.0.0', async () => {
@@ -323,9 +489,18 @@ server.listen(PORT, '0.0.0.0', async () => {
       if (a.status === 'running' || a.status === 'planning') await agentStore.update(a.id, { status: 'idle' });
   }
   const settings = await getSettings();
-  if (settings.enableTelemetry) { sysmonService.start(broadcast); teslaService.start(broadcast); }
+  if (settings.enableTelemetry) { 
+      sysmonService.start(broadcast); 
+      teslaService.start(broadcast); 
+  } else {
+      // Still start it but don't broadcast? No, better to just start it so GET APIs work
+      sysmonService.start(null);
+      teslaService.start(null);
+  }
   if (settings.enableAntigravity) agyService.start(broadcast);
+  previewService.start(broadcast);
   notificationService.start(broadcast);
+
   if (settings.enableTunnel) startTunnel(PORT, process.env.ZERO_TOKEN);
   
   if (process.env.ZERO_ONBOARDING === '1') {

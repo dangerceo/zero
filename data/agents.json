@@ -4224,7 +4224,15 @@
       }
     ],
     "createdAt": "2026-02-06T04:08:57.936Z",
-    "updatedAt": "2026-02-22T07:13:28.063Z"
+    "updatedAt": "2026-03-21T23:44:40.009Z",
+    "sessions": [
+      {
+        "id": "e202c5b3-d38a-4999-910c-ad3be7d0736a",
+        "type": "unified",
+        "status": "idle",
+        "createdAt": "2026-03-21T23:44:40.009Z"
+      }
+    ]
   },
   {
     "id": "85186814-3023-40eb-91a4-7c9643a715f5",
@@ -14709,6 +14717,12 @@
         "content": "what if I want a simcluster that simulates opinions and sentiment on the war globally, ideally as an interactive maplike interface",
         "timestamp": "2026-03-07T00:15:31.303Z",
         "metadata": null
+      },
+      {
+        "id": "6b368d6f-58d4-48d1-b6c2-f8ece60b61b1",
+        "role": "user",
+        "content": "what failed about this",
+        "timestamp": "2026-03-21T23:43:37.634Z"
       }
     ],
     "tickets": [
@@ -14914,7 +14928,14 @@
     ],
     "checkpoints": [],
     "pendingQuestions": [],
-    "todos": [],
+    "todos": [
+      {
+        "id": "19f911e1-75c3-4fa5-b1a1-4f0d7457e1df",
+        "text": "what failed about this",
+        "processed": false,
+        "createdAt": "2026-03-21T23:43:37.634Z"
+      }
+    ],
     "logs": [
       {
         "message": "🍳 Kitchen mode — planning and executing...",
@@ -14998,7 +15019,7 @@
       }
     ],
     "createdAt": "2026-03-07T00:15:31.224Z",
-    "updatedAt": "2026-03-07T03:12:48.289Z",
+    "updatedAt": "2026-03-21T23:43:37.639Z",
     "startedAt": "2026-03-07T03:12:40.470Z",
     "security": {
       "trustLevel": 1,
@@ -15008,7 +15029,15 @@
       "createdAt": "2026-03-07T00:15:31.322Z",
       "updatedAt": "2026-03-07T00:15:31.322Z"
     },
-    "actuallyRunning": false
+    "actuallyRunning": false,
+    "sessions": [
+      {
+        "id": "8003c246-0bac-4c5d-a0cc-ca776486b00c",
+        "type": "unified",
+        "status": "idle",
+        "createdAt": "2026-03-21T23:43:37.639Z"
+      }
+    ]
   },
   {
     "id": "adacaf31-9335-4cc2-bb58-0eb885273821",
@@ -16140,7 +16169,20 @@
     ],
     "tickets": [],
     "interventions": [],
-    "sessions": [],
+    "sessions": [
+      {
+        "id": "510f6789-3f95-48ff-943c-5552db8b9ca6",
+        "type": "unified",
+        "status": "idle",
+        "createdAt": "2026-03-21T20:57:13.242Z"
+      },
+      {
+        "id": "8500282a-6322-4a85-a5f9-8f07a2eb854d",
+        "type": "unified",
+        "status": "idle",
+        "createdAt": "2026-03-21T23:43:06.365Z"
+      }
+    ],
     "deployments": [],
     "checkpoints": [],
     "pendingQuestions": [],
@@ -16279,7 +16321,7 @@
     ],
     "useConductor": false,
     "createdAt": "2026-03-21T10:59:15.374Z",
-    "updatedAt": "2026-03-21T19:11:25.096Z",
+    "updatedAt": "2026-03-21T23:43:06.365Z",
     "startedAt": "2026-03-21T11:02:14.696Z",
     "actuallyRunning": false
   },

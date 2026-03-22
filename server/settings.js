@@ -11,6 +11,8 @@ const defaults = {
     claudeApiKey: '',
     geminiApiKey: '',
     model: 'claude-sonnet-4-20250514',
+    passkey: null,
+    riskTolerance: 1,
     enableTunnel: true,
     enableAntigravity: true,
     enableTelemetry: true,

@@ -1,18 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useStore } from '../store';
 
 function TeslaDashboard() {
-    const [sysData, setSysData] = useState(null);
-    const [teslaData, setTeslaData] = useState(null);
-
-    useEffect(() => {
-        const fetchTelemetry = () => {
-            fetch('/api/sysmon').then(res => res.json()).then(setSysData).catch(console.error);
-            fetch('/api/tesla').then(res => res.json()).then(setTeslaData).catch(console.error);
-        };
-        fetchTelemetry();
-        const interval = setInterval(fetchTelemetry, 5000);
-        return () => clearInterval(interval);
-    }, []);
+    const { sysData, teslaData } = useStore();
 
     if (!sysData || !teslaData) return <div className='loading-mini'>Initialising telemetry...</div>;
 
@@ -37,6 +27,16 @@ function TeslaDashboard() {
                         </div>
                         <div className='sys-bar-bg'>
                             <div className='sys-bar-fill' style={{ width: sysData.cpu.load + '%', background: 'var(--fg)' }} />
+                        </div>
+                    </div>
+                    <div className='sys-card'>
+                        <span className='sys-label'>GPU LOAD</span>
+                        <div className='sys-value-row'>
+                            <span className='sys-value'>{(sysData.gpu || {load:0}).load}%</span>
+                            <span className='sys-sub'>{(sysData.gpu || {temp:0}).temp}°C</span>
+                        </div>
+                        <div className='sys-bar-bg'>
+                            <div className='sys-bar-fill' style={{ width: (sysData.gpu || {load:0}).load + '%', background: 'var(--accent)' }} />
                         </div>
                     </div>
                     <div className='sys-card'>
@@ -68,7 +68,7 @@ function TeslaDashboard() {
                                 <span className='sys-sub'>UPTIME: {Math.floor(sysData.power.uptime / 3600)}h</span>
                             </div>
                             <div className='sys-bar-bg'>
-                                <div className='sys-bar-fill' style={{ width: sysData.power.load + '%', background: 'var(--accent)' }} />
+                                <div className='sys-bar-fill' style={{ width: Math.min(100, sysData.power.load) + '%', background: 'var(--accent)' }} />
                             </div>
                         </div>
                     )}
@@ -109,7 +109,7 @@ function TeslaDashboard() {
                 </div>
             </div>
 
-            <style>{ ".tesla-dashboard { width: 100%; max-width: 800px; margin: 0 auto; } .sys-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 8px; } .sys-card { background: var(--bg2); padding: 12px; border-radius: var(--radius); border: 1px solid var(--border); } .sys-label { font-size: 10px; font-weight: 700; color: var(--fg3); letter-spacing: 0.5px; } .sys-value-row { display: flex; justify-content: space-between; align-items: baseline; margin: 4px 0; } .sys-value { font-size: 18px; font-weight: 700; font-family: var(--mono); } .sys-sub { font-size: 11px; color: var(--fg2); font-family: var(--mono); } .sys-bar-bg { width: 100%; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-top: 4px; } .sys-bar-fill { height: 100%; transition: width 0.5s ease-out; } .tesla-card-main { background: var(--bg2); padding: 16px; border-radius: var(--radius); border: 1px solid var(--border); margin-top: 8px; } .tesla-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; } .tesla-car-name { font-size: 18px; font-weight: 700; } .tesla-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border: 1px solid var(--accent); border-radius: 10px; color: var(--accent); } .tesla-stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; } .tesla-stat { display: flex; flex-direction: column; } .tesla-val { font-size: 16px; font-weight: 700; font-family: var(--mono); margin-top: 2px; }" }</style>
+            <style>{ ".tesla-dashboard { width: 100%; max-width: 800px; margin: 0 auto; } .sys-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 8px; } .sys-card { background: var(--bg2); padding: 12px; border-radius: var(--radius); border: 1px solid var(--border); } .sys-label { font-size: 10px; font-weight: 700; color: var(--fg3); letter-spacing: 0.5px; } .sys-value-row { display: flex; justify-content: space-between; align-items: baseline; margin: 4px 0; } .sys-value { font-size: 18px; font-weight: 700; font-family: var(--mono); } .sys-sub { font-size: 11px; color: var(--fg2); font-family: var(--mono); } .sys-bar-bg { width: 100%; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-top: 4px; } .sys-bar-fill { height: 100%; transition: width 0.5s ease-out; } .tesla-card-main { background: var(--bg2); padding: 16px; border-radius: var(--radius); border: 1px solid var(--border); margin-top: 8px; } .tesla-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; } .tesla-car-name { font-size: 18px; font-weight: 700; } .tesla-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border: 1px solid var(--accent); border-radius: 10px; color: var(--accent); } .tesla-stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; } .tesla-stat { display: flex; flex-direction: column; } .tesla-val { font-size: 16px; font-weight: 700; font-family: var(--mono); margin-top: 2px; }" }</style>
         </div>
     );
 }

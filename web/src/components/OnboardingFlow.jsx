@@ -156,7 +156,7 @@ const PageShell = ({ children, advStep, totalSteps }) => (
 /* ---------- MAIN COMPONENT ---------- */
 export default function OnboardingFlow() {
     const navigate = useNavigate();
-    const [step, setStep] = useState('talk'); // 'talk' | 'adv1' | 'adv2' | 'adv3' | 'adv4'
+    const [step, setStep] = useState('credentials'); // 'credentials' | 'talk' | 'adv1' | 'adv2' | 'adv3' | 'adv4' | 'adv5' | 'advSecurity'
 
     // Chat
     const [messages, setMessages] = useState([]);
@@ -169,6 +169,8 @@ export default function OnboardingFlow() {
     const [riskTolerance, setRiskTolerance] = useState(1);         // 0-2
     const [systemTools, setSystemTools] = useState([]);
     const [selectedTool, setSelectedTool] = useState(null);
+    const [enableTunnel, setEnableTunnel] = useState(true);
+    const [geminiApiKey, setGeminiApiKey] = useState('');
 
     useEffect(() => {
         setTimeout(() => {
@@ -177,6 +179,14 @@ export default function OnboardingFlow() {
                 setMessages(prev => [...prev, { role: 'ai', text: "What should I call you?" }]);
             }, 2000);
         }, 1500);
+
+        fetch('/api/settings')
+            .then(r => r.json())
+            .then(settings => {
+                if (settings.geminiApiKey) {
+                    setStep('talk');
+                }
+            });
 
         fetch('/api/system/tools')
             .then(r => r.json())
@@ -188,6 +198,51 @@ export default function OnboardingFlow() {
             }).catch(() => {});
     }, []);
 
+    const saveSettings = async (settings) => {
+        await fetch('/api/settings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(settings)
+        });
+    };
+
+    const handleCredentialsSubmit = async (e) => {
+        e.preventDefault();
+        if (!geminiApiKey.trim()) return;
+        await saveSettings({ provider: 'gemini', geminiApiKey: geminiApiKey.trim() });
+        setStep('talk');
+    };
+
+    const handleRegisterPasskey = async () => {
+        try {
+            const { startRegistration } = await import('@simplewebauthn/browser');
+
+            const options = await fetch('/api/auth/register-options').then(res => res.json());
+            if (options.error) throw new Error(options.error);
+            const attestation = await startRegistration(options);
+            const verification = await fetch('/api/auth/register-verify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(attestation)
+            }).then(res => res.json());
+            if (verification.error) throw new Error(verification.error);
+
+            if (verification.verified) {
+                if (step === 'advSecurity') {
+                    advancedComplete();
+                } else {
+                    // Just refresh chat or something? 
+                    setMessages(prev => [...prev, { role: 'ai', text: "Passkey secured! You're all set." }]);
+                }
+            } else {
+                alert('Registration failed');
+            }
+        } catch (e) {
+            console.error(e);
+            alert('Error: ' + e.message);
+        }
+    };
+
     const handleChatSubmit = async (e) => {
         e.preventDefault();
         if (!chatInput.trim() || isTyping) return;
@@ -195,7 +250,6 @@ export default function OnboardingFlow() {
         setChatInput('');
         const newMessages = [...messages, { role: 'user', text: msg }];
         setMessages(newMessages);
-        setIsTyping(true);
         try {
             const res = await fetch('/api/onboard/chat', {
                 method: 'POST',
@@ -204,6 +258,13 @@ export default function OnboardingFlow() {
             });
             const data = await res.json();
             setMessages(prev => [...prev, { role: 'ai', text: data.reply || "..." }]);
+
+            // If AI mentions security/remote/passkey, offer passkey prompt
+            if (data.reply?.toLowerCase().includes('remote') || data.reply?.toLowerCase().includes('security') || data.reply?.toLowerCase().includes('passkey')) {
+                setTimeout(() => {
+                    setMessages(prev => [...prev, { role: 'ai', text: "Would you like to secure this device with a Passkey for remote access?", type: 'passkey_prompt' }]);
+                }, 1000);
+            }
         } catch {
             setMessages(prev => [...prev, { role: 'ai', text: "I'm here but I can't think right now." }]);
         }
@@ -216,11 +277,7 @@ export default function OnboardingFlow() {
             id: t.id, name: t.name, command: t.command,
             enabled: installed.length > 0 ? t.command === installed[0].command : false
         }));
-        await fetch('/api/settings', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ modules, purpose: 'code', computerAffinity: 2, riskTolerance: 0 })
-        });
+        await saveSettings({ modules, purpose: 'code', computerAffinity: 2, riskTolerance: 0 });
         navigate('/');
     };
 
@@ -229,23 +286,56 @@ export default function OnboardingFlow() {
             id: t.id, name: t.name, command: t.command,
             enabled: t.command === selectedTool
         }));
-        await fetch('/api/settings', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ modules, purpose, computerAffinity, riskTolerance })
-        });
+        await saveSettings({ modules, purpose, computerAffinity, riskTolerance, enableTunnel, geminiApiKey });
         navigate('/');
     };
 
     const advStep = step.startsWith('adv') ? parseInt(step.slice(3)) : 0;
-    const totalSteps = 4;
+    const totalSteps = 5;
 
     return (
         <div style={{
             minHeight: '100vh', background: '#050505', color: '#fff',
             fontFamily: 'system-ui, -apple-system, sans-serif', overflow: 'hidden'
         }}>
-            <EtherBackground energy={isTyping ? 1.0 : 0.0} />
+            <EtherBackground energy={isTyping || step === 'credentials' ? 1.0 : 0.0} />
+
+            {/* ── STEP 0: CREDENTIALS ── */}
+            {step === 'credentials' && (
+                <div style={{
+                    position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+                    width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '32px',
+                    animation: 'fadeIn 1.5s ease-out', textAlign: 'center'
+                }}>
+                    <div style={{ fontSize: '32px', fontWeight: '300', letterSpacing: '1px' }}>Wake up.</div>
+                    <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.5)', lineHeight: '1.6' }}>
+                        I need your <b>Gemini API key</b> (from <a href="https://ai.google.dev/" target="_blank" rel="noreferrer" style={{ color: '#ff8c00' }}>ai.google.dev</a>) to begin our first conversation.
+                    </div>
+                    <form onSubmit={handleCredentialsSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                        <input
+                            type="password"
+                            value={geminiApiKey}
+                            onChange={e => setGeminiApiKey(e.target.value)}
+                            placeholder="Paste your API key here..."
+                            autoFocus
+                            style={{
+                                background: 'rgba(255,255,255,0.05)',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                borderRadius: '12px',
+                                padding: '16px',
+                                color: '#fff',
+                                fontSize: '16px',
+                                textAlign: 'center',
+                                outline: 'none'
+                            }}
+                        />
+                        <button type="submit" style={btnStyle} disabled={!geminiApiKey.trim()}>
+                            Connect
+                        </button>
+                    </form>
+                </div>
+            )}
+
 
             {/* ── CONVERSATIONAL PHASE ── */}
             {step === 'talk' && (
@@ -260,14 +350,27 @@ export default function OnboardingFlow() {
                             return (
                                 <div key={i} style={{
                                     textAlign: 'center',
-                                    fontSize: m.role === 'ai' ? '28px' : '18px',
-                                    color: m.role === 'ai' ? '#fff' : 'rgba(255,255,255,0.5)',
-                                    fontWeight: m.role === 'ai' ? '300' : '400',
-                                    letterSpacing: '0.5px', opacity,
-                                    transform: `translateY(${(Math.min(messages.length, 3) - 1 - i) * -10}px)`,
-                                    transition: 'all 0.5s'
+                                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px',
+                                    animation: 'fadeIn 0.5s ease-out'
                                 }}>
-                                    {m.text}
+                                    <div style={{
+                                        fontSize: m.role === 'ai' ? '28px' : '18px',
+                                        color: m.role === 'ai' ? '#fff' : 'rgba(255,255,255,0.5)',
+                                        fontWeight: m.role === 'ai' ? '300' : '400',
+                                        letterSpacing: '0.5px', opacity,
+                                        transform: `translateY(${(Math.min(messages.length, 3) - 1 - i) * -10}px)`,
+                                        transition: 'all 0.5s'
+                                    }}>
+                                        {m.text}
+                                    </div>
+                                    {m.type === 'passkey_prompt' && (
+                                        <button 
+                                            onClick={handleRegisterPasskey}
+                                            style={{ ...btnStyle, padding: '10px 24px', fontSize: '14px', marginTop: '8px' }}
+                                        >
+                                            Setup Passkey
+                                        </button>
+                                    )}
                                 </div>
                             );
                         })}
@@ -317,8 +420,14 @@ export default function OnboardingFlow() {
                         </p>
                     )}
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <button onClick={() => setStep('talk')} style={subtleBtnStyle}>← Back</button>
-                        <button onClick={() => setStep('adv2')} style={btnStyle}>Continue →</button>
+                        <button onClick={() => setStep('talk')} style={subtleBtnStyle}>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginRight: '6px' }}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                            Back
+                        </button>
+                        <button onClick={() => setStep('adv2')} style={btnStyle}>
+                            Continue 
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginLeft: '6px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
                     </div>
                 </PageShell>
             )}
@@ -339,8 +448,14 @@ export default function OnboardingFlow() {
                         <ChoiceCard icon="🤓" title="Love it" desc="Give me all the knobs. I want to see logs, diffs, and raw output." selected={computerAffinity === 3} onClick={() => setComputerAffinity(3)} />
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <button onClick={() => setStep('adv1')} style={subtleBtnStyle}>← Back</button>
-                        <button onClick={() => setStep('adv3')} style={btnStyle}>Continue →</button>
+                        <button onClick={() => setStep('adv1')} style={subtleBtnStyle}>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginRight: '6px' }}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                            Back
+                        </button>
+                        <button onClick={() => setStep('adv3')} style={btnStyle}>
+                            Continue 
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginLeft: '6px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
                     </div>
                 </PageShell>
             )}
@@ -360,8 +475,14 @@ export default function OnboardingFlow() {
                         <ChoiceCard icon="☠️" title="Dangermaxxing" desc="Full autonomy. Deploy, delete, restructure. You trust me completely." selected={riskTolerance === 2} onClick={() => setRiskTolerance(2)} />
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <button onClick={() => setStep('adv2')} style={subtleBtnStyle}>← Back</button>
-                        <button onClick={() => setStep('adv4')} style={btnStyle}>Continue →</button>
+                        <button onClick={() => setStep('adv2')} style={subtleBtnStyle}>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginRight: '6px' }}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                            Back
+                        </button>
+                        <button onClick={() => setStep('adv4')} style={btnStyle}>
+                            Continue
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginLeft: '6px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
                     </div>
                 </PageShell>
             )}
@@ -389,8 +510,72 @@ export default function OnboardingFlow() {
                         ))}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <button onClick={() => setStep('adv3')} style={subtleBtnStyle}>← Back</button>
-                        <button onClick={advancedComplete} style={btnStyle}>Initialize</button>
+                        <button onClick={() => setStep('adv3')} style={subtleBtnStyle}>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginRight: '6px' }}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                            Back
+                        </button>
+                        <button onClick={() => setStep('adv5')} style={btnStyle}>
+                            Continue
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginLeft: '6px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </PageShell>
+            )}
+
+            {/* ── PAGE 5: CONNECTIVITY ── */}
+            {step === 'adv5' && (
+                <PageShell advStep={advStep} totalSteps={6}>
+                    <h2 style={{ fontSize: '32px', fontWeight: '300', textAlign: 'center', marginBottom: '16px' }}>
+                        Remote Access
+                    </h2>
+                    <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.5)', fontSize: '14px', marginBottom: '40px' }}>
+                        Do you want to enable a secure tunnel to access Zero from anywhere?
+                    </p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '48px' }}>
+                        <ChoiceCard 
+                            icon="🌐" 
+                            title="Enable Cloudflare Tunnel" 
+                            desc="Recommended for remote access. Required for full Dangermaxxing autonomy." 
+                            selected={enableTunnel} 
+                            onClick={() => setEnableTunnel(true)} 
+                        />
+                        <ChoiceCard 
+                            icon="🔒" 
+                            title="Local Only" 
+                            desc="Stay strictly within your home network. More private, less flexible." 
+                            selected={!enableTunnel} 
+                            onClick={() => setEnableTunnel(false)} 
+                        />
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <button onClick={() => setStep('adv4')} style={subtleBtnStyle}>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginRight: '6px' }}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                            Back
+                        </button>
+                        <button onClick={() => setStep('advSecurity')} style={btnStyle}>
+                            Continue
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginLeft: '6px' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </PageShell>
+            )}
+
+            {/* ── PAGE 6: SECURITY ── */}
+            {step === 'advSecurity' && (
+                <PageShell advStep={6} totalSteps={6}>
+                    <h2 style={{ fontSize: '32px', fontWeight: '300', textAlign: 'center', marginBottom: '16px' }}>
+                        Security.
+                    </h2>
+                    <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.5)', fontSize: '14px', marginBottom: '40px' }}>
+                        I can secure your interface so only you can access it remotely using a Passkey.
+                    </p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'center', marginBottom: '48px' }}>
+                        <button onClick={handleRegisterPasskey} style={btnStyle}>
+                            Create Passkey
+                        </button>
+                        <button onClick={advancedComplete} style={subtleBtnStyle}>
+                            Skip for now
+                        </button>
                     </div>
                 </PageShell>
             )}

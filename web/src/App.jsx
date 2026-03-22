@@ -9,10 +9,11 @@ import { useStore } from './store';
 import ChatPage from './components/ChatPage';
 import TerminalPage from './components/TerminalPage';
 import OnboardingFlow from './components/OnboardingFlow';
+import Login from './components/Login';
 
 function App() {
     const navigate = useNavigate();
-    const { agents, agyProjects, connected, handleMessage, setConnected } = useStore();
+    const { agents, agyProjects, previewPorts, connected, handleMessage, setConnected } = useStore();
     const [isExpanded, setIsExpanded] = useState(localStorage.getItem('zero-expanded') === 'true');
 
     useEffect(() => {
@@ -60,6 +61,7 @@ function App() {
                     <Home
                         agents={agents}
                         agyProjects={agyProjects}
+                        previewPorts={previewPorts}
                         connected={connected}
                         onSelectAgent={openAgent}
                         onSettingsClick={() => navigate('/dashboard')}
@@ -71,6 +73,7 @@ function App() {
                     <Settings
                         agents={agents}
                         agyProjects={agyProjects}
+                        previewPorts={previewPorts}
                         onBack={() => navigate('/')}
                     />
                 } />
@@ -78,6 +81,7 @@ function App() {
                     <Settings
                         agents={agents}
                         agyProjects={agyProjects}
+                        previewPorts={previewPorts}
                         onBack={() => navigate('/dashboard')}
                     />
                 } />
@@ -91,6 +95,7 @@ function App() {
                 <Route path='/chat' element={<ChatPage />} />
                 <Route path='/terminal' element={<TerminalPage />} />
                 <Route path='/onboard' element={<OnboardingFlow />} />
+                <Route path='/login' element={<Login />} />
             </Routes>
         </div>
     );

@@ -60,7 +60,9 @@ function MemoryDetail({ memoryId, onBack, embedded = false }) {
     return (
         <div className={embedded ? 'agent-detail-embedded' : 'zero-app memory-view'}>
             <header className='detail-header'>
-                {!embedded && <button className='back-btn' onClick={onBack}>←</button>}
+                {!embedded && <button className='back-btn' onClick={onBack} title="Back">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                </button>}
                 <div className='detail-title'>
                     <h1>{memory.name}</h1>
                     <div className='status-row'>

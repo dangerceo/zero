@@ -7,7 +7,8 @@ import '@xterm/xterm/css/xterm.css';
 
 export default function RawTerminal({
     cwd, cmd, existingSessionId,
-    setConnected, setExited, setSessionId, disconnect
+    setConnected, setExited, setSessionId, disconnect,
+    onSendInputReady,   // callback(fn) — parent receives a "send key" function
 }) {
     const { notifications, dismissNotification } = useStore();
     const termContainerRef = useRef(null);
@@ -17,10 +18,10 @@ export default function RawTerminal({
 
     useEffect(() => {
         let isCancelled = false;
-        
+
         const initTerminal = async () => {
             if (!termContainerRef.current) return;
-            
+
             // Clear container to prevent double-renders in Strict Mode
             termContainerRef.current.innerHTML = '';
 
@@ -41,11 +42,11 @@ export default function RawTerminal({
 
                 const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
                 const params = new URLSearchParams({ cwd, cmd: cmd || 'bash', cols: String(cols), rows: String(rows) });
-                
+
                 let nextSessionId = existingSessionId || (Math.random().toString(36).substring(2, 12));
                 if (existingSessionId) params.set('resume', existingSessionId);
                 else params.set('id', nextSessionId);
-                
+
                 setSessionId(nextSessionId);
                 const wsUrl = `${protocol}//${window.location.host}/pty?${params}`;
 
@@ -56,6 +57,18 @@ export default function RawTerminal({
                 }
                 setConnected(true);
                 console.log("✅ Restty connected.");
+
+                // Expose sendInput for mobile toolbar.
+                // Restty manages its own internal WebSocket, so we inject input
+                // via the server's HTTP endpoint to avoid kicking Restty's WS.
+                const sendFn = (data) => {
+                    fetch(`/api/pty/sessions/${nextSessionId}/input`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ data }),
+                    }).catch(() => {});
+                };
+                if (onSendInputReady) onSendInputReady(sendFn);
                 return;
             } catch (err) {
                 console.warn("⚠️  Restty failed, falling back to xterm.js:", err);
@@ -74,7 +87,7 @@ export default function RawTerminal({
                 term.loadAddon(fitAddon);
                 term.open(termContainerRef.current);
                 fitAddon.fit();
-                
+
                 if (isCancelled) {
                     term.dispose();
                     return;
@@ -82,11 +95,11 @@ export default function RawTerminal({
                 terminalInstanceRef.current = term;
 
                 const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-                const params = new URLSearchParams({ 
-                    cwd, cmd: cmd || 'bash', 
-                    cols: String(term.cols), rows: String(term.rows) 
+                const params = new URLSearchParams({
+                    cwd, cmd: cmd || 'bash',
+                    cols: String(term.cols), rows: String(term.rows)
                 });
-                
+
                 let nextSessionId = existingSessionId || (Math.random().toString(36).substring(2, 12));
                 if (existingSessionId) params.set('resume', existingSessionId);
                 else params.set('id', nextSessionId);
@@ -100,7 +113,7 @@ export default function RawTerminal({
                         ws.send(JSON.stringify({ type: 'input', data }));
                     }
                 });
-                
+
                 ws.onmessage = (ev) => {
                     try {
                         const msg = JSON.parse(ev.data);
@@ -111,7 +124,15 @@ export default function RawTerminal({
                 };
                 ws.onopen = () => setConnected(true);
                 ws.onclose = () => setConnected(false);
-                
+
+                // Expose sendInput for mobile toolbar
+                const sendFn = (data) => {
+                    if (ws.readyState === WebSocket.OPEN) {
+                        ws.send(JSON.stringify({ type: 'input', data }));
+                    }
+                };
+                if (onSendInputReady) onSendInputReady(sendFn);
+
                 // Handle window resize for xterm
                 const handleResize = () => {
                     fitAddon.fit();
@@ -132,6 +153,7 @@ export default function RawTerminal({
 
         return () => {
             isCancelled = true;
+            if (onSendInputReady) onSendInputReady(null);
             if (resttyRef.current) {
                 try { resttyRef.current.disconnectPty(); } catch (e) {}
                 resttyRef.current = null;
@@ -161,15 +183,17 @@ export default function RawTerminal({
                     gap: '10px'
                 }}>
                     {notifications.map(n => (
-                        <div key={n.id} style={{
-                            background: 'var(--bg2)',
-                            border: '1px solid var(--border)',
-                            padding: '10px',
-                            borderRadius: '5px'
-                        }}>
-                            <p>{n.message}</p>
-                            <button onClick={() => dismissNotification(n.id)}>Dismiss</button>
-                        </div>
+                        n && n.message ? (
+                            <div key={n.id} style={{
+                                background: 'var(--bg2)',
+                                border: '1px solid var(--border)',
+                                padding: '10px',
+                                borderRadius: '5px'
+                            }}>
+                                <p>{n.message}</p>
+                                <button onClick={() => dismissNotification(n.id)}>Dismiss</button>
+                            </div>
+                        ) : null
                     ))}
                 </div>
             )}

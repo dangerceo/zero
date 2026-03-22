@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import KitchenDisplay from './KitchenDisplay';
 import WebContainerPreview from './WebContainerPreview';
+import { useStore } from '../store';
 
 function AgentDetail({ agent, onBack, embedded = false }) {
+    const { previewPorts } = useStore();
     const [todo, setTodo] = useState('');
     const [answer, setAnswer] = useState('');
     const [elapsed, setElapsed] = useState(0);
@@ -13,6 +15,9 @@ function AgentDetail({ agent, onBack, embedded = false }) {
     const isWorking = agent.actuallyRunning;
     const unanswered = (agent.pendingQuestions || []).filter(q => !q.answer);
     const pendingTodos = (agent.todos || []).filter(t => !t.processed);
+    
+    // Check if this project has a live dev stream
+    const activePort = previewPorts?.find(p => p.path && (p.path === agent?.workingDir || p.path === agent?.path || p.path?.startsWith(agent?.workingDir || agent?.path)));
 
     useEffect(() => {
         if (!isWorking) return;
@@ -96,22 +101,35 @@ function AgentDetail({ agent, onBack, embedded = false }) {
 
     return (
         <div className={embedded ? 'agent-detail-embedded' : 'zero-app'}>
+
             <header className='detail-header'>
-                {!embedded && <button className='back-btn' onClick={onBack}>←</button>}
+                {!embedded && <button className='back-btn' onClick={onBack} title="Back">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                </button>}
                 <div className='detail-title'>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
                         <h1 style={{ flex: 1, minWidth: '200px' }}>{agent.name}</h1>
                         <div style={{ display: 'flex', gap: '4px' }}>
                             {!isWorking ? (
                                 <>
-                                    <button className='mini-btn' onClick={() => handleAction('resume')} style={{ background: 'var(--success)', color: '#fff', border: 'none' }}>▶ Resume</button>
-                                    <button className='mini-btn' onClick={() => handleAction('start')}>🔄 Restart</button>
+                                    <button className='mini-btn' onClick={() => handleAction('resume')} style={{ background: 'var(--success)', color: '#fff', border: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg> Resume
+                                    </button>
+                                    <button className='mini-btn' onClick={() => handleAction('start')} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg> Restart
+                                    </button>
                                 </>
                             ) : (
-                                <button className='mini-btn' onClick={() => handleAction('stop')} style={{ color: 'var(--error)', borderColor: 'var(--error)' }}>⏹ Stop</button>
+                                <button className='mini-btn' onClick={() => handleAction('stop')} style={{ color: 'var(--error)', borderColor: 'var(--error)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12"/></svg> Stop
+                                </button>
                             )}
-                            <button className='mini-btn' onClick={archiveAgent}>📁 Archive</button>
-                            <button className='mini-btn' onClick={deleteAgent} style={{ opacity: 0.5 }}>🗑️ Delete</button>
+                            <button className='mini-btn' onClick={archiveAgent} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg> Archive
+                            </button>
+                            <button className='mini-btn' onClick={deleteAgent} style={{ opacity: 0.5, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6"/></svg> Delete
+                            </button>
                         </div>
                     </div>
                     {error && <div style={{ color: 'var(--error)', fontSize: '11px', fontWeight: 'bold', marginTop: '4px' }}>⚠️ {error}</div>}
@@ -131,7 +149,19 @@ function AgentDetail({ agent, onBack, embedded = false }) {
             </header>
 
             <div className='content-canvas' style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                {view === 'preview' && (agent.workingDir || agent.path) && <WebContainerPreview workingDir={agent.workingDir || agent.path} />}
+                {view === 'preview' && (agent.workingDir || agent.path) && (
+                    activePort ? (
+                        <div className='preview-iframe-wrapper' style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                            <div style={{ padding: '8px 16px', background: 'var(--bg2)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border)' }}>
+                                <div style={{ fontWeight: 'bold' }}>Native Project Preview <span style={{ color: 'var(--fg3)', fontSize: '11px', marginLeft: '6px', fontWeight: 'normal' }}>Local Proxy: {activePort.port}</span></div>
+                                <button className='mini-btn' onClick={() => window.open(`/host/${activePort.port}`, '_blank')} style={{ background: 'var(--bg)', color: 'var(--fg)', cursor: 'pointer', padding: '4px 12px' }}>↗ Pop Out Native View</button>
+                            </div>
+                            <iframe src={`/host/${activePort.port}`} style={{ flex: 1, border: 'none', width: '100%', height: '100%', background: '#fff' }} />
+                        </div>
+                    ) : (
+                        <WebContainerPreview workingDir={agent.workingDir || agent.path} />
+                    )
+                )}
                 {view === 'kitchen' && (agent.tickets || []).length > 0 && <div style={{ overflowY: 'auto', flex: 1 }}><KitchenDisplay tickets={agent.tickets} /></div>}
                 {(view === 'chat' || view === 'logs') && (
                     <section className={'unified-chat v-' + view} style={{ flex: 1, overflowY: 'auto' }}>

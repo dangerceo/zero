@@ -182,3 +182,15 @@ export function getPtyStats() {
     return { active: activeSessions.size };
 }
 
+/**
+ * Inject raw input into a session's PTY process directly,
+ * without needing a WebSocket connection. Safe to call while
+ * Restty or xterm already holds the WebSocket.
+ */
+export function writeToPtySession(id, data) {
+    const session = activeSessions.get(id);
+    if (!session) return false;
+    session.proc.write(data);
+    return true;
+}
+
