@@ -26,3 +26,25 @@ dat_client_token=YOUR_MWDAT_CLIENT_TOKEN
 - The app uses cleartext HTTP for local LAN connections to the Zero server.
 - Background monitoring runs as a foreground service with per-project notifications.
 - Meta Wearables DAT is scaffolded only; streaming is out of scope for MVP.
+
+## APK Update Channel (debug/internal)
+
+The Android app can check `GET /api/android/update` and open the returned APK URL.
+
+Publish files to:
+
+`web/dist/android/latest.apk`
+
+Optional metadata (recommended):
+
+`web/dist/android/latest.json`
+
+```json
+{
+  "versionCode": 2,
+  "versionName": "0.1.1",
+  "path": "/android/latest.apk"
+}
+```
+
+If `latest.json` is present, the app can compare `versionCode` and show "update available" accurately.
